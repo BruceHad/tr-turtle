@@ -1,18 +1,7 @@
-var canvas = document.getElementById('c');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-var ctx = canvas.getContext('2d');
-ctx.strokeStyle = '#000';
-ctx.lineWidth = 1;
-var tid;
-
-function centre() {
-    return [window.innerWidth / 2, window.innerHeight / 2];
-}
-
-function Dot() {
-    this.angle = 0;
-    this.position = centre();
+function Dot(angle, colour) {
+    this.angle = angle * Math.PI * 2; //starting angle
+    this.position = [canvas.width / 2, canvas.height / 2];
+	ctx.strokeStyle = colour;
     this.forward = function(dist) {
         ctx.beginPath();
         ctx.moveTo(this.position[0], this.position[1]);
@@ -22,6 +11,6 @@ function Dot() {
         ctx.stroke();
     };
     this.rotate = function(angle) {
-        this.angle += angle * Math.PI;
+        this.angle += angle * Math.PI *2;
     }
 }

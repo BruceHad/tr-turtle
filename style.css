@@ -1,4 +1,10 @@
+body, html {
+	height: 100%;
+	background-color: #eee;
+}
 canvas {
-	border: 2px solid red;
-	overflow: hidden;
+	margin: 20px auto; 
+	padding:0;
+	display: block;
+	background-color: white;
 }
