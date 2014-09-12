@@ -1,8 +1,3 @@
-var canvas = document.getElementById('c');
-var ctx = canvas.getContext('2d');
-ctx.strokeStyle = '#000';
-ctx.lineWidth = 1;
-
 function dc(angle, colour, length) {
     var md = new Dot(angle, colour);
     for(var n = 1; n <= 10000; n++) {

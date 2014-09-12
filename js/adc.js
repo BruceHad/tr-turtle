@@ -1,8 +1,3 @@
-var canvas = document.getElementById('c');
-var ctx = canvas.getContext('2d');
-ctx.strokeStyle = '#000';
-ctx.lineWidth = 1;
-
 var md = new Dot(1/8, '#000');
 var count = 0;
 var length = 10;
