@@ -14,7 +14,7 @@ function Dot(angle, colour) {
 	this.turn = 1/4; //default to 90 degrees
     this.position = [canvas.width / 2, canvas.height / 2]; // starting position in middle of canvas
 	this.pen = true; // pen is on
-    this.forward = function(dist=3) {
+    this.forward = function(dist) {
 		// move turtle forward by dist
 		ctx.beginPath();
         ctx.moveTo(this.position[0], this.position[1]);
