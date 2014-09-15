@@ -1,4 +1,9 @@
 var funcInit = function() {
+
+    var textBox = document.getElementById("image-desc");
+    textBox.innerHTML = "<p>This is a another dragon curve, this time animated so you can watch it grow.</p>";
+    
+
     var md = new Dot(1 / 8, '#000');
     var count = 0;
     var length = 10;

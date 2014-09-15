@@ -1,12 +1,10 @@
 function updatePage(page) {
-    var content = document.getElementById('content');
-    content.innerHTML = '';
-    var replaceStr = '<div id="content">';
-    replaceStr += '<canvas id="c" width="750" height="750">';
+    var canvas = document.getElementById('canvas-wrapper');
+    canvas.innerHTML = '';
+    replaceStr = '<canvas id="c" width="750" height="750">';
     replaceStr += '<p>Canvas cannot be displayed.</p>';
     replaceStr += '</canvas>';
-    replaceStr += '</div>';
-    content.innerHTML = replaceStr;
+    canvas.innerHTML = replaceStr;
     replaceJs('js/' + page + '.js');
 }
 
@@ -20,4 +18,13 @@ function replaceJs(newFile) {
     script.setAttribute("src", newFile);
     script.setAttribute("id", "my-script");
     document.head.appendChild(script);
+}
+
+// check for #url
+
+if(window.location.hash != ""){
+    updatePage(window.location.hash.substr(1));
+    console.log(window.location.hash.substr(1))
+} else {
+    console.log("nope");
 }

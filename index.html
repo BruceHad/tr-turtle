@@ -5,9 +5,6 @@
     <title>My Turtle</title>
     <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.17.2/build/cssnormalize/cssnormalize-min.css">
     <link rel="stylesheet" type="text/css" href="style.css">
-    <script src="js/myturtle/mt.js"></script>
-    <script src="js/page.js"></script>
-    <script src="js/dc1.js" id="my-script"></script>
 </head>
 
 <body>
@@ -23,14 +20,19 @@
             </ol>
         </div>
         <div id="content" class="col col-8">
-            <canvas id="c" width="750" height="750">
-                <p>Canvas cannot be displayed.</p>
-            </canvas>
-			<div id="image-desc" class="text-box">
-				<p>Random giberrish</p>
-			</div>
+            <div id="canvas-wrapper">
+                <canvas id="c" width="750" height="750">
+                    <p>Canvas cannot be displayed.</p>
+                </canvas>
+            </div>
+            <div id="image-desc" class="text-box">
+                <p>Random giberrish</p>
+            </div>
         </div>
     </div>
+    <script src="js/myturtle/mt.js"></script>
+    <script src="js/dc1.js" id="my-script"></script>
+    <script src="js/page.js"></script>    
 </body>
 
 </html>
