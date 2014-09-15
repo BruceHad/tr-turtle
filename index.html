@@ -4,21 +4,33 @@
 <head>
     <title>My Turtle</title>
     <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.17.2/build/cssnormalize/cssnormalize-min.css">
-	<link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="js/myturtle/mt.js"></script>
+    <script src="js/page.js"></script>
+    <script src="js/dc1.js" id="my-script"></script>
 </head>
 
 <body>
-	<div>
-		<ul>
-			<li><a href="index.html">Dragon Curve</a></li>
-			<li><a href="adc.html">Animated Dragon Curve</a></li>
-			<li><a href="ls.html">L-System - Dragon Curve</a></li>
-		</ul>
-	</div>
-    <canvas id="c" width="750" height="750">
-        <p>Canvas cannot be displayed.</p>
-    </canvas>
+    <div class="row clearfix">
+        <div class="col col-4">
+            <ol>
+                <li><a href="#dc1" onmouseup="updatePage('dc1')">Dragon Curve</a>
+                </li>
+                <li><a href="#adc" onmouseup="updatePage('adc')">Animated Dragon Curve</a>
+                </li>
+                <li><a href="#ls" onmouseup="updatePage('ls')">L-System - Dragon Curve</a>
+                </li>
+            </ol>
+        </div>
+        <div id="content" class="col col-8">
+            <canvas id="c" width="750" height="750">
+                <p>Canvas cannot be displayed.</p>
+            </canvas>
+			<div id="image-desc" class="text-box">
+				<p>Random giberrish</p>
+			</div>
+        </div>
+    </div>
 </body>
-	<script src="js/myturtle/mt.js"></script>
-	<script src="js/dc.js"></script>
+
 </html>

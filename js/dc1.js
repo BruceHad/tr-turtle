@@ -1,4 +1,8 @@
 var funcInit = function() {
+	
+	var textBox = document.getElementById("image-desc");
+	textBox.innerHTML = "<p>Hello</p>";
+	
     function dc(angle, colour, length) {
         var md = new Dot(angle, colour);
         for(var n = 1; n <= 10000; n++) {
