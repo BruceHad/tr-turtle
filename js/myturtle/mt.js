@@ -42,8 +42,3 @@ function Dot(angle, colour) {
 		this.position = [x, y];
 	};
 }
-
-
-
-
-

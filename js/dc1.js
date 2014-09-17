@@ -5,7 +5,7 @@ var funcInit = function() {
 	
     function dc(angle, colour, length) {
         var md = new Dot(angle, colour);
-        for(var n = 1; n <= 10000; n++) {
+        for(var n = 1; n <= 1000; n++) {
             md.forward(length);
             // https://en.wikipedia.org/wiki/Dragon_curve
             // See also bitwise operators
@@ -16,8 +16,8 @@ var funcInit = function() {
             }
         }
     }
-    dc(1 / 8, '#f00', 3);
-    dc(5 / 8, '#0f0', 3);
+    dc(1 / 8, '#f00', 6);
+    dc(5 / 8, '#0f0', 6);
 }
 
 if(document.getElementById('c')) funcInit()

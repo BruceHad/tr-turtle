@@ -1,7 +1,7 @@
 function updatePage(page) {
     var canvas = document.getElementById('canvas-wrapper');
     canvas.innerHTML = '';
-    replaceStr = '<canvas id="c" width="750" height="750">';
+    replaceStr = '<canvas id="c" width="600" height="600">';
     replaceStr += '<p>Canvas cannot be displayed.</p>';
     replaceStr += '</canvas>';
     canvas.innerHTML = replaceStr;
