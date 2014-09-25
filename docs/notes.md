@@ -1,5 +1,14 @@
 # The Page
 
+## Lindermeyer System
+
+The L-System is made up of an Axiom, a set of rules and the number of times to apply those rules.
+
+Users should be able to edit the rules, or select from some preset values. 
+
+They should also be able to step through each step of the transform, or play and animation.
+
+
 # Dragon Curves
 
 https://en.wikipedia.org/wiki/Dragon_curve

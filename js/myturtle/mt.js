@@ -41,4 +41,7 @@ function Dot(angle, colour) {
 		// manually set position of turtle.
 		this.position = [x, y];
 	};
+    this.clear = function(){
+        ctx.clearRect(0,0, canvas.width, canvas.width)
+    }
 }

@@ -1,6 +1,6 @@
 var funcInit = function() {
 
-    var textBox = document.getElementById("image-desc");
+    var textBox = document.getElementById("meta");
     textBox.innerHTML = "<p>This is a another dragon curve, this time animated so you can watch it grow.</p>";
     
 

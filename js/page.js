@@ -1,5 +1,6 @@
 function updatePage(page) {
-    var canvas = document.getElementById('canvas-wrapper');
+    if(typeof intId != 'undefined') clearInterval(intId);
+    canvas = document.getElementById('canvas-wrapper');
     canvas.innerHTML = '';
     replaceStr = '<canvas id="c" width="600" height="600">';
     replaceStr += '<p>Canvas cannot be displayed.</p>';
@@ -24,7 +25,4 @@ function replaceJs(newFile) {
 
 if(window.location.hash != ""){
     updatePage(window.location.hash.substr(1));
-    console.log(window.location.hash.substr(1))
-} else {
-    console.log("nope");
 }

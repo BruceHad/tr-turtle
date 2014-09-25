@@ -2,7 +2,7 @@ var funcInit = function() {
     var rules = ['F>', 'X > X+YF+', 'Y > -FX-Y'];
     var dragonStr = expandLs('FX', rules, 10);
     applyLs(dragonStr);
-    var textBox = document.getElementById("image-desc");
+    var textBox = document.getElementById("meta");
     var lsStr = "<p>This is a dragon curve that's built up using the <a href='http://en.wikipedia.org/wiki/L-system'>lindenmayer system</a>, which give us flexibility to draw all sorts of things by adding new rules.</p>";
     lsStr += "<p>The l-system string:</p>";
     lsStr += "<p id='l-system'>"+dragonStr+"</p>";
