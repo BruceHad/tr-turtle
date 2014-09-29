@@ -1,6 +1,7 @@
 var init = function() {
 	
 	var textBox = document.getElementById("meta");
+// 	console.log(textBox);
 	textBox.innerHTML = "<p>This is a (double) dragon curve. It's drawn with a <a href='http://en.wikipedia.org/wiki/Logo_%28programming_language%29#Turtle_and_graphics'>turtle</a>, that rotates either left or right depending on formula as <a href='http://en.wikipedia.org/wiki/Dragon_curve#.5BUn.5DFolding_the_Dragon'>described here</a>.</p>";
 	
     function dc(angle, colour, length) {

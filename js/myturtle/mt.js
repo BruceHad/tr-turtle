@@ -42,6 +42,7 @@ function Dot(angle, colour) {
 		this.position = [x, y];
 	};
     this.clear = function(){
-        ctx.clearRect(0,0, canvas.width, canvas.width)
+        ctx.clearRect(0,0, canvas.width, canvas.width);
+		console.log("cleared");
     }
 }

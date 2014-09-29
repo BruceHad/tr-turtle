@@ -1,3 +1,17 @@
+function clone(obj) {
+    if(obj == null || typeof(obj) != 'object')
+        return obj;
+
+    var temp = obj.constructor(); // changed
+
+    for(var key in obj) {
+        if(obj.hasOwnProperty(key)) {
+            temp[key] = clone(obj[key]);
+        }
+    }
+    return temp;
+}
+
 function expandLs(str, rules) {
 	// Lindermayer system - expand from the initial state using rules
 	// 1. Extract rules
@@ -14,7 +28,6 @@ function expandLs(str, rules) {
 		}
 	}
 	str = sStr.join('');
-    console.log(str);
 	return str;
 }
 
@@ -22,6 +35,7 @@ function applyLs(str) {
 	// Lindermayer system - translate string
 	// into geometric structure
 	md = new Dot(1 / 8, '#000', 3);
+	md.clear();
 	var sStr = str.split('');
 	forEach(sStr, function(ch) {
 		if(ch === 'F') md.forward(10);
@@ -30,15 +44,28 @@ function applyLs(str) {
 	});
 }
 
-function tick(){
-	if(ls.count > ls.steps) {
-		clearInterval(intId);
-		console.log("done");
-	} else {
-		ls.lsString = expandLs(ls.lsString, ls.rules);
-		applyLs(ls.lsString);
+function tick(ls, dir){
+// 	if(ls.count > ls.steps) console.log("You are breaking it");
+	if(dir=='forward') {
+		ls.lsString.push(
+			expandLs(ls.lsString[ls.lsString.length-1], ls.rules));
 		ls.count++;
+	} 
+	else {
+		console.log(ls.lsString[ls.lsString.length-1]);
+		ls.lsString.pop();
+		console.log(ls.lsString[ls.lsString.length-1]);
+		ls.count--;
 	}
+	update(ls)
+	return ls;
+}
+
+function update(ls){
+	document.getElementById('ls-back').removeAttribute("disabled");
+	document.getElementById('ls-string').innerHTML = ls.lsString[ls.lsString.length-1];
+	document.getElementById('ls-count').innerHTML = ls.count;
+	applyLs(ls.lsString[ls.lsString.length-1]);
 }
 
 function anim(){
@@ -50,57 +77,77 @@ var systemRules = {
     'null': ['FX', 'F > ', 'X > X+YF+', 'Y > -FX-YF']
 };
 
-var ls = {
-	steps: 10,
-	axiom: 'FX',
-	rules: systemRules['dragon'].slice(1),
-	lsString: 'FX',
-	count: 0
-};
-
-function init() {
-    if(typeof md != 'undefined') md.clear();
-    var textBoxStr = "<h3>The L-System</h3>";
+function updateMeta(ls, rule){
+	var textBoxStr = "<h3>The L-System</h3>";
     textBoxStr += "<p>A <a href='http://en.wikipedia.org/wiki/L-system'>lindenmayer system</a> is made up of a starting point (axiom) and a set of rules used to repeatedly transform the string from the starting point.</p>";
     textBoxStr += "<p>The resulting string can then be used to control our Turtle.</p>";
     textBoxStr += "<form id='ls-rule' class='ls2-form'>";
     textBoxStr += "<p>Select a set of rules: <select id='ls-select'>"
     for (var prop in systemRules){
-        textBoxStr += "<option value='"+prop+"'>"+prop+"</option>";
+		var selected = rule==prop? "selected": "";
+		textBoxStr += "<option value='"+prop+"' "+selected+">"+prop+"</option>";
     }
     textBoxStr += "</select></p>"
     textBoxStr += "<p>Or enter your own rules:</p>";
     textBoxStr += "<p><input type='number' id='ls-steps' name='ls-steps' value="+ls.steps+"><label for='ls-steps'>No. of Steps</label><br>";
     textBoxStr += "<input type='text' id='ls-axiom' name='ls-axion' value="+ls.axiom+"><label for='ls-axion'>Axiom</label><br>";
     for(var i = 1; i <= ls.rules.length; i++) {
-        textBoxStr += "<input type='text' id='ls-rule-"+i+"' name='ls-rule-"+i+"' value='"+ls.rules[i-1]+"'><label for='ls-rule-"+i+"'>Rule "+i+"</label><br>";
+        textBoxStr += "<input type='text' id='ls-rule-"+i+"' name='ls-rule-"+i+"' value='"+ls.rules[i-1]+"'>";
+		textBoxStr += "<label for='ls-rule-"+i+"'>Rule "+i+"</label><br>";
     }
     textBoxStr += "</p>";
     textBoxStr += "<p>Controls:</p>"
-    textBoxStr += "<p><button type='button' form='ls-rule' name='ls-clear'>Clear Image</button>";
-    textBoxStr += "<button type='button' form='ls-rule' name='ls-back'>Step Back</button>";
-    textBoxStr += "<span id='ls-count'>0</span>";
-    textBoxStr += "<button type='button' form='ls-rule' name='ls-forward'>Step Forward</button>";
-    textBoxStr += "<button type='button' form='ls-rule' name='ls-play'>Play</button></p>";
+    textBoxStr += "<p><button type='button' form='ls-rule' name='ls-clear' id='ls-clear'>Clear Image</button>";
+    textBoxStr += "<button type='button' form='ls-rule' name='ls-back' id='ls-back' disabled='true'>Step Back</button>";
+    textBoxStr += "<span id='ls-count'>"+ls.count+"</span>";
+    textBoxStr += "<button type='button' form='ls-rule' name='ls-forward' id='ls-forward'>Step Forward</button>";
+    textBoxStr += "<button type='button' form='ls-rule' name='ls-play' id='ls-play'>Play</button></p>";
     textBoxStr += "</form>"
-    textBoxStr += "<p id='l-system'></p>";
+	textBoxStr += "<p>The Lindenmayer string for this image looks like:</p>";
+    textBoxStr += "<p id='ls-string'>"+ls.lsString[ls.lsString.length-1]+"</p>";
 	var textBox = document.getElementById("meta");
-	textBox.innerHTML = textBoxStr; 
-	tick();
+	textBox.innerHTML = textBoxStr;
+}
+
+function init() {
+	if(typeof md != 'undefined') md.clear();
+	if(document.getElementById('ls-select')) var selectedRule = document.getElementById('ls-select').value;
+	else var selectedRule = 'dragon';
+	
+	/* convert lsString to a stack so I can easily get back previous strings */
+	var ls = {
+		steps: 10,
+		axiom: systemRules[selectedRule][0],
+		rules: systemRules[selectedRule].slice(1),
+		lsString: [systemRules[selectedRule][0]], // reset string to axiom
+		count: 0
+	};
+	updateMeta(ls, selectedRule);
+	ls = tick(ls, 'forward'); // First tick
+	
+	// Events
+	document.getElementById('ls-select').onchange = function(){
+		init();
+	};
+	document.getElementById('ls-clear').onclick = function(){
+		init();
+	};
+	document.getElementById('ls-back').onclick = function(){
+		ls = tick(ls, 'back');
+		if(ls.count == 1) this.setAttribute("disabled", true);
+		update(ls)
+	};
+	document.getElementById('ls-forward').onclick = function(){
+		ls = tick(ls, 'forward');
+		update(ls);
+	};
 }
 
 if(document.getElementById('c')) init()
 else document.addEventListener('DOMContentLoaded', init);
 
-var lsSelect = document.getElementById('ls-select');
-lsSelect.onchange = function(){
-    ls.rules = systemRules[lsSelect.value].slice(1);
-    ls.axiom = systemRules[lsSelect.value][0];
-    ls.lsString = ls.axiom; // reset
-    init();
-};
 
-var clear = document.getElementById('ls-clear');
-console.log(clear);
-// clear.onclick = function(ev){console.log(ev)};
+
+
+
 
