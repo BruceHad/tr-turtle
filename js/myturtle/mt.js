@@ -3,17 +3,21 @@ function forEach(array, action) {
     action(array[i]);
 }
 
-function Dot(angle, colour) {
+function Dot(angle, colour, pos) {
 	// For angle 0 = 3 o'clock. 0.25 = 6 o'clock etc.
 	var canvas = document.getElementById('c');
 	var ctx = canvas.getContext('2d');
+	var pos = pos || [0.5, 0.5]; // relative position. default to middle.
+	this.position = [canvas.width * pos[0], canvas.height * pos[1]]; // actual position
+	console.log(this.position);
 	ctx.strokeStyle = '#000';
 	ctx.lineWidth = 1;
 	ctx.strokeStyle = colour;
 	this.angle = angle * Math.PI * 2; // starting angle converted to rads.
 	this.turn = 1/4; //default to 90 degrees
-    this.position = [canvas.width / 2, canvas.height / 2]; // starting position in middle of canvas
+    
 	this.pen = true; // pen is on
+	this.stack = []; // to store positions
     this.forward = function(dist) {
 		// move turtle forward by dist
 		ctx.beginPath();
@@ -42,7 +46,7 @@ function Dot(angle, colour) {
 		this.position = [x, y];
 	};
     this.clear = function(){
-        ctx.clearRect(0,0, canvas.width, canvas.width);
-		console.log("cleared");
+        ctx.clearRect(0, 0, canvas.width, canvas.width);
+		this.position = [canvas.width * pos[0], canvas.height * pos[1]];
     }
 }
