@@ -1,0 +1,58 @@
+canvas {
+    margin: 20px 0;
+    padding:0;
+    display: block;
+    border: 1px solid #ddd;
+}
+
+.view-button {
+	text-align: center;
+}
+.view-button a {
+    padding: 5px;
+    margin: 10px auto;
+    background-color: #428BCA;
+    color: white;
+	text-decoration: none;
+    border-radius: 5px;
+}
+
+.top, .bottom {
+	overflow-y: scroll;
+	overflow-x: hidden;
+	padding-bottom: 10%;
+}
+.top {
+	height: 50vh;	
+}
+.bottom {
+	border-top: 3px double #ddd;
+	height: 60vh;
+	margin-top: -10%;
+	padding-top: 10%;
+	background-color: white;
+	opacity: 0.75;
+	-moz-opacity: 0.75;
+	-khtml-opacity: 0.75;
+	z-index: 999;
+}
+form p {
+    margin: 0;
+    padding: 2px 0;
+}
+form input {
+    max-width: 60%;
+}
+label {
+    font-size: small;
+    margin-left: 5px;
+}
+button {
+    font-size: small;
+}
+
+#ls-count {
+    padding: 0 5px;
+}
+
+
