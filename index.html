@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="http://treerock.me/assets/favicon.ico">
     <link href="css/normalize.css" rel="stylesheet">
-    <link href="css/base.css" rel="stylesheet">
     <link href="css/project.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -18,64 +17,65 @@
 </head>
 
 <body>
- 
-    <div class="container">
+
+    <div class="page">
 
         <div class="top">
-            <h3>Turtles, Dragons and the Lindenmayer System</h3>
-            <p>The first thing I ever programmed was a <a href="https://en.wikipedia.org/wiki/Big_Trak">Big Trak</a>, which was this toy truck that could be programmed to follow a route (forward, back, turn left, forward again etc). So I'm regressing to childhood with this attempt to program a <a href="https://en.wikipedia.org/wiki/Turtle_graphics">Turtle</a> drawing tool in Javascript.</p>
-            <p>I started off looking at <a href="https://en.wikipedia.org/wiki/Dragon_curve">dragon curves</a>, 'recursive nonintersecting curve whose name derives from its resemblance to a certain mythical creature'. There are a couple of methods for drawing approximating them and my first attempt used a formula found on the wikipedia page (and a little investigation into <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators">bitwise operators</a>).</p>
+            <div class="container">
+                <h3>Turtles, Dragons and the Lindenmayer System</h3>
+                <p>The first thing I ever programmed was a <a href="https://en.wikipedia.org/wiki/Big_Trak">Big Trak</a>, which was this toy truck that could be programmed to follow a route (forward, back, turn left, forward again etc). So I'm regressing to childhood with this attempt to program a <a href="https://en.wikipedia.org/wiki/Turtle_graphics">Turtle</a> drawing tool in Javascript.</p>
+                <p>I started off looking at <a href="https://en.wikipedia.org/wiki/Dragon_curve">dragon curves</a>, 'recursive nonintersecting curve whose name derives from its resemblance to a certain mythical creature'. There are a couple of methods for drawing approximating them and my first attempt used a formula found on the wikipedia page (and a little investigation into <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators">bitwise operators</a>).</p>
 
-            <pre>
-				<code>
-for(var n = 1; n <= 1000; n++) {
-	turtle.forward(length);
-	if((((n & -n) << 1) & n) != 0) turtle.rotate(0.25);
-	else turtle.rotate(-0.25);
-}
-				</code>
-			</pre>
+                <pre>
+                    <code>
+                        for(var n = 1; n <= 1000; n++) {
+                        turtle.forward(length);
+                        if((((n & -n) << 1) & n) != 0) turtle.rotate(0.25);
+                        else turtle.rotate(-0.25);
+                    }
+                </code>
+            </pre>
             <p class="view-button"><a href="#dc1" onmouseup="updatePage('dc1')">Click to View Dragon Curve</a>
             </p>
 
             <p>With a turtle I can also generate spirals with very simple code.</p>
             <pre>
-				<code>
-for(var n = 1; n <= 250; n++) {
-	turtle.forward(dist);
-	turtle.rotate(89.5); 
-	dist += 1.75;
-}
-				</code>
-			</pre>
-            <p class="view-button"><a href="#spiral" onmouseup="updatePage('spiral')">Click to View Spiral</a>
-            </p>
+                <code>
+                    for(var n = 1; n <= 250; n++) {
+                    turtle.forward(dist);
+                    turtle.rotate(89.5); 
+                    dist += 1.75;
+                }
+            </code>
+        </pre>
+        <p class="view-button"><a href="#spiral" onmouseup="updatePage('spiral')">Click to View Spiral</a>
+        </p>
 
-            <p><a href="https://en.wikipedia.org/wiki/L-system">Lindenmayer Systems</a> are an interesting method of defining patterns in the form of strings of characters that represent actions like 'move forward' or 'rotate'. The resulting string can be used to control the turtle. In general and L-System consists of:</p>
-            <ul>
-                <li>An alphabet of symbols that can be used to make strings.</li>
-                <li>An initial 'axiom' string from which contruction begins.</li>
-                <li>A collection of rules that are repeatedly applied to the string, expanding it into some larger string of symbols.</li>
-                <li>A mechanism for translating string into geometric structure.</li>
-            </ul>
-            <p>For example a dragon curve could be written in L-system as:</p>
-            <ul>
-                <li>Axiom FX</li>
-                <li>Variables [X, Y]</li>
-                <li>Constants [F, +, -]</li>
-                <li>Rules:</li>
-                <li>X converts to X+YF+</li>
-                <li>Y converts to -FX-Y</li>
-                <li>F converts to Empty String (i.e. remove F)</li>
-            </ul>
-            <p>Applying these rules would result in:</p>
-            <p>0: FX
-                <br />1: X+YF+
-                <br />2: X+YF++-FX-Y+
-                <br />3: X+YF++-FX-Y++-X+YF+&ndash;FX-Y+
-                <br />4: X+YF++-FX-Y++-X+YF+&ndash;FX-Y++-X+YF++-FX-Y+&ndash;X+YF+&ndash;FX-Y+
-                <br />5: X+YF++-FX-Y++-X+YF+&ndash;FX-Y++-X+YF++-FX-Y+&ndash;X+YF+&ndash;FX-Y++-X+YF++-F
-                <br />X-Y++-X+YF+&ndash;FX-Y+&ndash;X+YF++-FX-Y+&ndash;X+YF+&ndash;FX-Y+</p>
+        <p><a href="https://en.wikipedia.org/wiki/L-system">Lindenmayer Systems</a> are an interesting method of defining patterns in the form of strings of characters that represent actions like 'move forward' or 'rotate'. The resulting string can be used to control the turtle. In general and L-System consists of:</p>
+        <ul>
+            <li>An alphabet of symbols that can be used to make strings.</li>
+            <li>An initial 'axiom' string from which contruction begins.</li>
+            <li>A collection of rules that are repeatedly applied to the string, expanding it into some larger string of symbols.</li>
+            <li>A mechanism for translating string into geometric structure.</li>
+        </ul>
+        <p>For example a dragon curve could be written in L-system as:</p>
+        <ul>
+            <li>Axiom FX</li>
+            <li>Variables [X, Y]</li>
+            <li>Constants [F, +, -]</li>
+            <li>Rules:</li>
+            <li>X converts to X+YF+</li>
+            <li>Y converts to -FX-Y</li>
+            <li>F converts to Empty String (i.e. remove F)</li>
+        </ul>
+        <p>Applying these rules would result in:</p>
+        <p>0: FX
+            <br />1: X+YF+
+            <br />2: X+YF++-FX-Y+
+            <br />3: X+YF++-FX-Y++-X+YF+&ndash;FX-Y+
+            <br />4: X+YF++-FX-Y++-X+YF+&ndash;FX-Y++-X+YF++-FX-Y+&ndash;X+YF+&ndash;FX-Y+
+            <br />5: X+YF++-FX-Y++-X+YF+&ndash;FX-Y++-X+YF++-FX-Y+&ndash;X+YF+&ndash;FX-Y++-X+YF++-F
+            <br />X-Y++-X+YF+&ndash;FX-Y+&ndash;X+YF++-FX-Y+&ndash;X+YF+&ndash;FX-Y+</p>
             <p>This can be translated into a curve by applying the following:</p>
             <ul>
                 <li>F means draw forward</li>
@@ -86,7 +86,9 @@ for(var n = 1; n <= 250; n++) {
             <p class="view-button"><a href="#ls2" onmouseup="updatePage('ls2')">Click to View Lindermayer System</a>
             </p>
         </div>
-        <div class="bottom" id="display">
+    </div>
+    <div class="bottom" id="display">
+        <div class="container">
             <div id="meta" class="text-box"></div>
             <div id="canvas-wrapper">
                 <canvas id="c" width="300" height="300">
@@ -94,11 +96,11 @@ for(var n = 1; n <= 250; n++) {
                 </canvas>
             </div>
         </div>
-
     </div>
-    <script src="js/myturtle/mt.js"></script>
-    <script src="js/dc1.js" id="my-script"></script>
-    <script src="js/page.js"></script>
+</div>
+<script src="js/myturtle/mt.js"></script>
+<script src="js/dc1.js" id="my-script"></script>
+<script src="js/page.js"></script>
 </body>
 
 </html>
