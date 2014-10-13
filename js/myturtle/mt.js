@@ -9,7 +9,6 @@ function Dot(angle, colour, pos) {
 	var ctx = canvas.getContext('2d');
 	var pos = pos || [0.5, 0.5]; // relative position. default to middle.
 	this.position = [canvas.width * pos[0], canvas.height * pos[1]]; // actual position
-	console.log(this.position);
 	ctx.strokeStyle = '#000';
 	ctx.lineWidth = 1;
 	ctx.strokeStyle = colour;
@@ -48,5 +47,6 @@ function Dot(angle, colour, pos) {
     this.clear = function(){
         ctx.clearRect(0, 0, canvas.width, canvas.width);
 		this.position = [canvas.width * pos[0], canvas.height * pos[1]];
+		this.angle = angle * Math.PI * 2; // starting angle converted to rads.
     }
 }

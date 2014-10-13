@@ -1,46 +1,62 @@
 # The Page
 
-## Lindermeyer System
+## Turtles, Dragons and the Lindenmayer System
 
-The L-System is made up of an Axiom, a set of rules and the number of times to apply those rules.
+The first thing I ever programmed was a [Big Trak](https://en.wikipedia.org/wiki/Big_Trak), which could be programmed to follow a route. So I'm regressing to childhood with this [Turtle](https://en.wikipedia.org/wiki/Turtle_graphics). With a bit of maths, turtles can draw some incredible patterns.
 
-Users should be able to edit the rules, or select from some preset values. 
+A [Dragon Curve](https://en.wikipedia.org/wiki/Dragon_curve) is a self-similar fractal curve. There are a couple of methods for drawing or approximating them.
 
-They should also be able to step through each step of the transform, or play and animation.
+My first attempt used a formula found on the wikipedia page and a little investigation into [bitwise operators](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators). 
 
 
-# Dragon Curves
+<pre>
+	<code>
+	for(var n = 1; n <= 1000; n++) {
+		turtle.forward(length);
+		if((((n & -n) << 1) & n) != 0) {
+			turtle.rotate(0.25);
+		} else {
+			turtle.rotate(-0.25);
+		}
+	}
+	</code>
+</pre>
 
-https://en.wikipedia.org/wiki/Dragon_curve
-https://en.wikipedia.org/wiki/L-system
 
-Dragon Curve is a name for self-similar fractal curves which can be approximated by recursive methods like Lindenmayer systems.
+View Dragon Curve or view the Animated Version.
 
-L-system is a type of symbolic grammar. It consists of:
+With a turtles we can easily generate pretty spirals. e.g. with the following couple of lines of code.
 
-* Alphabet of symbols that can be used to make strings.
-* A collection of production rules that expand each symbol into some larger string of symbols.
-* Initial 'axiom' string from which contruction begins.
+<pre>
+	<code>
+	for(var n = 1; n <= 250; n++) {
+        turtle.forward(dist);
+        turtle.rotate(89.5); 
+		dist += 1.75;
+    }
+	</code>
+</pre>
+
+View Spiral.
+
+[Lindenmayer Systems](https://en.wikipedia.org/wiki/L-system) are an interesting method of defining patterns, that can be combined with a Turtle to generate and draw complex models. The L-system is a type of 'symbolic grammar', generally taking the form of a sequence of characters that represent actions. It consists of:
+
+* An alphabet of symbols that can be used to make strings.
+* An initial 'axiom' string from which contruction begins.
+* A collection of rules that are repeatedly applied to the string, expanding it into some larger string of symbols.
 * A mechanism for translating string into geometric structure.
 
-The Jurassic Park dragon can be written in L-system as:
+For example a dragon curve could be written in L-system as:
 
-
-* Initial string FX
-* Variables X Y
-* Constants F + -
-* Start FX
-* Rules
+* Axiom FX
+* Variables [X, Y]
+* Constants [F, +, -]
+* Rules:
   * X → X+YF+
   * Y → -FX-Y
   * F → ε (empty string/remove F)
-* Angle 90 degrees.
-
-Where F means draw forward, - means turn left, + means turn right. 
-
-Starting from a base segment (two perpendicular line like a V) replace each segment by 2 segments with a right angle and with a rotation of 45 degrees, alternating to the left and the right.
-
-The string replacement looks something like this.
+  
+Applying these rules would result in:
 
 0: FX
 1: X+YF+
@@ -50,11 +66,23 @@ The string replacement looks something like this.
 5: X+YF++-FX-Y++-X+YF+--FX-Y++-X+YF++-FX-Y+--X+YF+--FX-Y++-X+YF++-F
 X-Y++-X+YF+--FX-Y+--X+YF++-FX-Y+--X+YF+--FX-Y+
 
-# L System
+This can be translated into a curve by applying the following:
 
+* F means draw forward
+* - means turn left (90 degrees)
+* + means turn right (90 degrees)
 
+(X and Y are ignored in the drawing)
 
-# Bitwise Operations
+f(.01, 89.5, .01, 184) f(dist, angle, incr, segs /*(number of segments)*/) { 
+	start in the center of a square view-space, 
+	facing east repeat segs times: 
+		go dist * (60% the view-space width) in the current direction turn angle degrees clockwise (to your right) 
+		increment dist by incr }
+
+# Notes
+
+## Bitwise Operations
 
 Bitwise operations directly manipulate bits.
 
@@ -75,7 +103,7 @@ The bitwise NOT ~ operator flips the bits. (Seems a bit more complicated than th
 
 You can combine these with masks to manipulate binary numbers.
 
-# Canvas
+## HTML Canvas
 
 Grab the element and create the context object for drawing on the canvas.
 
