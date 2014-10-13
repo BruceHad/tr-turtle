@@ -2,7 +2,7 @@ function updatePage(page) {
     if(typeof intId != 'undefined') clearInterval(intId);
     canvas = document.getElementById('canvas-wrapper');
     canvas.innerHTML = '';
-    replaceStr = '<canvas id="c" width="600" height="600">';
+    replaceStr = '<canvas id="c" width="300" height="300">';
     replaceStr += '<p>Canvas cannot be displayed.</p>';
     replaceStr += '</canvas>';
     canvas.innerHTML = replaceStr;

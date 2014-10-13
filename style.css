@@ -1,68 +1,84 @@
-.clearfix:after {
-   content: " "; /* Older browser do not support empty content */
-   visibility: hidden;
-   display: block;
-   height: 0;
-   clear: both;
+.clearfix:before, .clearfix:after {
+    content:" ";
+    /* 1 */
+    display: table;
+    /* 2 */
 }
-
+.clearfix:after {
+    clear: both;
+}
+/**
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+ .clearfix {
+    *zoom: 1;
+}
+/* apply a natural box layout model to all elements, but allowing components to change */
+ html {
+    box-sizing: border-box;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
 body, html {
-	height: 100%;
-	background-color: #eee;
+    height: 100%;
 }
 canvas {
-	margin: 20px auto; 
-	padding:0;
-	display: block;
-	background-color: white;
+    margin: 20px 0;
+    padding:0;
+    display: block;
+    border: 1px solid #ddd;
 }
 
-.row {
-	clear: both;
+.container {
+	max-width: 700px;
+	padding: 0 15px;
+	margin: 0 auto;
 }
-
-.col {
-	float: left;	
+.top, .bottom {
+	height: 50vh;
+	overflow: auto;
 }
-.col-3 {
-    width: 25%;
-}
-.col-4 {
-	width: 33.33333%;
-}
-.col-6 {
-    width: 50%;
-}
-
-.col-8 {
-	width: 66.66666%;
-}
-
 form p {
-	margin: 0;
-	padding: 2px 0;
+    margin: 0;
+    padding: 2px 0;
 }
 form input {
-	max-width: 60%;
+    max-width: 60%;
 }
 label {
-	font-size: small;
-	margin-left: 5px;
+    font-size: small;
+    margin-left: 5px;
 }
-button{
-	font-size: small;
+button {
+    font-size: small;
 }
 
 #ls-count {
-	padding: 0 5px;
+    padding: 0 5px;
+}
+/* #ls-string {
+    float: left;
+    position: absolute;
+    border: 1px solid #ddd;
+    background-color: rgba(255, 255, 255, 0.5);
+    max-width: 60%;
+    max-height: 275px;
+    overflow: auto;
+} */
+
+.view-button {
+	text-align: center;
+}
+.view-button a {
+    padding: 5px;
+    margin: 10px auto;
+    background-color: #428BCA;
+    color: white;
+	text-decoration: none;
+    border-radius: 5px;
 }
 
-#ls-string {
-	float: left;
-	position: absolute;
-	border: 1px solid #ddd;
-	background-color: rgba(255, 255, 255, 0.7);
-	max-width: 60%;
-	max-height: 175px;
-	overflow: auto;
-}
+
+

@@ -8,37 +8,90 @@
 </head>
 
 <body>
-    <div class="row clearfix">
-        <div class="col col-3">
-			<h3>Turtles, Dragons and the Lindemayer System</h3>
-			
-            <ul style="list-style:none; padding:0 15px;">
-                <li>Attempt 1. <a href="#dc1" onmouseup="updatePage('dc1')"> Basic Dragon Curve</a>
-                </li>
-                <li>Attempt 2. <a href="#adc" onmouseup="updatePage('adc')">Animated Dragon Curve</a>
-                </li>
-                <li>Attempt 3. <a href="#ls2" onmouseup="updatePage('ls2')">Lindenmayer System</a>
-                </li>
-				<li>Attempt 3. <a href="#spiral" onmouseup="updatePage('spiral')">Spiral</a>
-                </li>
+    <div class="container">
+
+        <div class="top">
+            <h3>Turtles, Dragons and the Lindenmayer System</h3>
+            <p>The first thing I ever programmed was a <a href="https://en.wikipedia.org/wiki/Big_Trak">Big Trak</a>, which was this toy truck that could be prorammed to follow a route (forward, back, turn left, forward again etc). So I'm regressing to childhood with this <a href="https://en.wikipedia.org/wiki/Turtle_graphics">Turtle</a> attempt.</p>
+            <p>I started off looking at dragon curves. A <a href="https://en.wikipedia.org/wiki/Dragon_curve">dragon curve</a> is a self-similar fractal curve. There are a couple of methods for drawing or approximating them.</p>
+            <p>My first attempt used a formula found on the wikipedia page and a little investigation into <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators">bitwise operators</a>.</p>
+
+            <pre>
+				<code>
+for(var n = 1; n <= 1000; n++) {
+	turtle.forward(length);
+	if((((n & -n) << 1) & n) != 0) {
+		turtle.rotate(0.25);
+	} else {
+		turtle.rotate(-0.25);
+	}
+}
+				</code>
+			</pre>
+            <p class="view-button"><a href="#dc1" onmouseup="updatePage('dc1')">Click to View Dragon Curve</a>
+            </p>
+
+            <p>With a turtle I can also generate spirals with very simple code.</p>
+            <pre>
+				<code>
+for(var n = 1; n <= 250; n++) {
+	turtle.forward(dist);
+	turtle.rotate(89.5); 
+	dist += 1.75;
+}
+				</code>
+			</pre>
+            <p class="view-button"><a href="#spiral" onmouseup="updatePage('spiral')">Click to View Spiral</a>
+            </p>
+
+            <p><a href="https://en.wikipedia.org/wiki/L-system">Lindenmayer Systems</a> are an interesting method of defining patterns, that can be combined with a Turtle to generate and draw complex models. The L-system is a type of 'symbolic grammar', generally taking the form of a sequence of characters that represent actions. It consists of:</p>
+            <ul>
+                <li>An alphabet of symbols that can be used to make strings.</li>
+                <li>An initial 'axiom' string from which contruction begins.</li>
+                <li>A collection of rules that are repeatedly applied to the string, expanding it into some larger string of symbols.</li>
+                <li>A mechanism for translating string into geometric structure.</li>
             </ul>
+            <p>For example a dragon curve could be written in L-system as:</p>
+            <ul>
+                <li>Axiom FX</li>
+                <li>Variables [X, Y]</li>
+                <li>Constants [F, +, -]</li>
+                <li>Rules:</li>
+                <li>X converts to X+YF+</li>
+                <li>Y converts to -FX-Y</li>
+                <li>F converts to ε (i.e. remove F)</li>
+            </ul>
+            <p>Applying these rules would result in:</p>
+            <p>0: FX
+                <br />1: X+YF+
+                <br />2: X+YF++-FX-Y+
+                <br />3: X+YF++-FX-Y++-X+YF+&ndash;FX-Y+
+                <br />4: X+YF++-FX-Y++-X+YF+&ndash;FX-Y++-X+YF++-FX-Y+&ndash;X+YF+&ndash;FX-Y+
+                <br />5: X+YF++-FX-Y++-X+YF+&ndash;FX-Y++-X+YF++-FX-Y+&ndash;X+YF+&ndash;FX-Y++-X+YF++-F
+                <br />X-Y++-X+YF+&ndash;FX-Y+&ndash;X+YF++-FX-Y+&ndash;X+YF+&ndash;FX-Y+</p>
+            <p>This can be translated into a curve by applying the following:</p>
+            <ul>
+                <li>F means draw forward</li>
+                <li>means turn left (90 degrees)</li>
+                <li>means turn right (90 degrees)</li>
+            </ul>
+            <p>(X and Y are ignored in the drawing)</p>
+            <p class="view-button"><a href="#ls2" onmouseup="updatePage('ls2')">Click to View Lindermayer System</a>
+            </p>
         </div>
-        <div class="col col-3">
-            <div id="meta" class="text-box">
-                <p>Random giberrish</p>
-            </div>
-        </div>
-        <div id="content" class="col col-6">
+        <div class="bottom" id="display">
+            <div id="meta" class="text-box"></div>
             <div id="canvas-wrapper">
-                <canvas id="c" width="600" height="600">
+                <canvas id="c" width="300" height="300">
                     <p>Canvas cannot be displayed.</p>
                 </canvas>
             </div>
         </div>
+
     </div>
     <script src="js/myturtle/mt.js"></script>
     <script src="js/dc1.js" id="my-script"></script>
-    <script src="js/page.js"></script>    
+    <script src="js/page.js"></script>
 </body>
 
 </html>
