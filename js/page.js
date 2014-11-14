@@ -1,8 +1,11 @@
 function updatePage(page) {
+	console.log("Hello");
     if(typeof intId != 'undefined') clearInterval(intId);
     canvas = document.getElementById('canvas-wrapper');
+	console.log(canvas.clientHeight);
+	console.log(canvas.offsetHeight);
     canvas.innerHTML = '';
-    replaceStr = '<canvas id="c" width="300" height="300">';
+    replaceStr = '<canvas id="c" width="'+(canvas.clientWidth-15)+'px" height="'+(canvas.clientHeight-15)+'px">';
     replaceStr += '<p>Canvas cannot be displayed.</p>';
     replaceStr += '</canvas>';
     canvas.innerHTML = replaceStr;
@@ -25,4 +28,6 @@ function replaceJs(newFile) {
 
 if(window.location.hash != ""){
     updatePage(window.location.hash.substr(1));
+} else {
+	updatePage("dc1");
 }
