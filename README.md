@@ -1,3 +1,3 @@
 # My Turtle
 
-A basic JS turtle.
+A basic turtle implementation. Using Javascript and Canvas.

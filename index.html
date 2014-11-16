@@ -11,87 +11,137 @@
     <link href='http://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-<script src="http://treerock.me/assets/js/html5shiv.js"></script>
-<script src="http://treerock.me/assets/js/respond.min.js"></script>
-<![endif]-->
-</head>
-
-<body>
-
-    <div class="page">
-        <div class="top">
-            <h3>Turtles, Dragons and the Lindenmayer System</h3>
-            <p>The first thing I ever programmed was a <a href="https://en.wikipedia.org/wiki/Big_Trak">Big Trak</a>, which was this toy truck that could be programmed to follow a route (forward, back, turn left, forward again etc). So I'm regressing to childhood with this attempt to program a <a href="https://en.wikipedia.org/wiki/Turtle_graphics">Turtle</a> drawing tool in Javascript.</p>
-			<p class="view-button"><a href="#bt" onmouseup="updatePage('bt')">Click to Play with My Big Track</a></p>
-				<p>With a turtle I can also generate spirals with very simple code.</p>
-            <p>I started off looking at <a href="https://en.wikipedia.org/wiki/Dragon_curve">dragon curves</a>, 'recursive nonintersecting curve whose name derives from its resemblance to a certain mythical creature'. There are a couple of methods for drawing approximating them and my first attempt used a formula found on the wikipedia page (and a little investigation into <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators">bitwise operators</a>).</p>
-
-            <pre>
-for(var n = 1; n &lt;= 1000; n++) {
-	turtle.forward(length);
-	if((((n &amp; -n) &lt;&lt; 1) &amp; n) != 0) turtle.rotate(0.25);
-	else turtle.rotate(-0.25);
+        <script src="http://treerock.me/assets/js/html5shiv.js"></script>
+        <script src="http://treerock.me/assets/js/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <header class="section">
+            <div class="container">
+                <h1>Treerock</h1>
+                <p class="sub"><span>Turtles, Dragons and Patterns</span></p>
+            </div>
+        </header>
+        <div class="page">
+            <div id="canvas">
+                <section id="one">
+                    <h2>1. Plain Canvas with Turtle</h2>
+                    <canvas id="canvasone" width="450" height="300">
+                        <p>Canvas cannot be displayed.</p>
+                    </canvas>
+                </section>
+                <section id="two">
+                    <h2>2. </h2>
+                    <canvas id="canvastwo" width="450" height="300">
+                        <p>Canvas cannot be displayed.</p>
+                    </canvas>
+                </section>
+                <section id="three">
+                    <canvas id="canvasthree" width="450" height="300">
+                        <p>Canvas cannot be displayed.</p>
+                    </canvas>
+                </section>
+            </div>
+            <div id="content" class="column">
+                <article class="one">
+                    <h2>Turtles</h2>
+                    <p>Like a lot of 80s kids, my first introduction to programming was a toy called <a href="https://en.wikipedia.org/wiki/Big_Trak">Big Trak</a>. It was a truck with a keypad on it's back, and it could be programmed to follow a route...3 forward, turn right, reverse 5 and so on. I didn't know at the time, but this was similar to a <a href="https://en.wikipedia.org/wiki/Turtle_graphics">Turtle</a>, a programming method whereby a 'pen' is programmed to draw lines on a cartesian plane. Programming a truck is cool an' all, but turtles can draw pictures, which is better.</p>
+                    <p>To work, a turtle needs three attributes: a location (generally x,y co-ordinates on a plane), an orientation (angle) and a pen.</p>
+                    <p>Turtle also needs a couple of actions: to move the turtle and rotate the orientation:</p>
+                    <ul>
+                        <li>forward(distance) - moves turtle forward by a distance</li>
+                        <li>rotate(angle) - rotates orientation by set angle.</li>
+                    </ul>
+                    <p>These two actions should be enough to do just about anything, but I could add more to make controls simpler.</p>
+<pre><code>
+function Turtle(){
+    var location = [0.5,0.5]; // Half pixel offset
+    var angle = 0; // Radians
+    var pen = new Pen();
+    var canvas = new Canvas();
+    this.rotate = function(anglePercent) {
+    // to simplify the maths anglePercent is a percentage of
+    // a full circle. e.g to rotate turtle by 90 degrees == rotate(0.25).
+    angle += anglePercent * Math.PI *2;
+};
+this.forward = function(dist) {
+    pos2 = [location[0]+ Math.cos(angle) * dist, location[1]+ Math.sin(angle) * dist];
+    if(pen.draw) canvas.draw(location, pos2, pen);
+        location = [pos2[0], pos2[1]];
+    };
 }
-				</pre>
-            <p class="view-button"><a href="#dc1" onmouseup="updatePage('dc1')">Click to View Dragon Curve</a>
-            </p>
-            <p>With a turtle I can also generate spirals with very simple code.</p>
-            <pre>
-for(var n = 1; n &lt;= 250; n++) {
-	turtle.forward(dist);
-	turtle.rotate(89.5); 
-	dist += 1.75;
+</code></pre>
+      <p>The pen also has a number of attributes such as colour, width, pen up or down (i.e. draw or don't draw).</p>
+<pre><code>f
+function Pen(){
+    var colour = '#000000';
+    var width = 1;
+    this.draw = true;
+    this.pop = function(){
+        draw = !draw
+    };
+};
+</code></pre>
+<p>And that's basically it. Though to implement this in javascript and actually draw stuff I'm going to need to set up a <a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API">canvas</a> with some line drawing type functions.</p>
+<pre><code>
+function Canvas(){
+  var canvas = document.getElementById('c');
+  var ctx = canvas.getContext('2d');
+  this.draw = function(start, end, pen){
+  ctx.strokeStyle = pen.colour;
+  ctx.lineWidth = pen.width;
+  ctx.beginPath();
+  ctx.moveTo(start[0], start[1]);
+  ctx.lineTo(end[0], end[1]);
+  ctx.stroke();
+};
 }
-				</pre>
-            <p class="view-button"><a href="#spiral" onmouseup="updatePage('spiral')">Click to View Spiral</a>
-            </p>
-            <p><a href="https://en.wikipedia.org/wiki/L-system">Lindenmayer Systems</a> are an interesting method of defining patterns in the form of strings of characters that represent actions like 'move forward' or 'rotate'. The resulting string can be used to control the turtle. In general and L-System consists of:</p>
-            <ul>
-                <li>An alphabet of symbols that can be used to make strings.</li>
-                <li>An initial 'axiom' string from which contruction begins.</li>
-                <li>A collection of rules that are repeatedly applied to the string, expanding it into some larger string of symbols.</li>
-                <li>A mechanism for translating string into geometric structure.</li>
-            </ul>
-            <p>For example a dragon curve could be written in L-system as:</p>
-            <ul>
-                <li>Axiom FX</li>
-                <li>Variables [X, Y]</li>
-                <li>Constants [F, +, -]</li>
-                <li>Rules:</li>
-                <li>X converts to X+YF+</li>
-                <li>Y converts to -FX-Y</li>
-                <li>F converts to Empty String (i.e. remove F)</li>
-            </ul>
-            <p>Applying these rules would result in:</p>
-            <p>0: FX
-                <br />1: X+YF+
-                <br />2: X+YF++-FX-Y+
-                <br />3: X+YF++-FX-Y++-X+YF+&ndash;FX-Y+
-                <br />4: X+YF++-FX-Y++-X+YF+&ndash;FX-Y++-X+YF++-FX-Y+&ndash;X+YF+&ndash;FX-Y+
-                <br />5: X+YF++-FX-Y++-X+YF+&ndash;FX-Y++-X+YF++-FX-Y+&ndash;X+YF+&ndash;FX-Y++-X+YF++-F
-                <br />X-Y++-X+YF+&ndash;FX-Y+&ndash;X+YF++-FX-Y+&ndash;X+YF+&ndash;FX-Y+</p>
-            <p>This can be translated into a curve by applying the following:</p>
-            <ul>
-                <li>F means draw forward</li>
-                <li>+ means turn left (90 degrees)</li>
-                <li>- means turn right (90 degrees)</li>
-            </ul>
-            <p>X and Y are necessary for building the L-System string but ignored when translating that to a geometric pattern.</p>
-            <p class="view-button"><a href="#ls2" onmouseup="updatePage('ls2')">Click to View Lindermayer System</a>
-            </p>
-            <div id="meta" class="text-box"></div>
-        </div>
-        <!-- end top -->
-        <div class="bottom" id="display">
-            <canvas id="c" width="300" height="300">
-                <p>Canvas cannot be displayed.</p>
-            </canvas>
-        </div>
-        <!-- End bottom -->
-    </div>
-    <script src="js/myturtle/mt.js"></script>
-    <script src="js/dc1.js" id="my-script"></script>
-    <script src="js/page.js"></script>
+</code></pre>
+<p>At the moment you should just see a blank canvas but if you open your web browsers console you should be able to type in some commands to control the turtle.</p>
+<pre><code>turtle.forward(100);
+    turtle.rotate(1/8);
+    turtle.forward(100);
+</code></pre>
+<p>etc...so it would be good to add a few controls for the turtle.</p>
+</article>
+<article class="two">
+    <h2>TurtleTrack</h2>
+    <p>Now we've added a visible pen and some controls.</p>
+    <p>The pen also has a number of attributes such as colour, width, pen up or down (i.e. draw or don't draw).</p>
+    <pre><code>function Pen(){
+      var colour = '#000000';
+      var width = 1;
+      this.draw = true;
+      this.pop = function(){
+      draw = !draw
+  };
+};
+</code></pre>
+<p>And that's basically it. Though to implement this in javascript and actually draw stuff I'm going to need to set up a <a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API">canvas</a> with some line drawing type functions.</p>
+
+</article>
+<article class="three">
+    <h2>TurtleTrack</h2>
+    <p>Now we've added a visible pen and some controls.</p>
+    <p>The pen also has a number of attributes such as colour, width, pen up or down (i.e. draw or don't draw).</p>
+    <pre><code>function Pen(){
+      var colour = '#000000';
+      var width = 1;
+      this.draw = true;
+      this.pop = function(){
+      draw = !draw
+  };
+};
+</code></pre>
+<p>And that's basically it. Though to implement this in javascript and actually draw stuff I'm going to need to set up a <a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API">canvas</a> with some line drawing type functions.</p>
+
+</article>
+</div>
+</div>
+<script src="js/myturtle/mt.js"></script>
+<script src="js/page.js"></script>
+<script id="my-script"></script>
+
 </body>
 
 </html>

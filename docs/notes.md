@@ -1,12 +1,10 @@
-# The Page
+## Turtles, Systems and Patterns
 
-## Turtles, Dragons and the Lindenmayer System
-
-The first thing I ever programmed was a [Big Trak](https://en.wikipedia.org/wiki/Big_Trak), which could be programmed to follow a route. So I'm regressing to childhood with this [Turtle](https://en.wikipedia.org/wiki/Turtle_graphics). With a bit of maths, turtles can draw some incredible patterns.
+Like a lot of 80s kids, my first introduction to programming was a toy called [Big Trak](https://en.wikipedia.org/wiki/Big_Trak). It was a truck with a keypad on it's back, and it could be programmed to follow a route... 3 forward, turn right, reverse 5 and so on. I didn't know at the time, but this was similar to a [Turtle](https://en.wikipedia.org/wiki/Turtle_graphics), a programming method whereby a 'pen' is programmed to draw lines on a cartesian plane. A turtle isn't as cool as a truck, but it can draw pictures.
 
 A [Dragon Curve](https://en.wikipedia.org/wiki/Dragon_curve) is a self-similar fractal curve. There are a couple of methods for drawing or approximating them.
 
-My first attempt used a formula found on the wikipedia page and a little investigation into [bitwise operators](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators). 
+My first attempt used a formula found on the wikipedia page and a little investigation into [bitwise operators](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators).
 
 
 <pre>
@@ -31,7 +29,7 @@ With a turtles we can easily generate pretty spirals. e.g. with the following co
 	<code>
 	for(var n = 1; n <= 250; n++) {
         turtle.forward(dist);
-        turtle.rotate(89.5); 
+        turtle.rotate(89.5);
 		dist += 1.75;
     }
 	</code>
@@ -55,7 +53,7 @@ For example a dragon curve could be written in L-system as:
   * X → X+YF+
   * Y → -FX-Y
   * F → ε (empty string/remove F)
-  
+
 Applying these rules would result in:
 
 0: FX
@@ -74,10 +72,10 @@ This can be translated into a curve by applying the following:
 
 (X and Y are ignored in the drawing)
 
-f(.01, 89.5, .01, 184) f(dist, angle, incr, segs /*(number of segments)*/) { 
-	start in the center of a square view-space, 
-	facing east repeat segs times: 
-		go dist * (60% the view-space width) in the current direction turn angle degrees clockwise (to your right) 
+f(.01, 89.5, .01, 184) f(dist, angle, incr, segs /*(number of segments)*/) {
+	start in the center of a square view-space,
+	facing east repeat segs times:
+		go dist * (60% the view-space width) in the current direction turn angle degrees clockwise (to your right)
 		increment dist by incr }
 
 # Notes
@@ -89,11 +87,11 @@ Bitwise operations directly manipulate bits.
 Left shift << and right shift >> operators shit the bits of a number over by a given number of slots.
 
 	0b000001 << 2 == 0b000100 (1 << 2 = 4)
-	
+
 The bitwise and & operator compares two numbers and returns a number where the bit is turned on (1) if the bits are turned on in both numbers.
 
 	a:     00101010   42
-	b:     00001111   15      
+	b:     00001111   15
 	====================
 	a & b: 00001010   10
 
@@ -109,7 +107,7 @@ Grab the element and create the context object for drawing on the canvas.
 
 	var canvas = document.getElementById('tutorial');
 	var ctx = canvas.getContext('2d');
-	
+
 Once you have a context (2d) you can draw on it. Useful methods:
 
 * beginPath() creates a new path by resetting the list of subpaths.

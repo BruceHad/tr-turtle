@@ -1,52 +1,38 @@
-function forEach(array, action) {
-  for (var i = 0; i < array.length; i++)
-    action(array[i]);
+function Pen(){
+  var colour = '#000000';
+  var width = 1;
+  this.draw = true;
+  this.pop = function(){
+    draw = !draw
+  };
+};
+
+function Canvas(canvasId){
+  var canvas = document.getElementById(canvasId);
+  var ctx = canvas.getContext('2d');
+  this.draw = function(start, end, pen){
+    ctx.strokeStyle = pen.colour;
+    ctx.lineWidth = pen.width;
+    ctx.beginPath();
+    ctx.moveTo(start[0], start[1]);
+    ctx.lineTo(end[0], end[1]);
+    ctx.stroke();
+  };
 }
 
-function Dot(angle, colour, pos) {
-	// For angle 0 = 3 o'clock. 0.25 = 6 o'clock etc.
-	var canvas = document.getElementById('c');
-	var ctx = canvas.getContext('2d');
-	var pos = pos || [0.5, 0.5]; // relative position. default to middle.
-	this.position = [canvas.width * pos[0], canvas.height * pos[1]]; // actual position
-	ctx.strokeStyle = '#000';
-	ctx.lineWidth = 1;
-	ctx.strokeStyle = colour;
-	this.angle = angle * Math.PI * 2; // starting angle converted to rads.
-	this.turn = 1/4; //default to 90 degrees
-    
-	this.pen = true; // pen is on
-	this.stack = []; // to store positions
-    this.forward = function(dist) {
-		// move turtle forward by dist
-		ctx.beginPath();
-        ctx.moveTo(this.position[0], this.position[1]);
-		this.position[0]+= Math.cos(this.angle) * dist;
-		this.position[1]+= Math.sin(this.angle) * dist;
-        ctx.lineTo(this.position[0], this.position[1]);
-        if(this.pen) ctx.stroke();
-    };
-    this.rotate = function(angle) {
-		// rotate turtle 0.25 = rotate by 90 degrees.
-        this.angle += angle * Math.PI *2;
-    };
-	this.right = function(){
-		this.rotate(this.turn);
-	};
-	this.left = function(){
-		this.rotate(this.turn*-1);
-	}
-	this.setPen = function(){
-		// switch pen on/off
-		this.pen = !this.pen;
-	};
-	this.setPosition = function(x, y){
-		// manually set position of turtle.
-		this.position = [x, y];
-	};
-    this.clear = function(){
-        ctx.clearRect(0, 0, canvas.width, canvas.width);
-		this.position = [canvas.width * pos[0], canvas.height * pos[1]];
-		this.angle = angle * Math.PI * 2; // starting angle converted to rads.
-    }
+function Turtle(name){
+  var location = [0.5,0.5]; // Half pixel offset
+  var angle = 0; // Radians
+  var pen = new Pen();
+  var canvas = new Canvas(name);
+  this.rotate = function(anglePercent) {
+    // to simplify the maths anglePercent is a percentage of
+    // a full circle. e.g to rotate turtle by 90 degrees == rotate(0.25).
+    angle += anglePercent * Math.PI *2;
+  };
+  this.forward = function(dist) {
+    pos2 = [location[0]+ Math.cos(angle) * dist, location[1]+ Math.sin(angle) * dist];
+    if(pen.draw) canvas.draw(location, pos2, pen);
+    location = [pos2[0], pos2[1]];
+  };
 }
