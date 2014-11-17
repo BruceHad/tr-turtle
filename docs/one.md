@@ -58,5 +58,5 @@ We need a [canvas](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API) 
 	  };
 	}
 
-And it would be good to add a few controls for the turtle.
+And I have added a few basic controls for the turtle so you can play around with it.
 

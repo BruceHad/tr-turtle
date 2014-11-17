@@ -21,7 +21,7 @@ function Canvas(canvasId){
 }
 
 function Turtle(name){
-  var location = [0.5,0.5]; // Half pixel offset
+  var location = [10.5,10.5]; // Half pixel offset
   var angle = 0; // Radians
   var pen = new Pen();
   var canvas = new Canvas(name);
@@ -35,4 +35,18 @@ function Turtle(name){
     if(pen.draw) canvas.draw(location, pos2, pen);
     location = [pos2[0], pos2[1]];
   };
+}
+
+// Event Handlers
+// 
+var controls = document.getElementsByClassName("buttons");
+for(var i=0; i<controls.length; i++){
+	controls[i].addEventListener("click", doSomething, false);
+}
+
+function doSomething(e){
+	if(e.target.name === "forward")	turtle.forward(100);
+	else if(e.target.name === "left") turtle.rotate(-0.25);
+	else if(e.target.name === "right") turtle.rotate(0.25);
+	e.stopPropagation();
 }
