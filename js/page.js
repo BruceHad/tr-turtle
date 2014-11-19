@@ -39,31 +39,3 @@ function updatePage(section){
     }
     turtle = new Turtle("canvas"+section);
 }
-
-// function test(el) {
-//    var docViewTop = window.scrollTop(),
-//        docViewBottom = docViewTop + $(window).height(),
-//        elemTop = $el.offset().top,
-//        elemBottom = elemTop + $el.height();
-
-//    return ((elemBottom >= docViewTop) && (elemTop <= docViewBottom)
-//              && (elemBottom <= docViewBottom) &&  (elemTop >= docViewTop) );
-// }
-
-// function checkInView( e ) {
-
-//    $.each(_watch, function () {
-
-//       if ( test( this.element ) ) {
-//          if ( !this.invp ) {
-//             this.invp = true;
-//             if ( this.options.scrolledin ) this.options.scrolledin.call( this.element, e );
-//             this.element.trigger( 'scrolledin', e );
-//          }
-//       } articlese if ( this.invp ) {
-//          this.invp = false;
-//          if ( this.options.scrolledout ) this.options.scrolledout.call( this.element, e );
-//          this.element.trigger( 'scrolledout', e );
-//       }
-//    });
-// }
