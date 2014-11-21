@@ -14,7 +14,7 @@ window.onscroll = function(e){
                 var name = elem.getAttribute("class");
                 var viewHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
                 // console.log(name+" position: "+ position+" viewHeight: "+viewHeight);
-                if(viewHeight-position > viewHeight/2){
+                if(viewHeight-position > viewHeight/1.5){
                     visible = name;
                 }
             }
