@@ -25,7 +25,7 @@ function Canvas(canvasId) {
 }
 
 function Turtle(name) {
-  var start = [10.5, 10.5, 0]; // x, y, angle - Half pixel offset
+  var start = [200.5, 150.5, 0]; // x, y, angle - Half pixel offset
   var location = [start[0], start[1]];
   var angle = start[2];
   var pen = new Pen();
@@ -69,6 +69,8 @@ function Turtle(name) {
   };
   this.go = function() {
 		var dist = parseInt(document.getElementById("distance").value,10);
+    console.log(dist);
+    console.log(commandString);
     var arr = commandString.split('');
     if(arr.length === 0) return;
     var intId = setInterval(anim, 100, this);
@@ -87,18 +89,21 @@ function Turtle(name) {
   };
 	this.setCommandString = function(cs){
 		commandString = cs;
+    document.getElementById("ls-string").innerHTML = commandString;
 	};
 	this.setDistance = function(dist){
 		document.getElementById("distance").value = dist;
 	}
 }
 
-function Dragon(){
-	
+function ls(lsString, dist){
+  turtle.setCommandString(lsString);
+  turtle.setDistance(dist);
+  // turtle.go();
 }
 
 // Event Handlers
-// 
+//
 var controls = document.getElementsByClassName("buttons");
 for(var i = 0; i < controls.length; i++) {
   controls[i].addEventListener("click", doSomething, false);
@@ -113,6 +118,6 @@ function doSomething(e) {
   else if(e.target.name === "ls-right") turtle.queue("R");
   else if(e.target.name === "ls-go") turtle.go();
   else if(e.target.name === "clear") turtle.clear();
-	else if(e.target.name === "dragon") Dragon();
+	else if(e.target.name === "ls-dragon") ls('XRYFRRLFXLYRRLXRYFRLLFXLYRRLXRYFRRLFXLYRLLXRYFRLLFXLYRRLXRYFRRLFXLYRRLXRYFRLLFXLYRLLXRYFRRLFXLYRLLXRYFRLLFXLYRRLXRYFRRLFXLYRRLXRYFRLLFXLYRRLXRYFRRLFXLYRLLXRYFRLLFXLYRLLXRYFRRLFXLYRRLXRYFRLLFXLYRLLXRYFRRLFXLYRLLXRYFRLLFXLYRRLXRYFRRLFXLYRRLXRYFRLLFXLYRRLXRYFRRLFXLYRLLXRYFRLLFXLYRRLXRYFRRLFXLYRRLXRYFRLLFXLYRLLXRYFRRLFXLYRLLXRYFRLLFXLYRLLXRYFRRLFXLYRRLXRYFRLLFXLYRRLXRYFRRLFXLYRLLXRYFRLLFXLYRLLXRYFRRLFXLYRRLXRYFRLLFXLYRLLXRYFRRLFXLYRLLXRYFRLLFXLYR', 5);
   e.stopPropagation();
 }

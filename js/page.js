@@ -5,6 +5,7 @@ var visible = null;
 var show = "one";
 updatePage(show);
 
+
 window.onscroll = function(e){
     if(!buffer){
         buffer = setTimeout(function(){
@@ -38,4 +39,5 @@ function updatePage(section){
         }
     }
     turtle = new Turtle("canvas"+section);
+    // var dragonString = expandLs(['FX', 'F > ', 'X > XRYFR', 'Y > LFXLY'],7);
 }

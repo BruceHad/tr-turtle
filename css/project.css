@@ -94,8 +94,16 @@ header p.sub {
 }
 
 .buttons-wrapper {
-	width: 60%;
+	/*width: 60%;*/
 	margin: 5px auto;
 	text-align:center;
 }
-
+#ls-string{
+    font-size: small;
+    border:1px solid #ddd;
+    padding: 2px;
+    height: 3.5em; line-height: 1em;
+    overflow: auto;
+    width: 100%;
+    overflow-wrap: break-word;
+}
