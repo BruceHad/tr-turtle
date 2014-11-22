@@ -39,5 +39,9 @@ function updatePage(section){
         }
     }
     turtle = new Turtle("canvas"+section);
-    // var dragonString = expandLs(['FX', 'F > ', 'X > XRYFR', 'Y > LFXLY'],7);
 }
+
+
+var dragonString = expandLs(['FX', 'F=', 'X=XRYFR', 'Y=LFXLY'],7);
+// var dragonString = expandLs(['F=C0FF-[C1-F+F+F]+[C2+F-F-F]'],5);
+console.log(dragonString);

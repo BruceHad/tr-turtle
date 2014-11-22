@@ -1,42 +1,48 @@
+// function expandLs(rules, count) {
+//   // Lindermayer System
+//   // Applies rules to string and returns results.
+//   var str = rules.shift();
+//   // Read rules
+//   var ruleList = {};
+//   for(var i = 0; i < rules.length; i++) {
+//     var rule = rules[i].split('>');
+//     ruleList[rule[0].trim()] = rule[1].trim();
+//   }
+//   console.log(ruleList);
+//   // Repeatedly Apply rules to string
+//   for(var i=0; i<count; i++){
+//     var sStr = str.split('');
+//     for(var j = 0; j < sStr.length; j++) {
+//       if(sStr[j] in ruleList) {
+//         sStr[j] = ruleList[sStr[j]];
+//       }
+//     }
+//     str = sStr.join('');
+//   }
+//   return str;
+// }
+
 function expandLs(rules, count) {
+  var iterations = count;
+  var rules = rules;
   // Lindermayer System
   // Applies rules to string and returns results.
-  var stack = [];
-  var str = rules.shift();
-  stack.push(str);
+  var str = rules.shift(); // axiom
   // Read rules
   var ruleList = {};
   for(var i = 0; i < rules.length; i++) {
-    var rule = rules[i].split('>');
-    ruleList[rule[0].trim()] = rule[1].trim();
+    var rule = rules[i].split('=');
+    ruleList[rule[0]] = rule[1];
   }
-  // Repeatedly Apply rules to string
+
   for(var i=0; i<count; i++){
     var sStr = str.split('');
-    for(var j = 0; j < sStr.length; j++) {
-      if(sStr[j] in ruleList) {
-        sStr[j] = ruleList[sStr[j]];
-      }
+    for (len = str.length, j=0; j<len; j++){
+      var c = sStr[j];
+      rule = ruleList[c];
+      sStr[j] = rule != null ? rule : c;
+      str = sStr.join('');
     }
-    str = sStr.join('');
-    stack.push(str);
   }
-  return stack;
-}
-
-function applyLs(str) {
-  // Lindermayer System
-  // Convert string into geometric structure,
-  // using turtle.
-  var angle = 1/8;
-  var colour = '#000';
-  var length = 4;
-  if(typeof md == 'undefined') md = new Dot(angle, colour);
-  md.clear();
-  var sStr = str.split('');
-  forEach(sStr, function(ch) {
-    if(ch === 'F') md.forward(length);
-    else if(ch === '+') md.left();
-    else if(ch === '-') md.right();
-  });
+  return str;
 }
