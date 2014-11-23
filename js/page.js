@@ -1,3 +1,7 @@
+var lsRules = {
+    dragon: [5, 'FX', 'F=', 'X=X+YF+', 'Y=−FX−Y'],
+    blank: [0, '']
+}
 var articles = document.getElementById("content").getElementsByTagName("article"); //articles
 var canvases = document.getElementById("canvas").getElementsByTagName("section");
 var buffer = null;
@@ -37,11 +41,28 @@ function updatePage(section){
         } else {
             canvases[i].setAttribute("class", "hide");
         }
+        if(i===2){
+            setLs()
+        }
     }
     turtle = new Turtle("canvas"+section);
 }
 
+function setLs(){
+    var selectedRule = document.querySelector('input[name = "ls-system"]:checked').value;
+    var rule = lsRules[selectedRule];
+    document.getElementById('ls-iterations').value = rule[0] || "";
+    document.getElementById('ls-axiom').value = rule[1] || "";
+    document.getElementById('ls-rule1').value = rule[2] || "";
+    document.getElementById('ls-rule2').value = rule[3] || "";
+    document.getElementById('ls-rule3').value = rule[4] || "";
+    document.getElementById('ls-rule4').value = rule[5] || "";
+    document.getElementById('ls-rule5').value = rule[6] || "";
+}
 
-var dragonString = expandLs(['FX', 'F=', 'X=XRYFR', 'Y=LFXLY'],7);
+
+
+
+// var dragonString = expandLs(['FX', 'F=', 'X=X+YF+', 'Y=−FX−Y'],5);
 // var dragonString = expandLs(['F=C0FF-[C1-F+F+F]+[C2+F-F-F]'],5);
-console.log(dragonString);
+// console.log(dragonString);
