@@ -8,6 +8,7 @@ function Pen() {
 };
 
 function Canvas(canvasId) {
+	console.log(canvasId);
   var canvas = document.getElementById(canvasId);
   var ctx = canvas.getContext('2d');
   var intId = null;

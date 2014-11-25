@@ -2,7 +2,7 @@
 
 Like a lot of 80s kids, my first introduction to programming was a toy called [Big Trak](https://en.wikipedia.org/wiki/Big_Trak). It was a truck with a keypad on it's back, and it could be programmed to follow a route...3 forward, turn right, reverse 5 and so on. 
 
-AKA a [Turtle](https://en.wikipedia.org/wiki/Turtle_graphics)), to program one it just needs to know two bit of information: where it is and what direction it's facing. On top of that, it needs to know how to perform a couple of actions: move forward and rotate.
+AKA a [Turtle](https://en.wikipedia.org/wiki/Turtle_graphics), to program one it just needs to know two bit of information: where it is and what direction it's facing. On top of that, it needs to know how to perform a couple of actions: move forward and rotate.
 
 	function Turtle(){
 	  var location = [0.5,0.5]; // Half pixel offset

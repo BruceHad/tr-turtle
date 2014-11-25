@@ -6,14 +6,6 @@ html {
 *, *:before, *:after {
   box-sizing: inherit;
 }
-
-#canvas .hide{
-    display: none;
-}
-#canvas .show{
-    display: block;
-}
-
 pre {
     padding: 5px 0;
     overflow: auto;
@@ -26,15 +18,17 @@ code {
     font-family: monospace;
     font-size: normal;
 }
-
-
 /* Common
 * --------------------------*/
 body{
-    margin:0; padding: 0;
+    margin:0; padding: 0 5px;
     border-top: 5px solid #143937;
     background: white url('http://www.treerock.me/assets/stripe.png') repeat-x top left;
     padding-top: 20px;
+}
+.page-wrapper {
+	max-width: 600px;
+	margin: 0 auto;
 }
 header {
     position: relative;
@@ -64,7 +58,38 @@ header p.sub {
     background-color: white;
     padding: 0 5px;
 }
-#canvas{
+
+.canvas-wrapper {
+	border-radius: 4px;
+	background-color: #f1f1f1;
+	margin: 15px 0; padding: 5px;
+	border: 4px solid white;
+	-webkit-transition: border-color 2s;
+  transition: border-color 2s;
+}
+.canvas-wrapper.show{
+	border: 4px solid #ddd;
+}
+canvas {
+	border: 1px solid white;
+	margin: 0 auto;
+	display: block;
+}
+.buttons-wrapper {
+	/*width: 60%;*/
+	margin: 5px auto;
+	text-align:center;
+}
+#ls-string{
+    font-size: small;
+    border:1px solid #ddd;
+    padding: 2px;
+    height: 3.5em; line-height: 1em;
+    overflow: auto;
+    width: 100%;
+    overflow-wrap: break-word;
+}
+/* #canvas{
     width: 500px;
     position: fixed;
     top: 130px; left: 0;
@@ -88,22 +113,9 @@ header p.sub {
     max-width: 480px;
     padding:0 15px;
     margin-left: 500px;
-}
+} */
 
 @media (max-width: 576px) {
 }
 
-.buttons-wrapper {
-	/*width: 60%;*/
-	margin: 5px auto;
-	text-align:center;
-}
-#ls-string{
-    font-size: small;
-    border:1px solid #ddd;
-    padding: 2px;
-    height: 3.5em; line-height: 1em;
-    overflow: auto;
-    width: 100%;
-    overflow-wrap: break-word;
-}
+
