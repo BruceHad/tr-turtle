@@ -58,7 +58,6 @@ header p.sub {
     background-color: white;
     padding: 0 5px;
 }
-
 .canvas-wrapper {
 	border-radius: 4px;
 	background-color: #f1f1f1;
@@ -75,12 +74,8 @@ canvas {
 	margin: 0 auto;
 	display: block;
 }
-.buttons-wrapper {
-	/*width: 60%;*/
-	margin: 5px auto;
-	text-align:center;
-}
-#ls-string{
+
+#tt-string{
     font-size: small;
     border:1px solid #ddd;
     padding: 2px;
@@ -89,31 +84,6 @@ canvas {
     width: 100%;
     overflow-wrap: break-word;
 }
-/* #canvas{
-    width: 500px;
-    position: fixed;
-    top: 130px; left: 0;
-}
-#canvas section {
-    border: 1px solid #ddd;
-    padding: 5px 15px;
-}
-#canvas h2{
-    margin: 0; padding: 0;
-    text-align: center;
-    font-size: medium;
-    font-weight: bold;
-}
-#canvas canvas {
-    display: block;
-    margin: 0 auto;
-    border: 1px solid gray;
-}
-#content{
-    max-width: 480px;
-    padding:0 15px;
-    margin-left: 500px;
-} */
 
 @media (max-width: 576px) {
 }

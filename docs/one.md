@@ -1,36 +1,25 @@
 ## Turtles
 
-Like a lot of 80s kids, my first introduction to programming was a toy called [Big Trak](https://en.wikipedia.org/wiki/Big_Trak). It was a truck with a keypad on it's back, and it could be programmed to follow a route...3 forward, turn right, reverse 5 and so on. 
+Like a lot of 80s kids, my first introduction to programming was a toy called a [Big Trak](https://en.wikipedia.org/wiki/Big_Trak), which was a toy car that could be programmed with a route (3 forward, turn right, reverse 5 and so on) and would then follow that route (until it crashed into the skirting boards).
 
-AKA a [Turtle](https://en.wikipedia.org/wiki/Turtle_graphics), to program one it just needs to know two bit of information: where it is and what direction it's facing. On top of that, it needs to know how to perform a couple of actions: move forward and rotate.
+To program something similar (aka a [Turtle](https://en.wikipedia.org/wiki/Turtle_graphics)) you just needs to know a couple of actions: move and turn, while keeping track of current location and direction. With that you have a basic turtle.
 
 	function Turtle(){
-	  var location = [0.5,0.5]; // Half pixel offset
-	  var angle = 0; // Radians
-	  var pen = new Pen();
-	  var canvas = new Canvas();
+	  var location = [0,0]; // Set starting location 
+	  var angle = 0; // Angle is in radians
+	  var canvas = new Canvas(); // Need a canvas to draw on
 	  this.rotate = function(anglePercent) {
-	    // to simplify the maths anglePercent is a percentage of
-	    // a full circle. e.g to rotate turtle by 90 degrees == rotate(0.25).
 	    angle += anglePercent * Math.PI *2;
 	  };
 	  this.forward = function(dist) {
-	    pos2 = [location[0]+ Math.cos(angle) * dist, location[1]+ Math.sin(angle) * dist];
-	    if(pen.draw) canvas.draw(location, pos2, pen);
-	    location = [pos2[0], pos2[1]];
+	    newLocation = [location[0]+ Math.cos(angle) * dist, 
+				location[1]+ Math.sin(angle) * dist];
+	    canvas.draw(location, newLocation, pen);
+	    location = [newLocation[0], newLocation[1]];
 	  };
 	}
 	
-And that's pretty much all the code that's needed for a turtle. Though in order two implement this in HTML/Javascript we need a pen and a [canvas](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API) with some line drawing capability. Something like this.
-
-	function Pen() {
-		var colour = '#000000';
-		var width = 1;
-		this.draw = true;
-		this.pop = function() {
-			draw = !draw
-		};
-	};
+In order to do this on a webpage we need something like the HTML [canvas](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API) element and some code to help with drawing lines. Something like this works for me.
 
 	function Canvas(canvasId) {
 		var canvas = document.getElementById(canvasId);
@@ -49,4 +38,4 @@ And that's pretty much all the code that's needed for a turtle. Though in order 
 		};
 	}
 
-And I have added a few basic controls and animated the line drawing just for kicks.
+Add in a few basic controls and you've got the beginnings of a turtle to play with.

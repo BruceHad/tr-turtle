@@ -42,22 +42,22 @@
 				<p>Canvas cannot be displayed.</p>
 			</canvas>
 			<div class="buttons buttons-wrapper">
-				<label for="ls-string">Command Window: </label><br>
-				<input type="text" id="ls-string" value="">
-				<button name="ls-left" class="line one">Left</button>
-				<button name="ls-forward" class="line one">Forward</button>
-				<button name="ls-right" class="line one">Right</button>
+				<label for="tt-string">Command Window: </label><br>
+				<input type="text" id="tt-string" value="">
+				<button name="tt-left" class="line one">Left</button>
+				<button name="tt-forward" class="line one">Forward</button>
+				<button name="tt-right" class="line one">Right</button>
 				<br>
 				<button name="clear" class="line two">Clear</button>
-				<button name="ls-go" class="line two">Go</button>
+				<button name="tt-go" class="line two">Go</button>
 				<br>
-				<label for="distance">Distance: </label>
-				<input type="text" id="distance" name="distance" value="20">
+				<label for="distance">Line Length: </label>
+				<input type="text" id="distance" name="distance" value="10">
 				<br>
 			</div>
 		</div>
 		
-
+	<?php include('one.html'); ?>
 		<div class="canvas-wrapper" id="three">
 			<canvas id="canvasthree" width="450" height="300">
 				<p>Canvas cannot be displayed.</p>
@@ -77,13 +77,19 @@
 				<input type="text" id="ls-rule4" value=""><br>
 				<label for="ls-rule5">Rule Five: </label>
 				<input type="text" id="ls-rule5" value=""><br>
-				<input type="radio" name="ls-system" value="dragon" checked>Dragon Curve
-				<input type="radio" name="ls-system" value="dragon">Blank
-				<button name="clear" class="line two">Clear</button>
-				<button name="ls-go" class="line two">Go</button>
+				<div id="rule-list"><!-- holder for LS Rules Radio Selector--></div>
+			</div>
+			<div class="buttons">
+				<label for="distance">Line Length: </label>
+				<input type="text" id="ls-distance" name="distance" value="10">
+				<br>
+			</div>
+			<div class="buttons actions-wrapper">
+				<button name="clear">Clear Drawing</button>
+				<button name="ls-go">Go Draw It</button>
 			</div>
 		</div>
-	</div><!-- end wrapper -->
+	</div><!-- end page-wrapper -->
 	<script src="js/mt.js"></script>
 	<script src="js/page.js"></script>
 	<script id="my-script"></script>

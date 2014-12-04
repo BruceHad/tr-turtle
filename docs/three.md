@@ -1,10 +1,8 @@
-## 3. L-Systems
+The string of commands I generated was based on a pattern called a [Dragon Curve](http://en.wikipedia.org/wiki/Dragon_curve). It's one of many patterns that can be generated using Lindenmayer System or [L-system](http://en.wikipedia.org/wiki/L-system).
 
-One interesting possibility -- now that we can program the turtle with a string of commands -- is that we can generate that command string using an [L-system](http://en.wikipedia.org/wiki/L-system).
+L-Systems consist of alphabets of commands (like 'F' is the command for forward()). It starts with a basic string (the axiom) and a set of rules. These rules are repeatedly applied to the string to generate more and more complicated set of commands.
 
-An L-System consists of an alphabet of commands (like 'F' is the command for forward()), and axiom or starting point, and a set of rules. These rules are repeatedly applied to the string to generate more and more complicated set of commands.
-
-We seen the results of one of these L-Systems already. The long string above is the start of a [Dragon Curve](http://en.wikipedia.org/wiki/Dragon_curve). In the standard definition a dragon curve starts with the axiom FX then applies the following rules to that string:
+For a dragon curve you start with the axiom 'FX' then apply the following rules:
 
 * Replace F with null
 * Replace X with X+YF+

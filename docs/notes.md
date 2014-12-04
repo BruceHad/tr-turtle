@@ -1,5 +1,10 @@
 ## Turtles, Systems and Patterns
 
+
+
+// To do:
+// * Check the tt-string updates
+
 Like a lot of 80s kids, my first introduction to programming was a toy called [Big Trak](https://en.wikipedia.org/wiki/Big_Trak). It was a truck with a keypad on it's back, and it could be programmed to follow a route... 3 forward, turn right, reverse 5 and so on. I didn't know at the time, but this was similar to a [Turtle](https://en.wikipedia.org/wiki/Turtle_graphics), a programming method whereby a 'pen' is programmed to draw lines on a cartesian plane. A turtle isn't as cool as a truck, but it can draw pictures.
 
 A [Dragon Curve](https://en.wikipedia.org/wiki/Dragon_curve) is a self-similar fractal curve. There are a couple of methods for drawing or approximating them.
