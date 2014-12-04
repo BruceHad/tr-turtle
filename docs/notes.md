@@ -2,18 +2,23 @@
 
 
 
-// To do:
-// * Check the tt-string updates
+To do:
 
-Like a lot of 80s kids, my first introduction to programming was a toy called [Big Trak](https://en.wikipedia.org/wiki/Big_Trak). It was a truck with a keypad on it's back, and it could be programmed to follow a route... 3 forward, turn right, reverse 5 and so on. I didn't know at the time, but this was similar to a [Turtle](https://en.wikipedia.org/wiki/Turtle_graphics), a programming method whereby a 'pen' is programmed to draw lines on a cartesian plane. A turtle isn't as cool as a truck, but it can draw pictures.
+* Fix styling of form
+* ---Update Rules on radio changing---
+* Add in support for angle.
+* Check performance of map()
+* ---Switch Ls to array.map()---
+* ---Check the tt-string updates---
+
+
+
+## Dragon Curves
 
 A [Dragon Curve](https://en.wikipedia.org/wiki/Dragon_curve) is a self-similar fractal curve. There are a couple of methods for drawing or approximating them.
 
 My first attempt used a formula found on the wikipedia page and a little investigation into [bitwise operators](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators).
 
-
-<pre>
-	<code>
 	for(var n = 1; n <= 1000; n++) {
 		turtle.forward(length);
 		if((((n & -n) << 1) & n) != 0) {
@@ -22,25 +27,20 @@ My first attempt used a formula found on the wikipedia page and a little investi
 			turtle.rotate(-0.25);
 		}
 	}
-	</code>
-</pre>
-
 
 View Dragon Curve or view the Animated Version.
 
+## Spirals
+
 With a turtles we can easily generate pretty spirals. e.g. with the following couple of lines of code.
 
-<pre>
-	<code>
 	for(var n = 1; n <= 250; n++) {
         turtle.forward(dist);
         turtle.rotate(89.5);
 		dist += 1.75;
     }
-	</code>
-</pre>
 
-View Spiral.
+## L-systems
 
 [Lindenmayer Systems](https://en.wikipedia.org/wiki/L-system) are an interesting method of defining patterns, that can be combined with a Turtle to generate and draw complex models. The L-system is a type of 'symbolic grammar', generally taking the form of a sequence of characters that represent actions. It consists of:
 
@@ -82,8 +82,6 @@ f(.01, 89.5, .01, 184) f(dist, angle, incr, segs /*(number of segments)*/) {
 	facing east repeat segs times:
 		go dist * (60% the view-space width) in the current direction turn angle degrees clockwise (to your right)
 		increment dist by incr }
-
-# Notes
 
 ## Bitwise Operations
 

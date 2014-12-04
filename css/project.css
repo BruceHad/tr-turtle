@@ -75,6 +75,22 @@ canvas {
 	display: block;
 }
 
+.ls-form .form-wrapper{
+	margin: 15px; padding: 5px;
+}
+.ls-form label {
+	display: inline-block;
+	min-width: 30%;
+	text-align: right;
+}
+.radio-p {
+	margin:0; padding: 5px 0;
+	line-height: 1.3em;
+}
+.radio-p span {
+	padding-left: 5px;
+}
+
 #tt-string{
     font-size: small;
     border:1px solid #ddd;

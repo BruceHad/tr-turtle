@@ -71,16 +71,18 @@ function Turtle(activeCanvas) {
   this.queue = function(command) {
     document.getElementById("tt-string").value += command;
   };
-  this.go = function(commandStr, lineLength) {
+  this.go = function(commandStr, lineLength, angle) {
+		console.log(angle);
     var commandString = document.getElementById("tt-string").value || getCommandString();
     var commands = commandString.split('');
     var dist = lineLength || parseInt(document.getElementById("distance").value);
+		var angle = angle || parseInt(document.getElementById("ls-angle").value)/360;
     var goIntId = setInterval(function(self) {
       if(!pen.animating) {
         var command = commands.shift();
         if(command === 'F') self.forward(dist);
-        else if(command === 'L' || command === '−') self.rotate(-0.25);
-        else if(command === 'R' || command === '+') self.rotate(0.25);
+        else if(command === 'L' || command === '−') self.rotate(-1* angle);
+        else if(command === 'R' || command === '+') self.rotate(angle);
         if(commands.length === 0) {
           clearInterval(goIntId);
         }

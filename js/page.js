@@ -1,13 +1,23 @@
 var canvases = document.getElementsByClassName("canvas-wrapper");
 var timeoutId, shownCanvas, myTurtle, myCanvas;
+var lsRules = {
+  tree: [5, 25, 'FX', 'F=C0FF-[C1-F+F]+[C2+F-F]', 'X=C0FF+[C1+F]+[C3-F]'],
+  dragon: [5, 90, 'FX', 'F=', 'X=X+YF+', 'Y=−FX−Y']
+};
 
 function createRadio(ruleName, checked) {
+  var p = document.createElement("p");
+  p.setAttribute("class", "radio-p");
   var radio = document.createElement("input");
   radio.setAttribute("type", "radio");
   radio.setAttribute("name", "ls-system");
   radio.setAttribute("value", ruleName);
   if(checked) radio.setAttribute("checked", "true");
-  return radio;
+  var span = document.createElement("span");
+  span.innerHTML = ruleName;
+  p.appendChild(radio);
+  p.appendChild(span);
+  return p;
 }
 
 function scrolled() {
@@ -54,40 +64,35 @@ function updatePage(section) {
 }
 
 function setLs() {
-  var lsRules = {
-		tree: [5, 'FX', 'F=C0FF-[C1-F+F]+[C2+F-F]', 'X=C0FF+[C1+F]+[C3-F]'],
-    dragon: [5, 'FX', 'F=', 'X=X+YF+', 'Y=−FX−Y']
-		
-  }
-	
   var ruleList = document.getElementById("rule-list");
-	if(ruleList.childNodes.length > 1) return; // don't repeatedly add nodes
+  if(ruleList.childNodes.length > 1) return; // don't repeatedly add nodes
   var count = 0;
   for(ruleName in lsRules) {
-    var span = document.createElement("span");
-    span.innerHTML = ruleName;
     var radio = createRadio(ruleName, count === 0 ? true : false);
     ruleList.appendChild(radio);
-    ruleList.appendChild(span);
     count++;
   }
-  var selectedRule = document.querySelector('input[name = "ls-system"]:checked').value;
-  var rule = lsRules[selectedRule];
+	displayRules();
+}
+function displayRules(){
+	var rule = lsRules[document.querySelector('input[name = "ls-system"]:checked').value];
+  console.log(rule);
   document.getElementById('ls-iterations').value = rule[0] || "";
-  document.getElementById('ls-axiom').value = rule[1] || "";
-  document.getElementById('ls-rule1').value = rule[2] || "";
-  document.getElementById('ls-rule2').value = rule[3] || "";
-  document.getElementById('ls-rule3').value = rule[4] || "";
-  document.getElementById('ls-rule4').value = rule[5] || "";
-  document.getElementById('ls-rule5').value = rule[6] || "";
+  document.getElementById('ls-angle').value = rule[1] || "";
+  document.getElementById('ls-axiom').value = rule[2] || "";
+  document.getElementById('ls-rule1').value = rule[3] || "";
+  document.getElementById('ls-rule2').value = rule[4] || "";
+  document.getElementById('ls-rule3').value = rule[5] || "";
+  document.getElementById('ls-rule4').value = rule[6] || "";
+  document.getElementById('ls-rule5').value = rule[7] || "";
 }
 
 function runLs() {
-	var cs = getCommandString();
-	var dist = parseInt(document.getElementById("ls-distance").value)
-	myTurtle.go(cs, dist);
+  var cs = getCommandString();
+  var dist = parseInt(document.getElementById("ls-distance").value);
+  var angle = parseInt(document.getElementById("ls-angle").value) / 360;
+  myTurtle.go(cs, dist, angle);
 }
-
 
 function getCommandString() {
   // Get command string from rules on page
@@ -101,9 +106,6 @@ function getCommandString() {
   if(document.getElementById('ls-rule5').value) rules[5] = document.getElementById('ls-rule5').value;
   return expandLs(rules, count);
 }
-// var dragonString = expandLs(['FX', 'F=', 'X=X+YF+', 'Y=−FX−Y'],5);
-// var dragonString = expandLs(['F=C0FF-[C1-F+F+F]+[C2+F-F-F]'],5);
-// console.log(dragonString);
 // Event Handlers
 window.onload = scrolled;
 window.onscroll = scrolled;
@@ -111,6 +113,7 @@ var controls = document.getElementsByClassName("buttons");
 for(var i = 0; i < controls.length; i++) {
   controls[i].addEventListener("click", doSomething, false);
 }
+
 function doSomething(e) {
   if(e.target.name === "forward") myTurtle.forward(50);
   else if(e.target.name === "left") myTurtle.rotate(-0.25);
@@ -119,7 +122,8 @@ function doSomething(e) {
   else if(e.target.name === "tt-left") myTurtle.queue("L");
   else if(e.target.name === "tt-right") myTurtle.queue("R");
   else if(e.target.name === "tt-go") myTurtle.go();
-	else if(e.target.name === "ls-go") runLs();
+  else if(e.target.name === "ls-go") runLs();
   else if(e.target.name === "clear") myTurtle.clear();
+  else if(e.target.name === "ls-system") displayRules();
   e.stopPropagation();
 }
