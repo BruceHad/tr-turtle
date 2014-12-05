@@ -1,11 +1,13 @@
 var pen = {
-  colour: '#000000',
+  colour: '#ffffff',
   width: 1,
   x: 200.5,
-  y: 150.5, // x, y, angle - Half pixel offset
+  y: 150.5, // Half pixel offset looks better
   angle: 0,
   animating: false
 };
+
+var stack = [];
 
 function Canvas(canvasId) {
   var canvas = document.getElementById(canvasId);
@@ -72,8 +74,7 @@ function Turtle(activeCanvas) {
     document.getElementById("tt-string").value += command;
   };
   this.go = function(commandStr, lineLength, angle) {
-		console.log(angle);
-    var commandString = document.getElementById("tt-string").value || getCommandString();
+    var commandString = document.getElementById("tt-string").value || commandStr; 
     var commands = commandString.split('');
     var dist = lineLength || parseInt(document.getElementById("distance").value);
 		var angle = angle || parseInt(document.getElementById("ls-angle").value)/360;
@@ -83,12 +84,23 @@ function Turtle(activeCanvas) {
         if(command === 'F') self.forward(dist);
         else if(command === 'L' || command === '−') self.rotate(-1* angle);
         else if(command === 'R' || command === '+') self.rotate(angle);
+				else if(command === '[') self.tPush();
+				else if(command === ']') self.tPop()
         if(commands.length === 0) {
           clearInterval(goIntId);
         }
       }
     }, 10, this);
   };
+	this.tPush = function(){
+		stack.push([pen.x, pen.y, pen.angle]);
+	};
+	this.tPop = function(){
+		var data = stack.pop();
+		pen.x = data[0];
+		pen.y = data[1];
+		pen.angle = data[2];
+	}
   init();
 }
 

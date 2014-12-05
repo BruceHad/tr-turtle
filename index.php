@@ -12,18 +12,19 @@
 </head>
 
 <body>
-  <header>
-    <div class="container">
-      <h1>Treerock</h1>
-      <p class="sub"><span>Turtles, Dragons and Patterns</span></p>
-    </div>
-  </header>
 	<div class="page-wrapper">
+	
 		
+		<header>
+				<h1>Treerock</h1>
+				<p class="sub"><span>Turtles, Dragons and Patterns</span></p>
+		</header>
+			
 		
+		<!-- section one -->
 		<?php include('one.html'); ?>
 		<div class="canvas-wrapper" id="one">
-			<canvas id="canvasone" width="450" height="300">
+			<canvas id="canvasone" width="350" height="300">
 				<p>Canvas cannot be displayed.</p>
 			</canvas>
 			<div class="form-wrapper buttons">
@@ -36,6 +37,7 @@
 		</div>
 		
 		
+		<!-- section two -->
 		<?php include('two.html'); ?>
 		<div class="canvas-wrapper" id="two">
 			<canvas id="canvastwo" width="450" height="300">
@@ -57,7 +59,9 @@
 			</div>
 		</div>
 		
-	<?php include('one.html'); ?>
+		
+		<!-- section three -->
+		<?php include('one.html'); ?>
 		<div class="canvas-wrapper" id="three">
 			<canvas id="canvasthree" width="450" height="300">
 				<p>Canvas cannot be displayed.</p>

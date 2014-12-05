@@ -1,6 +1,7 @@
 var canvases = document.getElementsByClassName("canvas-wrapper");
 var timeoutId, shownCanvas, myTurtle, myCanvas;
 var lsRules = {
+	fractal_plant: [3, 15, 'X', 'X=F-[[X]+X]+F[+FX]-X]', 'F=FF'],
   tree: [5, 25, 'FX', 'F=C0FF-[C1-F+F]+[C2+F-F]', 'X=C0FF+[C1+F]+[C3-F]'],
   dragon: [5, 90, 'FX', 'F=', 'X=X+YF+', 'Y=−FX−Y']
 };
@@ -88,7 +89,7 @@ function displayRules(){
 }
 
 function runLs() {
-  var cs = getCommandString();
+	var cs = getCommandString();
   var dist = parseInt(document.getElementById("ls-distance").value);
   var angle = parseInt(document.getElementById("ls-angle").value) / 360;
   myTurtle.go(cs, dist, angle);

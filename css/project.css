@@ -1,107 +1,116 @@
-/* Basics
+/* Layout and styles
+ * Single column text document.
+ * Code and canvas screen inline.
+ * #2E4321
+ * #748700
+
+/* Layout and Common elements
 * --------------------------*/
-html {
+ html {
   box-sizing: border-box;
+}
+
+body {
+  margin:0;
+  padding: 0 5px;
 }
 *, *:before, *:after {
   box-sizing: inherit;
 }
+.page-wrapper {
+  max-width: 600px;
+  min-width: 350px;
+  margin: 0 auto;
+}
+
 pre {
-    padding: 5px 0;
-    overflow: auto;
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
-    width: auto;
-    white-space: pre;
+  padding: 5px;
+  overflow: auto;
+	overflow-wrap: break-word;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+	background-color: #f5f5f5;
+  width: auto;
+  white-space: pre;
+	
 }
 code {
-    font-family: monospace;
-    font-size: normal;
+  font-family: monospace;
+  font-size: normal;
 }
-/* Common
-* --------------------------*/
-body{
-    margin:0; padding: 0 5px;
-    border-top: 5px solid #143937;
-    background: white url('http://www.treerock.me/assets/stripe.png') repeat-x top left;
-    padding-top: 20px;
-}
-.page-wrapper {
-	max-width: 600px;
-	margin: 0 auto;
-}
+
+/* Header styles
+ * --------------------------*/
 header {
-    position: relative;
-    margin: 0 15px;
-    background-color: rgba(255,255,255,0.5);
-    z-index: 9999;
+  position: relative;
+  margin: 0 15px;
+  background-color: rgba(255, 255, 255, 0.5);
+  z-index: 9999;
 }
 header h1, header p {
-    font-family: 'Vollkorn', sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    margin: 0; padding:0;
-    /*text-align:center;*/
+  font-family:'Vollkorn', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  margin: 0;
+  padding:0;
 }
 header h1 {
-    font-size: 40px;
-    padding-bottom: 5px;
-    border-bottom: 1px solid #1c4746;
+  font-size: 36px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #1c4746;
 }
 header p.sub {
-    font-size: 32px;
-    margin-top: -0.6em;
-    text-transform: uppercase;
-    color: #143937;
+  font-size: 20px;
+  margin-top: -0.6em;
+  text-transform: uppercase;
+  color: #143937;
+  text-align:center;
 }
-.sub span{
-    background-color: white;
-    padding: 0 5px;
+.sub span {
+  background-color: white;
+  padding: 0 5px;
 }
+/* Canvas and form controls
+ * ------------------------------*/
 .canvas-wrapper {
-	border-radius: 4px;
-	background-color: #f1f1f1;
-	margin: 15px 0; padding: 5px;
-	border: 4px solid white;
-	-webkit-transition: border-color 2s;
+  background-color: #2E4321;
+  margin: 15px 0;
+  padding: 5px;
+  border: 4px solid white;
+  -webkit-transition: border-color 2s;
   transition: border-color 2s;
 }
-.canvas-wrapper.show{
-	border: 4px solid #ddd;
+.canvas-wrapper.show {
+  border: 4px solid #748700;
 }
 canvas {
-	border: 1px solid white;
-	margin: 0 auto;
-	display: block;
+  margin: 0 auto;
+  display: block;
 }
-
-.ls-form .form-wrapper{
-	margin: 15px; padding: 5px;
+.ls-form .form-wrapper {
+  margin: 15px;
+  padding: 5px;
 }
 .ls-form label {
-	display: inline-block;
-	min-width: 30%;
-	text-align: right;
+  display: inline-block;
+  min-width: 30%;
+  text-align: right;
 }
 .radio-p {
-	margin:0; padding: 5px 0;
-	line-height: 1.3em;
+  margin:0;
+  padding: 5px 0;
+  line-height: 1.3em;
 }
 .radio-p span {
-	padding-left: 5px;
+  padding-left: 5px;
 }
-
-#tt-string{
-    font-size: small;
-    border:1px solid #ddd;
-    padding: 2px;
-    height: 3.5em; line-height: 1em;
-    overflow: auto;
-    width: 100%;
-    overflow-wrap: break-word;
+#tt-string {
+  font-size: small;
+  border:1px solid #ddd;
+  padding: 2px;
+  height: 3.5em;
+  line-height: 1em;
+  overflow: auto;
+  width: 100%;
+  overflow-wrap: break-word;
 }
-
-@media (max-width: 576px) {
-}
-
-
