@@ -1,19 +1,9 @@
-var pen = {
-  colour: '#ffffff',
-  width: 1,
-  x: 200.5,
-  y: 150.5, // Half pixel offset looks better
-  angle: 0,
-  animating: false
-};
-
-var stack = [];
-
-function Canvas(canvasId) {
+var animating = false;
+function Canvas(canvasId, pen) {
   var canvas = document.getElementById(canvasId);
   var ctx = canvas.getContext('2d');
-	this.width = canvas.width;
-	this.height = canvas.height;
+  this.width = canvas.width;
+  this.height = canvas.height;
   this.draw = function(start, end) {
     ctx.strokeStyle = pen.colour;
     ctx.lineWidth = pen.width;
@@ -27,105 +17,100 @@ function Canvas(canvasId) {
   }
 }
 
-function Turtle(activeCanvas, ls) {
+function Turtle(activeCanvas, pen) {
   var canvas = activeCanvas;
-  var commandString = "";
-  var intId, angle;
-	this.width = canvas.width;
-	this.height = canvas.height;
-  var rotate = function(dir) {
-    // to simplify the maths anglePercent is a percentage of
-    // a full circle. e.g to rotate turtle by 90 degrees == rotate(0.25).
-    pen.angle += anglePercent * Math.PI * 2;
+  var x = pen.startX;
+  var y = pen.startY;
+  var angle = pen.startAngle;
+  animating = false;
+  var intId;
+  this.width = canvas.width;
+  this.height = canvas.height;
+  this.rotate = function(rotateAngle, dir) {
+    if(dir === "left") var direction = -1;
+    else var direction = 1;
+    angle += direction * rotateAngle * Math.PI * 2;
   };
-  var forward = function() {
-    pen.animating = true;
+  this.forward = function(moveLength) {
+    animating = true;
     var stepLength = 6;
-    // var rate = stepLength/12; // around 10 pixels per second
-    var steps = dist / stepLength;
+    var steps = moveLength / stepLength;
     var count = 0;
     intId = setInterval(function() {
-      var newx = pen.x + Math.cos(pen.angle) * stepLength;
-      var newy = pen.y + Math.sin(pen.angle) * stepLength;
-      canvas.draw([pen.x, pen.y], [newx, newy]);
-      pen.x = newx;
-      pen.y = newy;
+      var newx = x + Math.cos(angle) * stepLength;
+      var newy = y + Math.sin(angle) * stepLength;
+      canvas.draw([x, y], [newx, newy]);
+      x = newx;
+      y = newy;
       count++;
       if(count >= steps) {
         count = 0;
-        clearInterval(intId);
-        pen.animating = false;
+        window.clearInterval(intId);
+        animating = false;
       }
     }, 41); // around 24 frames per second
   };
-	this.move = function(){
-		if(ls) this.queue(F)
-		else forward();
-	}
-	this.turn = function(dir, angle){
-		if(ls) this.queue(dir, angle);
-		else rotate(dir);
-	}
   this.clear = function() {
-    if(pen.animating) {
-      console.log("Is animating");
-      return;
+    if(animating) {
+      window.clearInterval(intId);
+      animating = false;
     }
+    x = pen.startX;
+    y = pen.startY;
+    angle = pen.startAngle;
     canvas.clear();
-    init();
   };
+}
+
+function Controller(turtle){
+  var stack = [];
   this.queue = function(command) {
     document.getElementById("tt-string").value += command;
   };
-  this.go = function(commandStr, lineLength, angle) {
-    var commandString = document.getElementById("tt-string").value || commandStr; 
-    var commands = commandString.split('');
-    var dist = lineLength || parseInt(document.getElementById("distance").value);
-		var angle = angle || parseInt(document.getElementById("ls-angle").value)/360;
-    var goIntId = setInterval(function(self) {
-      if(!pen.animating) {
+  this.go = function(commandStr, distance, angle) {
+    var commands = commandStr.split('');
+    var intId = setInterval(function(self) {
+      if(!animating) {
         var command = commands.shift();
-        if(command === 'F') self.forward(dist);
-        else if(command === 'L' || command === '−') self.rotate(-1* angle);
-        else if(command === 'R' || command === '+') self.rotate(angle);
-				else if(command === '[') self.tPush();
-				else if(command === ']') self.tPop()
+        if(command === 'F') turtle.forward(distance);
+        else if(command === 'L' || command === '−') turtle.rotate(-1* angle);
+        else if(command === 'R' || command === '+') turtle.rotate(angle);
+        else if(command === '[') self.tPush();
+        else if(command === ']') self.tPop();
         if(commands.length === 0) {
-          clearInterval(goIntId);
+          window.clearInterval(intId);
         }
       }
     }, 10, this);
   };
-	this.tPush = function(){
-		stack.push([pen.x, pen.y, pen.angle]);
-	};
-	this.tPop = function(){
-		var data = stack.pop();
-		pen.x = data[0];
-		pen.y = data[1];
-		pen.angle = data[2];
-	}
-  init();
-}
-
-function expandLs(rules, count) {
-  // Get Axiom
-  var str = rules.shift(); // axiom
-  // Then get the rules into a nice object
-  var ruleList = {};
-  for(var i = 0; i < rules.length; i++) {
-    var rule = rules[i].split('=');
-    ruleList[rule[0]] = rule[1];
-  }
-  // then iteritevely map the string to the expanded string
-  for(var i = 0; i < count; i++) {
-    var stringArray = str.split('');
-    var newStringArray = stringArray.map(function(rule) {
-      if(ruleList[rule] != undefined) return ruleList[rule];
-			else return rule;
-    });
-    str = newStringArray.join('');
-	}
-	console.log(str);
-  return str;
+  this.tPush = function(){
+    stack.push([turtle.x, turtle.y, turtle.angle]);
+  };
+  this.tPop = function(){
+    var data = stack.pop();
+    turtle.x = data[0];
+    turtle.y = data[1];
+    turtle.angle = data[2];
+  };
+  this.expandLs = function(rules, count) {
+    // Get Axiom
+    var str = rules.shift(); // axiom
+    // Then get the rules into a nice object
+    var ruleList = {};
+    for(var i = 0; i < rules.length; i++) {
+      var rule = rules[i].split('=');
+      ruleList[rule[0]] = rule[1];
+    }
+    // then iteritevely map the string to the expanded string
+    for(var i = 0; i < count; i++) {
+      var stringArray = str.split('');
+      var newStringArray = stringArray.map(function(rule) {
+        if(ruleList[rule] != undefined) return ruleList[rule];
+        else return rule;
+      });
+      str = newStringArray.join('');
+    }
+    console.log(str);
+    return str;
+  };
 }
