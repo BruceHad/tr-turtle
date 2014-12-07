@@ -4,9 +4,11 @@
 
 To do:
 
-* Fix styling of form
+* Get a 'reset' that works
+* ---Simplify page style and colour canvas---
+* Add in Starting position
 * ---Update Rules on radio changing---
-* Add in support for angle.
+* ---Add in support for angle.---
 * Check performance of map()
 * ---Switch Ls to array.map()---
 * ---Check the tt-string updates---

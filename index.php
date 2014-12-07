@@ -27,12 +27,9 @@
 			<canvas id="canvasone" width="350" height="300">
 				<p>Canvas cannot be displayed.</p>
 			</canvas>
-			<div class="form-wrapper buttons">
-				<button name="left" class="line one">Left</button>
-				<button name="forward" class="line one">Forward</button>
-				<button name="right" class="line one">Right</button>
-				<br />
-				<button name="clear" class="line two">Clear</button>
+			<div class="form-wrapper">
+				<div class="buttons turtle-controls"></div>
+				<div class="buttons turtle-settings"></div>
 			</div>
 		</div>
 		
@@ -43,19 +40,11 @@
 			<canvas id="canvastwo" width="450" height="300">
 				<p>Canvas cannot be displayed.</p>
 			</canvas>
-			<div class="form-wrapper buttons">
-				<label for="tt-string">Command Window: </label><br>
-				<input type="text" id="tt-string" value="">
-				<button name="tt-left" class="line one">Left</button>
-				<button name="tt-forward" class="line one">Forward</button>
-				<button name="tt-right" class="line one">Right</button>
-				<br>
-				<button name="clear" class="line two">Clear</button>
-				<button name="tt-go" class="line two">Go</button>
-				<br>
-				<label for="distance">Line Length: </label>
-				<input type="text" id="distance" name="distance" value="10">
-				<br>
+			<div class="form-wrapper">
+				<div class="buttons turtle-string"></div>
+				<div class="buttons turtle-controls"></div>
+				<div class="buttons turtle-settings"></div>
+				<div class="buttons turtle-actions"></div>
 			</div>
 		</div>
 		
@@ -66,34 +55,12 @@
 			<canvas id="canvasthree" width="450" height="300">
 				<p>Canvas cannot be displayed.</p>
 			</canvas>
-			<div class="ls-form">
-				<div class="form-wrapper buttons">
-					<label for="ls-iterations">Iterations: </label>
-					<input type="text" id="ls-iterations" value=""><br>
-					<label for="ls-axiom">Axiom: </label>
-					<input type="text" id="ls-axiom" value=""><br>
-					<label for="ls-rule1">Rule One: </label>
-					<input type="text" id="ls-rule1" value=""><br>
-					<label for="ls-rule2">Rule Two: </label>
-					<input type="text" id="ls-rule2" value=""><br>
-					<label for="ls-rule3">Rule Three: </label>
-					<input type="text" id="ls-rule3" value=""><br>
-					<label for="ls-rule4">Rule Four: </label>
-					<input type="text" id="ls-rule4" value=""><br>
-					<label for="ls-rule5">Rule Five: </label>
-					<input type="text" id="ls-rule5" value=""><br>
-				</div>
-				<div class="form-wrapper buttons">
-					<label for="angle">Angle: </label>
-					<input type="text" id="ls-angle" name="angle"><br>
-					<label for="distance">Line Length: </label>
-					<input type="text" id="ls-distance" name="distance" value="10"><br>
-					<div id="rule-list"><!-- holder for LS Rules Radio Selector--></div>
-				</div>
-				<div class="form-wrapper buttons actions">
-					<button name="clear">Clear Drawing</button>
-					<button name="ls-go">Go Draw It</button>
-				</div>
+			<div class="form-wrapper">
+				<div class="buttons turtle-controls"></div>
+				<div class="buttons turtle-settings"></div>
+				<div class="buttons turtle-radio"></div>
+				<div class="buttons turtle-ls-settings"></div>
+				<div class="buttons turtle-actions"></div>
 			</div>
 		</div>
 	</div><!-- end page-wrapper -->

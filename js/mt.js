@@ -12,6 +12,8 @@ var stack = [];
 function Canvas(canvasId) {
   var canvas = document.getElementById(canvasId);
   var ctx = canvas.getContext('2d');
+	this.width = canvas.width;
+	this.height = canvas.height;
   this.draw = function(start, end) {
     ctx.strokeStyle = pen.colour;
     ctx.lineWidth = pen.width;
@@ -25,24 +27,18 @@ function Canvas(canvasId) {
   }
 }
 
-function Turtle(activeCanvas) {
+function Turtle(activeCanvas, ls) {
   var canvas = activeCanvas;
   var commandString = "";
   var intId, angle;
-
-  function init() {
-    pen.x = 200.5;
-    pen.y = 150.5;
-    pen.angle = 0;
-    document.getElementById("distance").value = 10;
-    document.getElementById("tt-string").value = "";
-  }
-  this.rotate = function(anglePercent) {
+	this.width = canvas.width;
+	this.height = canvas.height;
+  var rotate = function(dir) {
     // to simplify the maths anglePercent is a percentage of
     // a full circle. e.g to rotate turtle by 90 degrees == rotate(0.25).
     pen.angle += anglePercent * Math.PI * 2;
   };
-  this.forward = function(dist) {
+  var forward = function() {
     pen.animating = true;
     var stepLength = 6;
     // var rate = stepLength/12; // around 10 pixels per second
@@ -62,6 +58,14 @@ function Turtle(activeCanvas) {
       }
     }, 41); // around 24 frames per second
   };
+	this.move = function(){
+		if(ls) this.queue(F)
+		else forward();
+	}
+	this.turn = function(dir, angle){
+		if(ls) this.queue(dir, angle);
+		else rotate(dir);
+	}
   this.clear = function() {
     if(pen.animating) {
       console.log("Is animating");
