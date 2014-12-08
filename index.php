@@ -81,10 +81,12 @@
 				<div class="buttons turtle-settings">
 					<label for="distance">Line Length: </label>
 					<input type="text" id="ls-distance" name="distance"><br>
-					<label for="angle">Angle: </label>
+					<label for="angle">Turn Angle: </label>
 					<input type="text" id="ls-angle" name="angle"><br>
-					<label for="iterations">Angle: </label>
+					<label for="iterations">No. of Iterations: </label>
 					<input type="text" id="ls-iterations" name="iterations"><br>
+					<label for="iterations">Start Angle: </label>
+					<input type="text" id="ls-start-angle" name="iterations">
 				</div>
 				<div id="rule-list" class="buttons turtle-radio"><!-- holder for LS Rules Radio Selector--></div>
 				<div class="buttons turtle-ls-settings"><label for="ls-axiom">Axiom: </label>
@@ -98,12 +100,12 @@
 					<label for="ls-rule4">Rule Four: </label>
 					<input type="text" id="ls-rule4" class="rule" value=""><br>
 					<label for="ls-rule5">Rule Five: </label>
-					<input type="text" id="ls-rule5" class="rule" value=""><br></div>
+					<input type="text" id="ls-rule5" class="rule" value=""><br>
 				</div>
-				<div class="buttons turtle-actions">
-					<button name="clear">Clear Drawing</button>
-					<button name="ls-go">Go Draw It</button>
-				</div>
+			</div>
+			<div class="buttons turtle-actions">
+				<button name="clear">Clear Drawing</button>
+				<button name="ls-go">Go Draw It</button>
 			</div>
 		</div>
 	</div><!-- end page-wrapper -->

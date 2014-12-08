@@ -1,9 +1,9 @@
 var canvases = document.getElementsByClassName("canvas-wrapper");
 var timeoutId, shownCanvas, myTurtle, myCanvas;
 var lsRules = {
-	"Dragon Curve": [0.5, 0.5, 5, 90, 'FX', 'F=', 'X=X+YF+', 'Y=−FX−Y'],
-	"Fractal Plant": [0.1, 0.1, 3, 15, 'X', 'X=F-[[X]+X]+F[+FX]-X]', 'F=FF'],
-  "Tree": [0.1, 0.1, 5, 25, 'FX', 'F=C0FF-[C1-F+F]+[C2+F-F]', 'X=C0FF+[C1+F]+[C3-F]']
+	"Dragon Curve": 	[200.5, 150.5, 5, 90, 7, 0, 'FX', 'F=', 'X=X+YF+', 'Y=−FX−Y'],
+	"Fractal Plant": 	[200.5, 150.5, 5, 25, 3, 0, 'X', 'X=F-[[X]+X]+F[+FX]-X]', 'F=FF'],
+  "Tree": 					[200.5, 150.5, 5, 25, 3, 0, 'FX', 'F=C0FF-[C1-F+F]+[C2+F-F]', 'X=C0FF+[C1+F]+[C3-F]']
 };
 
 var pen = {
@@ -45,12 +45,14 @@ function updateRules(){
   var rule = lsRules[document.querySelector('input[name = "ls-system"]:checked').value];
   document.getElementById('ls-distance').value = rule[2];
   document.getElementById('ls-angle').value = rule[3];
-  document.getElementById('ls-axiom').value = rule[4];
-  document.getElementById('ls-rule1').value = rule[5];
-  document.getElementById('ls-rule2').value = rule[6];
-  document.getElementById('ls-rule3').value = rule[7];
-  document.getElementById('ls-rule4').value = rule[8];
-  document.getElementById('ls-rule5').value = rule[9];
+	document.getElementById('ls-iterations').value = rule[4];
+	document.getElementById('ls-start-angle').value = rule[5];
+  document.getElementById('ls-axiom').value = rule[6];
+  document.getElementById('ls-rule1').value = rule[7];
+  document.getElementById('ls-rule2').value = rule[8];
+  document.getElementById('ls-rule3').value = rule[9];
+  document.getElementById('ls-rule4').value = rule[10];
+  document.getElementById('ls-rule5').value = rule[11];
 }
 
 function scrolled() {
@@ -95,7 +97,7 @@ function updatePage(section) {
   }
 }
 
-function getString(){
+function getRules(){
   var rules = [];
   if(document.getElementById('ls-axiom').value != 'undefined') rules.push(document.getElementById('ls-axiom').value);
   if(document.getElementById('ls-rule1').value != 'undefined') rules.push(document.getElementById('ls-rule1').value);
@@ -103,8 +105,7 @@ function getString(){
   if(document.getElementById('ls-rule3').value != 'undefined') rules.push(document.getElementById('ls-rule3').value);
   if(document.getElementById('ls-rule4').value != 'undefined') rules.push(document.getElementById('ls-rule4').value);
   if(document.getElementById('ls-rule5').value != 'undefined') rules.push(document.getElementById('ls-rule5').value);
-  var iterations = document.getElementById('ls-iterations').value;
-  console.log(iterations);
+  return rules;
 }
 
 
@@ -124,7 +125,14 @@ function doSomething(e) {
   else if(e.target.name === "add-left") myController.queue("L");
   else if(e.target.name === "add-right") myController.queue("R");
   else if(e.target.name === "tt-go") myController.go(document.getElementById("tt-string").value,document.getElementById("tt-distance").value, 0.25);
-  else if(e.target.name === "ls-go") myController.go(getString(), 0.25)
+	else if(e.target.name === "ls-go") {
+		var rules = getRules();
+		var iterations = document.getElementById('ls-iterations').value;
+		var string = myController.expandLs(rules, iterations);
+		var angle = document.getElementById('ls-angle').value/360;
+		var distance = document.getElementById('ls-distance').value;
+		myController.go(string, distance, angle);
+	}
   else if(e.target.name === "clear") myTurtle.clear();
   else if(e.target.name === "ls-system") updateRules();
   e.stopPropagation();

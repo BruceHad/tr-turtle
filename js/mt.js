@@ -110,7 +110,7 @@ function Controller(turtle){
       });
       str = newStringArray.join('');
     }
-    console.log(str);
+//     console.log(str);
     return str;
   };
 }
