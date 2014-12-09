@@ -9,13 +9,18 @@
  html {
   box-sizing: border-box;
 }
+*, *:before, *:after {
+  box-sizing: inherit;
+}
 
 body {
   margin:0;
   padding: 0 5px;
 }
-*, *:before, *:after {
-  box-sizing: inherit;
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
 }
 .page-wrapper {
   max-width: 600px;
@@ -32,7 +37,7 @@ pre {
 	background-color: #f5f5f5;
   width: auto;
   white-space: pre;
-	
+
 }
 code {
   font-family: monospace;
@@ -73,9 +78,8 @@ header p.sub {
 /* Canvas and form controls
  * ------------------------------*/
 .canvas-wrapper {
+  width: 472px;
   background-color: #2E4321;
-  margin: 15px 0;
-  padding: 5px;
   border: 10px solid white;
   -webkit-transition: border-color 2s;
   transition: border-color 2s;
@@ -90,46 +94,46 @@ canvas {
 }
 .form-wrapper {
 	min-height: 150px;
-  margin: 15px 0;
-  padding: 5px;
 	border-top: 1px dashed #748700;
 }
-.form-wrapper label {
-  display: inline-block;
-  width: 150px;
-  text-align: right;
+.turtle-controls {
+  text-align: center;
+}
+.turtle-queue textarea {
+  font-size: small;
+  overflow-wrap: break-word;
+  display: block;
+  width: 100%;
+  margin: 2px 0;
 }
 
-.form-wrapper input{
-	width: 150px;
-	margin-top: 2px;
-}
-input.narrow{
-	width: 100px;
-	margin-right: 16px;
-}
-#tt-string {
-  font-size: small;
-  border:1px solid #ddd;
-  padding: 2px;
-  height: 3.5em;
-  line-height: 1em;
-  overflow: auto;
-  width: 100%;
-  overflow-wrap: break-word;
+#ls-form .row{
 }
 
 #ls-form .form-group {
+  float: left;
+  width: 50%;
+  padding: 2px;
+}
+
+#ls-form .rules input {
+  width: 49%;
+  display: inline-block;
+}
+#ls-form .rules label {
+  text-align: right;
+  display: inline-block;
+  width: 49%;
+}
+
+#ls-form .turtle-radio {
 }
 
 .radio-p {
-  margin:0;
-  padding: 5px 0;
-  line-height: 1.3em;
+  float: left;
+  margin: 0 5px;
 }
-.radio-p input {
-	width: auto;
-}
-.radio-p span {
-  padding-left: 5px;
+.radio-p label{
+  padding: 5px;
+  line-height: 2em;
 }

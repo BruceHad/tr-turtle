@@ -15,17 +15,19 @@ var pen = {
 };
 
 function createRadio(ruleName, checked) {
-  var p = document.createElement("p");
+  var p = document.createElement("div");
   p.setAttribute("class", "radio-p");
   var radio = document.createElement("input");
   radio.setAttribute("type", "radio");
   radio.setAttribute("name", "ls-system");
   radio.setAttribute("value", ruleName);
+  radio.setAttribute("id", ruleName);
   if(checked) radio.setAttribute("checked", "true");
-  var span = document.createElement("span");
-  span.innerHTML = ruleName;
+  var label = document.createElement("label");
+  label.setAttribute("for", ruleName);
+  label.innerHTML = ruleName;
   p.appendChild(radio);
-  p.appendChild(span);
+  p.appendChild(label);
   return p;
 }
 
