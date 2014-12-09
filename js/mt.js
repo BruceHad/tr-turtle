@@ -32,7 +32,7 @@ function Turtle(activeCanvas, pen) {
     this.angle += direction * rotateAngle * Math.PI * 2;
   };
   this.forward = function(moveLength) {
-		console.log(moveLength+" "+this.x + ' ' + this.y);
+		// console.log(moveLength+" "+this.x + ' ' + this.y);
 		var self = this; // to pass to setInterval
     animating = true;
     var stepLength = 6;

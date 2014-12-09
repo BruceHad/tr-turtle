@@ -137,8 +137,8 @@ function doSomething(e) {
 		var angle = document.getElementById('ls-angle').value/360;
 		var startAngle = document.getElementById('ls-start-angle').value/360;
 		myTurtle.angle = startAngle* Math.PI * 2;
-// 		myTurtle.x = document.getElementById('ls-x').value;
-// 		myTurtle.y = document.getElementById('ls-y').value;
+		myTurtle.x = parseInt(document.getElementById('ls-x').value)+0.5;
+		myTurtle.y = parseInt(document.getElementById('ls-y').value)+0.5;
 		var distance = document.getElementById('ls-distance').value;
 		myController.go(string, distance, angle);
 	}

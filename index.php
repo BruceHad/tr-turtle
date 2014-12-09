@@ -102,8 +102,8 @@
 						<input type="text" id="ls-iterations" name="iterations"><br>
 						<label for="iterations">Start Angle: </label>
 						<input type="text" id="ls-start-angle" name="iterations">
-						<input type="hidden" id="ls-x" name="position-x">
-						<input type="hidden" id="ls-y" name="position-y">
+						<input type="text" id="ls-x" name="position-x">
+						<input type="text" id="ls-y" name="position-y">
 					</div>
 				</div>
 				<div class="row clearfix">
