@@ -1,9 +1,9 @@
 var canvases = document.getElementsByClassName("canvas-wrapper");
 var timeoutId, shownCanvas, myTurtle, myCanvas;
-var lsRules = {
-	"Dragon Curve": 	[200.5, 150.5, 5, 90, 7, 0, 'FX', 'F=', 'X=X+YF+', 'Y=−FX−Y'],
-	"Fractal Plant": 	[200.5, 150.5, 5, 25, 3, 0, 'X', 'X=F-[[X]+X]+F[+FX]-X]', 'F=FF'],
-  "Tree": 					[200.5, 150.5, 5, 25, 3, 0, 'FX', 'F=C0FF-[C1-F+F]+[C2+F-F]', 'X=C0FF+[C1+F]+[C3-F]']
+var lsRules = { // posx, posy, dist, angle, iterations, starting angle,rules
+	"Dragon Curve": 	[200.5, 150.5, 5, 90, 8, 0, 'FX', 'F=', 'X=X+YF+', 'Y=-FX-Y'],
+  "Whispy Tree": 		[100.5, 290.5, 5, 25, 3, 300, 'FX', 'F=C0FF-[C1-F+F]+[C2+F-F]', 'X=C0FF+[C1+F]+[C3-F]'],
+	"Fractal Plant":	[200.5, 290.5, 7, 25, 3, 270, 'X', 'X=F-[[X]+X]+F[+FX]-X', 'F=FF']
 };
 
 var pen = {
@@ -11,7 +11,7 @@ var pen = {
   width: 1,
   startX: 200.5,
   startY: 150.5,
-  startAngle: 0
+  startAngle: 0.25
 };
 
 function createRadio(ruleName, checked) {
@@ -43,6 +43,8 @@ function displayLsRadio() {
 
 function updateRules(){
   var rule = lsRules[document.querySelector('input[name = "ls-system"]:checked').value];
+	document.getElementById('ls-x').value = rule[0];
+	document.getElementById('ls-y').value = rule[1];
   document.getElementById('ls-distance').value = rule[2];
   document.getElementById('ls-angle').value = rule[3];
 	document.getElementById('ls-iterations').value = rule[4];
@@ -53,6 +55,7 @@ function updateRules(){
   document.getElementById('ls-rule3').value = rule[9];
   document.getElementById('ls-rule4').value = rule[10];
   document.getElementById('ls-rule5').value = rule[11];
+	// Hacky
 }
 
 function scrolled() {
@@ -130,6 +133,10 @@ function doSomething(e) {
 		var iterations = document.getElementById('ls-iterations').value;
 		var string = myController.expandLs(rules, iterations);
 		var angle = document.getElementById('ls-angle').value/360;
+		var startAngle = document.getElementById('ls-start-angle').value/360;
+		myTurtle.angle = startAngle* Math.PI * 2;
+// 		myTurtle.x = document.getElementById('ls-x').value;
+// 		myTurtle.y = document.getElementById('ls-y').value;
 		var distance = document.getElementById('ls-distance').value;
 		myController.go(string, distance, angle);
 	}

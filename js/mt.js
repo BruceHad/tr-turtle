@@ -19,9 +19,9 @@ function Canvas(canvasId, pen) {
 
 function Turtle(activeCanvas, pen) {
   var canvas = activeCanvas;
-  var x = pen.startX;
-  var y = pen.startY;
-  var angle = pen.startAngle;
+  this.x = pen.startX;
+  this.y = pen.startY;
+  this.angle = pen.startAngle * Math.PI * 2;
   animating = false;
   var intId;
   this.width = canvas.width;
@@ -29,19 +29,21 @@ function Turtle(activeCanvas, pen) {
   this.rotate = function(rotateAngle, dir) {
     if(dir === "left") var direction = -1;
     else var direction = 1;
-    angle += direction * rotateAngle * Math.PI * 2;
+    this.angle += direction * rotateAngle * Math.PI * 2;
   };
   this.forward = function(moveLength) {
+		console.log(moveLength+" "+this.x + ' ' + this.y);
+		var self = this; // to pass to setInterval
     animating = true;
     var stepLength = 6;
     var steps = moveLength / stepLength;
     var count = 0;
     intId = setInterval(function() {
-      var newx = x + Math.cos(angle) * stepLength;
-      var newy = y + Math.sin(angle) * stepLength;
-      canvas.draw([x, y], [newx, newy]);
-      x = newx;
-      y = newy;
+      var newx = self.x + Math.cos(self.angle) * stepLength;
+      var newy = self.y + Math.sin(self.angle) * stepLength;
+      canvas.draw([self.x, self.y], [newx, newy]);
+      self.x = newx;
+      self.y = newy;
       count++;
       if(count >= steps) {
         count = 0;
@@ -55,9 +57,9 @@ function Turtle(activeCanvas, pen) {
       window.clearInterval(intId);
       animating = false;
     }
-    x = pen.startX;
-    y = pen.startY;
-    angle = pen.startAngle;
+    this.x = pen.startX;
+    this.y = pen.startY;
+    this.angle = pen.startAngle;
     canvas.clear();
   };
 }
@@ -72,8 +74,9 @@ function Controller(turtle){
     var intId = setInterval(function(self) {
       if(!animating) {
         var command = commands.shift();
+// 				console.log(angle);
         if(command === 'F') turtle.forward(distance);
-        else if(command === 'L' || command === '−') turtle.rotate(-1* angle);
+        else if(command === 'L' || command === '-') turtle.rotate(-1* angle);
         else if(command === 'R' || command === '+') turtle.rotate(angle);
         else if(command === '[') self.tPush();
         else if(command === ']') self.tPop();
@@ -84,7 +87,8 @@ function Controller(turtle){
     }, 10, this);
   };
   this.tPush = function(){
-    stack.push([turtle.x, turtle.y, turtle.angle]);
+		var data = [turtle.x, turtle.y, turtle.angle];
+    stack.push(data);
   };
   this.tPop = function(){
     var data = stack.pop();

@@ -77,8 +77,9 @@
 			<canvas id="canvasthree" width="450" height="300">
 				<p>Canvas cannot be displayed.</p>
 			</canvas>
-			<div class="form-wrapper">
-				<div class="buttons turtle-settings">
+			<div class="form-wrapper" id="ls-form">
+				<div id="rule-list" class="buttons turtle-radio form-group"><!-- holder for LS Rules Radio Selector--></div>
+				<div class="buttons turtle-settings form-group">
 					<label for="distance">Line Length: </label>
 					<input type="text" id="ls-distance" name="distance"><br>
 					<label for="angle">Turn Angle: </label>
@@ -87,9 +88,10 @@
 					<input type="text" id="ls-iterations" name="iterations"><br>
 					<label for="iterations">Start Angle: </label>
 					<input type="text" id="ls-start-angle" name="iterations">
+					<input type="hidden" id="ls-x" name="position-x">
+					<input type="hidden" id="ls-y" name="position-y">
 				</div>
-				<div id="rule-list" class="buttons turtle-radio"><!-- holder for LS Rules Radio Selector--></div>
-				<div class="buttons turtle-ls-settings"><label for="ls-axiom">Axiom: </label>
+				<div class="buttons turtle-ls-settings form-group"><label for="ls-axiom">Axiom: </label>
 					<input type="text" id="ls-axiom" value=""><br>
 					<label for="ls-rule1">Rule One: </label>
 					<input type="text" id="ls-rule1" class="rule" value=""><br>

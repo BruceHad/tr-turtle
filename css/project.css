@@ -96,19 +96,12 @@ canvas {
 }
 .form-wrapper label {
   display: inline-block;
-  min-width: 30%;
+  width: 150px;
   text-align: right;
 }
-.radio-p {
-  margin:0;
-  padding: 5px 0;
-  line-height: 1.3em;
-}
-.radio-p span {
-  padding-left: 5px;
-}
+
 .form-wrapper input{
-	width: 220px;
+	width: 150px;
 	margin-top: 2px;
 }
 input.narrow{
@@ -124,4 +117,19 @@ input.narrow{
   overflow: auto;
   width: 100%;
   overflow-wrap: break-word;
+}
+
+#ls-form .form-group {
+}
+
+.radio-p {
+  margin:0;
+  padding: 5px 0;
+  line-height: 1.3em;
+}
+.radio-p input {
+	width: auto;
+}
+.radio-p span {
+  padding-left: 5px;
 }
