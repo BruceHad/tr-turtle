@@ -26,12 +26,14 @@ function Turtle(activeCanvas, pen) {
   var intId;
   this.width = canvas.width;
   this.height = canvas.height;
+	this.linesDrawn = 0;
   this.rotate = function(rotateAngle, dir) {
     if(dir === "left") var direction = -1;
     else var direction = 1;
     this.angle += direction * rotateAngle * Math.PI * 2;
   };
   this.forward = function(moveLength) {
+		this.linesDrawn++;
 		// console.log(moveLength+" "+this.x + ' ' + this.y);
 		var self = this; // to pass to setInterval
     animating = true;
@@ -60,23 +62,26 @@ function Turtle(activeCanvas, pen) {
     this.x = pen.startX;
     this.y = pen.startY;
     this.angle = pen.startAngle;
+		this.linesDrawn = 0;
     canvas.clear();
   };
 }
 
 function Controller(turtle){
   var stack = [];
+	this.commandString="";
   this.queue = function(command) {
     document.getElementById("tt-string").value += command;
   };
   this.go = function(commandStr, distance, angle) {
-    var commands = commandStr.split('');
+		this.commandString = commandStr;
+    var commands = this.commandString.split('');
     var intId = setInterval(function(self) {
       if(!animating) {
         var command = commands.shift();
-// 				console.log(angle);
+				self.commandString = commands.join('');
         if(command === 'F') turtle.forward(distance);
-        else if(command === 'L' || command === '-') turtle.rotate(-1* angle);
+        else if(command === 'L' || command === '-') turtle.rotate(-1 * angle);
         else if(command === 'R' || command === '+') turtle.rotate(angle);
         else if(command === '[') self.tPush();
         else if(command === ']') self.tPop();

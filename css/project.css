@@ -137,3 +137,6 @@ canvas {
   padding: 5px;
   line-height: 2em;
 }
+.turtle-radio {
+	min-height: 2em;
+}

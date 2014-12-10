@@ -7,7 +7,7 @@ var lsRules = { // posx, posy, dist, angle, iterations, starting angle,rules
 };
 
 var pen = {
-  colour: '#ffffff',
+  colour: '#748700',
   width: 1,
   startX: 200.5,
   startY: 150.5,
@@ -113,6 +113,16 @@ function getRules(){
   return rules;
 }
 
+function startLs(){
+	var length = document.getElementById("string-length");
+	var linesDrawn = document.getElementById("lines-drawn");
+	var intervalId = window.setInterval(function(){
+		if(myController.commandString.length === 0) window.clearInterval(intervalId);
+		length.innerHTML = myController.commandString.length;
+		linesDrawn.innerHTML = myTurtle.linesDrawn;
+	}, 1000);
+}
+
 
 // Event Handlers
 window.onload = scrolled;
@@ -140,9 +150,10 @@ function doSomething(e) {
 		myTurtle.x = parseInt(document.getElementById('ls-x').value)+0.5;
 		myTurtle.y = parseInt(document.getElementById('ls-y').value)+0.5;
 		var distance = document.getElementById('ls-distance').value;
+		startLs();
 		myController.go(string, distance, angle);
 	}
-  else if(e.target.name === "clear") myTurtle.clear();
+	else if(e.target.name === "clear") {myTurtle.clear(); myController.commandString="";}
   else if(e.target.name === "ls-system") updateRules();
   e.stopPropagation();
 }

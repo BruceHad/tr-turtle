@@ -4,9 +4,10 @@
 
 To do:
 
+* Show 'info' on ls system
 * Get a 'reset' that works
 * ---Simplify page style and colour canvas---
-* Add in Starting position
+* ---Add in Starting position---
 * ---Update Rules on radio changing---
 * ---Add in support for angle.---
 * Check performance of map()
