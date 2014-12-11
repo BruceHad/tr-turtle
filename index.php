@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="shortcut icon" href="http://treerock.me/assets/favicon.ico">
 	<link href="css/normalize.css" rel="stylesheet">
-	<link href="css/project.sass.css" rel="stylesheet">
+	<link href="css/project.css" rel="stylesheet">
 	<link href='http://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>
 </head>
 
