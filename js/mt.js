@@ -1,4 +1,5 @@
 var animating = false;
+
 function Canvas(canvasId, pen) {
   var canvas = document.getElementById(canvasId);
   var ctx = canvas.getContext('2d');
@@ -15,6 +16,7 @@ function Canvas(canvasId, pen) {
   this.clear = function() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
   }
+  this.clear();
 }
 
 function Turtle(activeCanvas, pen) {
@@ -72,6 +74,16 @@ function Controller(turtle){
 	this.commandString="";
   this.queue = function(command) {
     document.getElementById("tt-string").value += command;
+  };
+  this.set = function(rules){
+    console.log(rules);
+    turtle.clear();
+    turtle.x = rules.posx; turtle.y = rules.posy;
+    turtle.angle = rules.starting_angle/360;
+    console.log(turtle.angle);
+    var string = this.expandLs(rules.rules, rules.iterations);
+    console.log(rules.angle);
+    this.go(string, rules.dist, rules.angle/360);
   };
   this.go = function(commandStr, distance, angle) {
 		this.commandString = commandStr;

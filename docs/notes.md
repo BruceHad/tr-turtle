@@ -16,6 +16,8 @@ To do:
 * ---Check the tt-string updates---
 
 
+
+
 ## Dragon Curves
 
 A [Dragon Curve](https://en.wikipedia.org/wiki/Dragon_curve) is a self-similar fractal curve. There are a couple of methods for drawing or approximating them.
@@ -85,7 +87,7 @@ f(.01, 89.5, .01, 184) f(dist, angle, incr, segs /*(number of segments)*/) {
 	facing east repeat segs times:
 		go dist * (60% the view-space width) in the current direction turn angle degrees clockwise (to your right)
 		increment dist by incr }
-		
+
 ## Fractal Plant
 Example 7: Fractal plant
 

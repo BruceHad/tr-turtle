@@ -79,34 +79,6 @@
 			</canvas>
 			<div class="form-wrapper" id="ls-form">
 				<div class="row clearfix">
-					<div class="form-group rules buttons">
-						<label for="ls-axiom">Axiom: </label>
-						<input type="text" id="ls-axiom" value=""><br>
-						<label for="ls-rule1">Rule One: </label>
-						<input type="text" id="ls-rule1" class="rule" value=""><br>
-						<label for="ls-rule2">Rule Two: </label>
-						<input type="text" id="ls-rule2" class="rule" value=""><br>
-						<label for="ls-rule3">Rule Three: </label>
-						<input type="text" id="ls-rule3" class="rule" value=""><br>
-						<label for="ls-rule4">Rule Four: </label>
-						<input type="text" id="ls-rule4" class="rule" value=""><br>
-						<label for="ls-rule5">Rule Five: </label>
-						<input type="text" id="ls-rule5" class="rule" value=""><br>
-					</div>
-					<div class="form-group rules  buttons">
-						<label for="distance">Line Length: </label>
-						<input type="text" id="ls-distance" name="distance"><br>
-						<label for="angle">Turn Angle: </label>
-						<input type="text" id="ls-angle" name="angle"><br>
-						<label for="iterations">Iterations: </label>
-						<input type="text" id="ls-iterations" name="iterations"><br>
-						<label for="iterations">Start Angle: </label>
-						<input type="text" id="ls-start-angle" name="iterations">
-						<input type="text" id="ls-x" name="position-x">
-						<input type="text" id="ls-y" name="position-y">
-					</div>
-				</div>
-				<div class="row clearfix">
 					<div id="rule-list" class="turtle-radio buttons"><!-- holder for LS Rules Radio Selector--></div>
 				</div>
 				<div class="row clearfix  buttons">
