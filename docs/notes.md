@@ -4,7 +4,8 @@
 
 To do:
 
-* Show 'info' on ls system
+* Convert CSS to SASS
+* ---Show 'info' on ls system----
 * Get a 'reset' that works
 * ---Simplify page style and colour canvas---
 * ---Add in Starting position---
