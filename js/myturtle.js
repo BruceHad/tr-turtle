@@ -148,7 +148,8 @@ function Controller(turtle) {
   this.setCommandString = function(str) {
     commandString = str;
   };
-  this.go = function(moveLength, turnAngle, rules, iterations, animate) {
+  this.go = function(moveLength, turnAngle, animate, rules, iterations) {
+		console.log(animate);
     if(commandString==="") commandString = expandLs(rules, iterations);
     var commands = commandString.split('');
     if(!animate) {

@@ -10,20 +10,20 @@ var funcInit = function() {
       rules: ['FX', 'F=', 'X=X+YF+', 'Y=-FX-Y']
     },
     "Whispy Tree": {
-      x: 100.5,
-      y: 290.5,
-      distance: 5,
+      x: 200.5,
+      y: 360,
+      distance: 7,
       turnAngle: 25,
-      iterations: 3,
+      iterations: 6,
       startAngle: 300,
       rules: ['FX', 'F=C0FF-[C1-F+F]+[C2+F-F]', 'X=C0FF+[C1+F]+[C3-F]']
     },
     "Fractal Plant": {
-      x: 200.5,
-      y: 290.5,
-      distance: 7,
+      x: 200,
+      y: 350,
+      distance: 2,
       turnAngle: 25,
-      iterations: 3,
+      iterations: 6,
       startAngle: 270,
       rules: ['X', 'X=F-[[X]+X]+F[+FX]-X', 'F=FF']
     }
@@ -96,7 +96,7 @@ var funcInit = function() {
 			var y = document.getElementById('ls-y').value;
 			var animate = document.getElementById('ls-animate').checked;
 			myCont.init(x, y, startAngle);
-			myCont.go(dist, turnAngle, rules, iter, animate);
+			myCont.go(dist, turnAngle, animate, rules, iter);
     };
 		this.clear = function(){
 			var startAngle = document.getElementById('ls-start-angle').value;
@@ -119,6 +119,7 @@ var funcInit = function() {
       default:
         console.log(e.target.name);
     }
+		e.stopPropagation();
   });
 }
 document.addEventListener('DOMContentLoaded', funcInit);

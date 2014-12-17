@@ -54,7 +54,7 @@ header {
   z-index: 9999;
 }
 header h1, header p {
-  font-family:'Vollkorn', sans-serif;
+  font-family: $font-headings;
   font-style: normal;
   font-weight: 400;
   margin: 0;
@@ -76,10 +76,19 @@ header p.sub {
   background-color: white;
   padding: 0 5px;
 }
+
+nav {
+	margin: 5px -5px;
+	padding: 5px;
+	border: 1px dashed #ddd;
+	background-color: #f1f1f1;
+}
+nav p {
+	padding: 0; margin: 0;
+}
 /* Canvas and form controls
 * ------------------------------*/
 .canvas-wrapper {
-  width: 472px;
   background-color: #2E4321;
   border: 10px solid white;
   -webkit-transition: border-color 2s;
@@ -100,13 +109,14 @@ canvas {
 }
 
 .form-wrapper {
-  min-height: 150px;
-  border-top: 1px dashed #748700;
+  min-height: 100px;
+	margin: 10px 0; padding: 5px 0;
+  border-top: 1px dashed $canvas-alt;
 }
 .turtle-controls {
   text-align: center;
 }
-.turtle-queue textarea {
+.turtle-controls textarea {
   font-size: small;
   overflow-wrap: break-word;
   display: block;
