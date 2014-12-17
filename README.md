@@ -1,3 +1,5 @@
 # My Turtle
 
-A basic turtle implementation. Using Javascript and Canvas.
+A basic turtle implementation using Javascript and Canvas.
+
+

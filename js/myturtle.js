@@ -133,7 +133,7 @@ function Controller(turtle) {
     var commands = commandString.split('');
     if(!animate) {
       for(var i = 0; i < commands.length; i++) {
-        if(commands[i] === 'F') turtle.forward(moveLength);
+        if(commands[i] === 'F' || commands[i] === 'G') turtle.forward(moveLength);
         else if(commands[i] === 'L' || commands[i] === '-') turtle.rotate(-1 * turnAngle);
         else if(commands[i] === 'R' || commands[i] === '+') turtle.rotate(turnAngle);
         else if(commands[i] === '[') this.stackPush();

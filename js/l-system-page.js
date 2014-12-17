@@ -26,6 +26,15 @@ var funcInit = function() {
       iterations: 6,
       startAngle: 270,
       rules: ['X', 'X=F-[[X]+X]+F[+FX]-X', 'F=FF']
+    },
+    "Pythagoras Tree": {
+      x: 300,
+      y: 360,
+      distance: 2,
+      turnAngle: 45,
+      iterations: 7,
+      startAngle: 270,
+      rules: ['G', 'F=FF', 'G=F[-G]+G']
     }
   };
   var myTurtle = new Turtle("canvasone");
