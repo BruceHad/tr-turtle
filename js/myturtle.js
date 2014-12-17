@@ -75,33 +75,12 @@ function Turtle(canvasId) {
   this.rotate = function(turnAngle) {
     this.angle += degreeToRad(turnAngle);
   };
-  this.forward = function(moveLength, animate) {
+  this.forward = function(moveLength) {
     moveLength = Math.floor(moveLength); // must be an integer
-    if(!animate) {
-      var newx = this.position[0] + Math.cos(this.angle) * moveLength;
-      var newy = this.position[1] + Math.sin(this.angle) * moveLength;
-      canvas.draw(this.position, [newx, newy]);
-      this.position = [newx, newy];
-    } else {
-      var self = this; // to pass to setInterval
-      this.moving = true;
-      var stepLength = 6; // adjust to speed up animation
-      var steps = moveLength / stepLength;
-      var count = 0;
-      intId = setInterval(function() {
-        var newx = self.position[0] + Math.cos(self.angle) * stepLength;
-        var newy = self.position[1] + Math.sin(self.angle) * stepLength;
-        canvas.draw(self.position, [newx, newy]);
-        self.position[0] = newx;
-        self.position[1] = newy;
-        count++;
-        if(count >= steps) {
-          count = 0;
-          window.clearInterval(intId);
-          self.moving = false;
-        }
-      }, 41); // around 24 frames per second
-    }
+    var newx = this.position[0] + Math.cos(this.angle) * moveLength;
+    var newy = this.position[1] + Math.sin(this.angle) * moveLength;
+    canvas.draw(this.position, [newx, newy]);
+    this.position = [newx, newy];
   };
   this.reset = function() {
     if(this.moving) {
@@ -136,11 +115,11 @@ function Controller(turtle) {
   };
   this.init = function(x, y, sAngle) {
     window.clearInterval(intId);
-		commandString = "";
-		stack = [];
+    commandString = "";
+    stack = [];
     turtle.reset();
     turtle.move(x, y, sAngle);
-		
+
   };
   this.queue = function(command) {
     commandString += command;
@@ -149,12 +128,12 @@ function Controller(turtle) {
     commandString = str;
   };
   this.go = function(moveLength, turnAngle, animate, rules, iterations) {
-		console.log(animate);
+    console.log(animate);
     if(commandString==="") commandString = expandLs(rules, iterations);
     var commands = commandString.split('');
     if(!animate) {
       for(var i = 0; i < commands.length; i++) {
-        if(commands[i] === 'F') turtle.forward(moveLength, false);
+        if(commands[i] === 'F') turtle.forward(moveLength);
         else if(commands[i] === 'L' || commands[i] === '-') turtle.rotate(-1 * turnAngle);
         else if(commands[i] === 'R' || commands[i] === '+') turtle.rotate(turnAngle);
         else if(commands[i] === '[') this.stackPush();
@@ -165,7 +144,7 @@ function Controller(turtle) {
         if(!turtle.moving) {
           var command = commands.shift();
           self.commandString = commands.join('');
-          if(command === 'F') turtle.forward(moveLength, true);
+          if(command === 'F') turtle.forward(moveLength);
           else if(command === 'L' || command === '-') turtle.rotate(-1 * turnAngle);
           else if(command === 'R' || command === '+') turtle.rotate(turnAngle);
           else if(command === '[') self.stackPush();
