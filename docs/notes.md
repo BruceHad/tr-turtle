@@ -6,7 +6,7 @@ To do:
 
 * Convert CSS to SASS
 * ---Show 'info' on ls system----
-* Get a 'reset' that works
+* --- Get a 'reset' that works---
 * ---Simplify page style and colour canvas---
 * ---Add in Starting position---
 * ---Update Rules on radio changing---
@@ -15,6 +15,37 @@ To do:
 * ---Switch Ls to array.map()---
 * ---Check the tt-string updates---
 
+
+## Colour Changes
+
+Given a base colour, we can re-calculate the shade of the colour (brightness) with the following code.
+
+	function changeBrightness(hex, percent) {
+		// strip the leading # if it's there
+		hex = hex.replace(/^\s*#|\s*$/g, '');
+		var red = parseInt(hex.substr(0, 2), 16);
+		var green = parseInt(hex.substr(2, 2), 16);
+		var blue = parseInt(hex.substr(4, 2), 16);
+		if(percent > 0){
+			//lighten
+		hex = 
+				((0 | (1 << 8) + r + (256 - r) * percent / 100).toString(16)).substr(1) 
+			+ ((0 | (1 << 8) + g + (256 - g) * percent / 100).toString(16)).substr(1) 
+			+ ((0 | (1 << 8) + b + (256 - b) * percent / 100).toString(16)).substr(1);
+		} else if(percent < 0) {
+			//darken
+			percent *= -1;
+			hex = 
+				((0 | (1 << 8) + r * (100 - percent) / 100).toString(16)).substr(1) 
+			+ ((0 | (1 << 8) + g * (100 - percent) / 100).toString(16)).substr(1) 
+			+ ((0 | (1 << 8) + b * (100 - percent) / 100).toString(16)).substr(1);
+		}
+		return '#' + newHex;
+	}
+
+Amended slightly from https://stackoverflow.com/questions/6443990/javascript-calculate-brighter-colour
+
+But that doesn't give us exactly what we need. Basically want a range of similar shades and calculating those programmatically is difficult. Changing brightness up or down will eventually lead to black or white, losing any colour information it had (e.g. how do you move from black back to green by simply changing brightness).
 
 
 

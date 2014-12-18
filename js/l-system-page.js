@@ -16,7 +16,7 @@ var funcInit = function() {
       turnAngle: 20,
       iterations: 5,
       startAngle: 330,
-      rules: ['FX', 'F=C0FF-[C1-F+F]+[C2+F-F]', 'X=C0FF+[C1+F]+[C3-F]']
+      rules: ['FX', 'F=C0FF-[>C1-F+F]<+[C2+F-F]', 'X=C0FF+[C1+F]+[C3-F]']
     },
     "Fractal Plant": {
       x: 200,
@@ -25,7 +25,7 @@ var funcInit = function() {
       turnAngle: 25,
       iterations: 6,
       startAngle: 270,
-      rules: ['X', 'X=F-[[X]+X]+F[+FX]-X', 'F=FF']
+      rules: ['X', 'X=F-[>[X]+X]+F[+FX]<-X', 'F=FF']
     },
     "Pythagoras Tree": {
       x: 300,

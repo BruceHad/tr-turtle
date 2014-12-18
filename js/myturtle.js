@@ -38,7 +38,24 @@ function expandLs(rules, iter) {
     }
   }
   return str;
-};
+}
+
+function changeBrightness(hex, percent) {
+  // strip the leading # if it's there
+  hex = hex.replace(/^\s*#|\s*$/g, '');
+  var r = parseInt(hex.substr(0, 2), 16);
+  var g = parseInt(hex.substr(2, 2), 16);
+  var b = parseInt(hex.substr(4, 2), 16);
+  if(percent > 0) {
+    //lighten
+    hex = ((0 | (1 << 8) + r + (256 - r) * percent / 100).toString(16)).substr(1) + ((0 | (1 << 8) + g + (256 - g) * percent / 100).toString(16)).substr(1) + ((0 | (1 << 8) + b + (256 - b) * percent / 100).toString(16)).substr(1);
+  } else if(percent < 0) {
+    //darken
+    percent *= -1;
+    hex = ((0 | (1 << 8) + r * (100 - percent) / 100).toString(16)).substr(1) + ((0 | (1 << 8) + g * (100 - percent) / 100).toString(16)).substr(1) + ((0 | (1 << 8) + b * (100 - percent) / 100).toString(16)).substr(1);
+  }
+  return '#' + hex;
+}
 
 function Canvas(canvasId, pen) {
   var cv = document.getElementById(canvasId);
@@ -61,9 +78,11 @@ function Canvas(canvasId, pen) {
 
 function Turtle(canvasId) {
   var pen = {
-    colour: '#ffffff',
+    colour: '#748700',
     width: 1
   };
+	var baseColour = pen.colour;
+	var percentChange = 0;
   var canvas = new Canvas(canvasId, pen);
   var intId;
   // default position and angle.
@@ -99,11 +118,16 @@ function Turtle(canvasId) {
     this.position = [startPos[0], startPos[1]];
     this.angle = startAngle;
   };
+  this.changeColour = function(percent) {
+		percentChange = Math.max(Math.min(percentChange+percent, 40),-40);
+    pen.colour = changeBrightness(baseColour, percentChange);
+  };
 }
 
 function Controller(turtle) {
   var stack = [];
-  var commandString="", intId;
+  var commandString = "",
+    intId;
   this.stackPush = function() {
     var data = [turtle.position, turtle.angle];
     stack.push(data);
@@ -119,7 +143,6 @@ function Controller(turtle) {
     stack = [];
     turtle.reset();
     turtle.move(x, y, sAngle);
-
   };
   this.queue = function(command) {
     commandString += command;
@@ -128,8 +151,7 @@ function Controller(turtle) {
     commandString = str;
   };
   this.go = function(moveLength, turnAngle, animate, rules, iterations) {
-    console.log(animate);
-    if(commandString==="") commandString = expandLs(rules, iterations);
+    if(commandString === "") commandString = expandLs(rules, iterations);
     var commands = commandString.split('');
     if(!animate) {
       for(var i = 0; i < commands.length; i++) {
@@ -138,6 +160,8 @@ function Controller(turtle) {
         else if(commands[i] === 'R' || commands[i] === '+') turtle.rotate(turnAngle);
         else if(commands[i] === '[') this.stackPush();
         else if(commands[i] === ']') this.stackPop();
+        else if(commands[i] === '>') turtle.changeColour(20);
+        else if(commands[i] === '<') turtle.changeColour(-20);
       }
     } else {
       intId = setInterval(function(self) {
@@ -149,6 +173,8 @@ function Controller(turtle) {
           else if(command === 'R' || command === '+') turtle.rotate(turnAngle);
           else if(command === '[') self.stackPush();
           else if(command === ']') self.stackPop();
+					else if(commands[i] === '>') turtle.changeColour(20);
+          else if(commands[i] === '<') turtle.changeColour(-20);
           if(commands.length === 0) {
             window.clearInterval(intId);
           }
