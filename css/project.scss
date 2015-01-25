@@ -1,7 +1,7 @@
 $font-stack:    Helvetica, sans-serif;
 $font-headings: 'Vollkorn', sans-serif;
-$canvas-color:  #2E4321;
-$canvas-alt:    #748700;
+$canvas-color:  #b3c832;
+$canvas-alt:    #323a00;
 
 body{
   font-family: $font-stack;
@@ -89,14 +89,14 @@ nav p {
 /* Canvas and form controls
 * ------------------------------*/
 .canvas-wrapper {
-  background-color: #2E4321;
+  background-color: $canvas-color;
   border: 10px solid white;
   -webkit-transition: border-color 2s;
   transition: border-color 2s;
   color: white;
 }
 .canvas-wrapper.show {
-  border: 10px solid #748700;
+  border: 10px solid $canvas-alt;
 }
 canvas {
   margin: 0 auto;

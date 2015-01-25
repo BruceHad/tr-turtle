@@ -77,14 +77,14 @@ nav p {
 /* Canvas and form controls
 * ------------------------------*/
 .canvas-wrapper {
-  background-color: #2E4321;
+  background-color: #b3c832;
   border: 10px solid white;
   -webkit-transition: border-color 2s;
   transition: border-color 2s;
   color: white; }
 
 .canvas-wrapper.show {
-  border: 10px solid #748700; }
+  border: 10px solid #323a00; }
 
 canvas {
   margin: 0 auto;
@@ -98,7 +98,7 @@ canvas {
   min-height: 100px;
   margin: 10px 0;
   padding: 5px 0;
-  border-top: 1px dashed #748700; }
+  border-top: 1px dashed #323a00; }
 
 .turtle-controls {
   text-align: center; }
