@@ -33,36 +33,35 @@ code {
   font-family: monospace;
   font-size: normal; }
 
+.content {
+  margin: 0px;
+  padding: 10px; }
+
 /* Header styles
 * --------------------------*/
 header {
-  position: relative;
-  margin: 0 15px;
-  background-color: rgba(255, 255, 255, 0.5);
-  z-index: 9999; }
-
-header h1, header p {
-  font-family: "Vollkorn", sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  margin: 0;
-  padding: 0; }
-
-header h1 {
-  font-size: 36px;
-  padding-bottom: 5px;
-  border-bottom: 1px solid #1c4746; }
-
-header p.sub {
-  font-size: 20px;
-  margin-top: -0.6em;
-  text-transform: uppercase;
-  color: #143937;
-  text-align: center; }
-
-.sub span {
-  background-color: white;
-  padding: 0 5px; }
+  background: white url("http://www.treerock.me/assets/stripe.png") repeat-x top left;
+  color: black; }
+  header h1, header p {
+    font-family: 'Vollkorn', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    margin: 0;
+    padding: 0; }
+  header h1 {
+    /* Background image is 25px high */
+    font-size: 21px;
+    height: 25px;
+    padding: 0;
+    margin: 0;
+    margin: -10px 0 0 0;
+    /* Negate padding */ }
+  header span {
+    background-color: rgba(255, 255, 255, 0.7); }
+  header p {
+    font-size: 1.25em;
+    text-transform: uppercase;
+    color: #143937; }
 
 nav {
   margin: 5px -5px;

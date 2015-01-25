@@ -14,29 +14,28 @@
 <body>
   <div class="page-wrapper">
 
-    <header>
-      <h1>Treerock</h1>
-      <p class="sub"><span>Turtles, Dragons and Patterns</span>
-      </p>
+    <header class="section">
+      <div class="content">
+        <h1><span>Treerock</span></h1>
+        <p class="sub">Turtles and the Lindenmayer System</p>
+      </div>
     </header>
 
-		
-		<nav><p>Back to the <a href="index.html">L-Systems</a> tool.</p></nav>
-		
+    <nav><p>Back to the <a href="index.html">L-Systems</a> tool.</p></nav>
 
     <!-- section one -->
     <h2>Turtles</h2>
     <p>Like a lot of 80s kids, my first introduction to programming was a toy called a <a href="https://en.wikipedia.org/wiki/Big_Trak">Big Trak</a>, which was a toy car that could be programmed with a route (3 forward, turn right, reverse 5 and so on) and would then follow that route (until it crashed into the skirting boards).</p>
     <p>To program something similar (aka a <a href="https://en.wikipedia.org/wiki/Turtle_graphics">Turtle</a>) you just needs to know a couple of actions: move and turn, while keeping track of current location and direction. With that you have a basic turtle.</p>
     <pre><code>function Turtle(){
-  var location = [0,0]; // Set starting location 
+  var location = [0,0]; // Set starting location
   var angle = 0; // Angle is in radians
   var canvas = new Canvas(); // Need a canvas to draw on
   this.rotate = function(anglePercent) {
     angle += anglePercent * Math.PI *2;
   };
   this.forward = function(dist) {
-    newLocation = [location[0]+ Math.cos(angle) * dist, 
+    newLocation = [location[0]+ Math.cos(angle) * dist,
             location[1]+ Math.sin(angle) * dist];
     canvas.draw(location, newLocation, pen);
     location = [newLocation[0], newLocation[1]];
@@ -80,7 +79,7 @@
     <p>The nice thing about this way of controlling the turtle is that we can easily write a program that will generate those strings of letters mathematically. For example, try copying the following string into the 'Command Window' and hitting Go.</p>
     <pre><code>RFRRLFLRRLRFRLLFLRRLRFRRLFLRLLRFRLLFLRRLRFRRLFLRRLRFRLLFLRLLRFRRLFLRLLRFRLLFLRRLRFRRLFLRRLRFRLLFLRRLRFRRLFLRLLRFRLLFLRLLRFRRLFLRRLRFRLLFLRLLRFRRLFLRLLRFRLLFLRRLRFRRLFLRRLRFRLLFLRRLRFRRLFLRLLRFRLLFLRRLRFRRLFLRRLRFRLLFLRLLRFRRLFLRLLRFRLLFLRLLRFRRLFLRRLRFRLLFLRRLRFRRLFLRLLRFRLLFLRLLRFRRLFLRRLRFRLLFLRLLRFRRLFLRLLRFRLLFLR
 </code></pre>
-		
+
     <p>Try programming that manually!</p>
 
     <p>That string of commands I generated was based on a pattern called a <a href="http://en.wikipedia.org/wiki/Dragon_curve">Dragon Curve</a>. It's one of many patterns that can be generated using <a href="http://en.wikipedia.org/wiki/L-system">Lindenmayer System</a>.</p>
@@ -96,7 +95,7 @@
     <p>Where F stands for 'move forward', + stands for 'turn right' and - 'turn left'. (X and Y are used in the L-system but don't equate to any actions).</p>
 		<p>L-systems were actually developed by a biologist (in 1968) called Arstid Lindenmayer. It's therefore quite good at modelling plant growth. They can also be used to describe fractal-like forms.</p>
 		<p>Play with the <a href="index.html">L-Systems</a> tool to see it in action.</p>
-		
+
   </div>
   <!-- end page-wrapper -->
   <script src="js/myturtle.js"></script>
