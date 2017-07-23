@@ -1,4 +1,5 @@
 'use strict';
+
 const del = require('del');
 const gulp = require('gulp');
 const rename = require('gulp-rename');
@@ -55,4 +56,7 @@ gulp.task('css', function() {
 
 gulp.task('default', ['clean'], function() {
     run('html', 'js', 'css');
+    gulp.watch('./src/css/*.scss', ['css']);
+    gulp.watch('./src/js/*.js', ['js']);
+    gulp.watch('./src/templates/**/*.hbs', ['html']);
 });

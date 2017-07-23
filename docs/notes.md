@@ -11,6 +11,6 @@ To Do
 - [x] Transpile ES2015
 - [ ] Include static assets
 - [ ] Create base style
-- [ ] Git 
-- [ ] Watchify
+- [x] Git 
+- [x] Watchify
 - [ ] Server
