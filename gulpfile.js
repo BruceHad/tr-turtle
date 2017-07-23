@@ -1,0 +1,58 @@
+'use strict';
+const del = require('del');
+const gulp = require('gulp');
+const rename = require('gulp-rename');
+const run = require('run-sequence');
+const path = require('path');
+const handlebars = require('gulp-compile-handlebars');
+const htmlBeautify = require('gulp-html-beautify');
+const sass = require('gulp-sass');
+const babel = require('gulp-babel');
+
+gulp.task('clean', function() {
+    del(['./dist/*']);
+});
+
+gulp.task('html', function() {
+    let templateData = {
+        title: 'My Web Page',
+        name: 'Bruce'
+    };
+    let options = {
+        ignorePartials: true,
+        batch: ['./src/templates/partials']
+    };
+
+    gulp.src('src/templates/*.hbs')
+        .pipe(handlebars(templateData, options))
+        .pipe(rename(function(path) {
+            path.extname = '.html';
+        }))
+        .pipe(htmlBeautify({
+            indentSize: 2
+        }))
+        .pipe(gulp.dest('./dist'));
+});
+
+gulp.task('js', function() {
+    gulp.src('src/js/*.js')
+        .pipe(babel({
+            presets: ['env']
+        }))
+        .pipe(gulp.dest('./dist/scripts'));
+});
+
+gulp.task('css', function() {
+    let bootstrapPath = path.join(__dirname,
+        'node_modules/bootstrap-sass/assets/stylesheets/');
+    gulp.src('src/css/*.scss')
+        .pipe(sass({
+            includePaths: [bootstrapPath]
+        }).on('error', sass.logError))
+        .pipe(gulp.dest('./dist/css'));
+});
+
+
+gulp.task('default', ['clean'], function() {
+    run('html', 'js', 'css');
+});
