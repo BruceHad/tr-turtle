@@ -13,4 +13,4 @@ To Do
 - [ ] Create base style
 - [x] Git 
 - [x] Watchify
-- [ ] Server
+- [x] Server

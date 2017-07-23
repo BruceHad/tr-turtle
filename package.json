@@ -1,10 +1,11 @@
 {
-  "name": "handles",
-  "version": "1.0.0",
+  "name": "tr-quickstart-basic",
+  "version": "0.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "./dist/index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "gulp",
+    "start": "cd dist && http-server"
   },
   "author": "",
   "license": "ISC",
@@ -18,6 +19,7 @@
     "gulp-html-beautify": "^1.0.1",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^3.1.0",
+    "http-server": "0.10.0",
     "path": "^0.12.7",
     "run-sequence": "^2.0.0"
   }
