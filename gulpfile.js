@@ -16,9 +16,8 @@ gulp.task('clean', function() {
 
 gulp.task('html', function() {
     let templateData = {
-        title: 'Treerock Quickstart (Basic)',
-        subtitle: 'Prototype for quickly bootstrapping basic wep pages.',
-        name: 'Treerock'
+        title: 'Quickstart (Basic)',
+        subtitle: 'A basic wep page'
     };
     let options = {
         ignorePartials: true,
