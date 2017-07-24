@@ -54,9 +54,13 @@ gulp.task('css', function() {
         .pipe(gulp.dest('./dist/css'));
 });
 
+gulp.task('images', function(){
+   gulp.src('./src/images/*') 
+   .pipe(gulp.dest('./dist/images'));
+});
 
 gulp.task('default', ['clean'], function() {
-    run('html', 'js', 'css');
+    run('html', 'js', 'css', 'images');
     gulp.watch('./src/css/*.scss', ['css']);
     gulp.watch('./src/js/*.js', ['js']);
     gulp.watch('./src/templates/**/*.hbs', ['html']);
