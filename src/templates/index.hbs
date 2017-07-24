@@ -1,15 +1,28 @@
-{{> header}}
-<div class='container-fluid'>
-    <header class='page-header'>
-        <h1>{{title}} <small>Example small text</small></h1>
-    </header>
-    <p>If this page looks okay then html templating and CSS should be working.</p>
-    <p id='js-test'>But the babel/javascript thing doesn't seem to be working.</p>
-    <script src='scripts/script.js'></script>
+<!DOCTYPE html>
+<html lang="en">
 
-    <footer>
-        <p>Created by {{name}}</p>
-    </footer>
-</div><!-- outer container -->
-{{> footer}}
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <meta content="" name="description">
+    <title>{{ title }}</title>
+    <link href="css/style.css" rel="stylesheet">
+    <!-- <link href=/favicon.ico rel=icon> -->
+</head>
 
+<body>
+
+    {{> header}}
+    
+    <div class='container'>
+        <p>If this page looks okay then html templating and CSS should be working.</p>
+        <p id='js-test'>But the babel/javascript thing doesn't seem to be working.</p>
+    </div>
+    
+    {{> footer}}
+    
+<script src='scripts/script.js'></script>
+</body>
+
+</html>
