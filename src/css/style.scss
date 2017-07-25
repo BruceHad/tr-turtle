@@ -1,5 +1,26 @@
 @import 'bootstrap';
 
-p {
-    font-family: sans-serif;
+$dark-background: #851919;
+
+body {
+    overflow: scroll;
+    border-top: 10px solid $dark-background;
 }
+
+header {
+    
+    ul {
+        list-style-position: inside;
+        list-style-type: '> ';
+        padding: 0;
+        margin: 10px 0 0 0;
+    }
+    h1 {
+        margin:5px 0; padding:0;
+    }
+}
+
+footer {
+    opacity: 0.5;
+}
+

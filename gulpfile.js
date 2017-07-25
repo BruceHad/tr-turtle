@@ -5,6 +5,8 @@ const gulp = require('gulp');
 const rename = require('gulp-rename');
 const run = require('run-sequence');
 const path = require('path');
+const fs = require('fs');
+const data = require('gulp-data');
 const handlebars = require('gulp-compile-handlebars');
 const htmlBeautify = require('gulp-html-beautify');
 const sass = require('gulp-sass');
@@ -14,32 +16,13 @@ gulp.task('clean', function() {
     del(['./dist/*']);
 });
 
-gulp.task('html', function() {
-    let templateData = {
-        title: 'Quickstart (Basic)',
-        subtitle: 'A basic wep page'
-    };
-    let options = {
-        ignorePartials: true,
-        batch: ['./src/templates/partials']
-    };
-
-    gulp.src('src/templates/*.hbs')
-        .pipe(handlebars(templateData, options))
-        .pipe(rename(function(path) {
-            path.extname = '.html';
-        }))
-        .pipe(htmlBeautify({
-            indentSize: 2
-        }))
-        .pipe(gulp.dest('./dist'));
-});
-
 gulp.task('js', function() {
-    gulp.src('src/js/*.js')
+    gulp.src('./src/js/*.js')
         .pipe(babel({
             presets: ['env']
         }))
+        .pipe(gulp.dest('./dist/scripts'));
+    gulp.src('./src/js/static/*.js')
         .pipe(gulp.dest('./dist/scripts'));
 });
 
@@ -53,9 +36,29 @@ gulp.task('css', function() {
         .pipe(gulp.dest('./dist/css'));
 });
 
-gulp.task('images', function(){
-   gulp.src('./src/images/*') 
-   .pipe(gulp.dest('./dist/images'));
+gulp.task('images', function() {
+    gulp.src('./src/images/*')
+        .pipe(gulp.dest('./dist/images'));
+});
+
+gulp.task('html', function() {
+    let templateData = {};
+    let options = {
+        ignorePartials: true,
+        batch: ['./src/templates/partials']
+    };
+    gulp.src('src/templates/*.hbs')
+        .pipe(data(function(file) {
+            return JSON.parse(fs.readFileSync('./src/data/tr-data.json'));
+        }))
+        .pipe(handlebars(templateData, options))
+        .pipe(rename(function(path) {
+            path.extname = '.html';
+        }))
+        .pipe(htmlBeautify({
+            indentSize: 2
+        }))
+        .pipe(gulp.dest('./dist'));
 });
 
 gulp.task('default', ['clean'], function() {
@@ -63,4 +66,5 @@ gulp.task('default', ['clean'], function() {
     gulp.watch('./src/css/*.scss', ['css']);
     gulp.watch('./src/js/*.js', ['js']);
     gulp.watch('./src/templates/**/*.hbs', ['html']);
+    gulp.watch('./src/data/*.json', ['html']);
 });

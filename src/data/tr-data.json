@@ -1,0 +1,20 @@
+{
+    "title": "treerock",
+    "subtitle": "learning how to code",
+    "lastUpdated": "2017",
+    "projects": [{
+        "name": "Web Tooling and Automation",
+        "date": "January, 2016",
+        "description": "<p>Courses selected from the Data Science Specialisation on coursera.</p><p>Includes R Programming; Getting, Cleaning and Exploring Data and Statistical Inference.</p>",
+        "image": "pr_cqc.jpg",
+        "url": "//www.udacity.com/course/web-tooling-automation--ud892",
+        "github": "//github.com/BruceHad/notes-stats"
+    }, {
+        "name": "Coursera Statistics Course",
+        "date": "February, 2015",
+        "image": "images/pr_stats.png",
+        "description": "<p>Some of the tools and techniques used by web developers.</p><p>An online course through Udacity, built by Google.</p><p>Covered <em>Productive Editing</em> and optimising your editor (Sublime Text), <em>Build Tools</em> to automate your build (Gulp), <em>Live Editing</em> for a smoother workflow, <em>Linting, Unit testing</em> and <em>Optimisation</em> for performance.</p>",
+        "url": "//www.coursera.org/specializations/jhu-data-science",
+        "github": "//github.com/BruceHad/notes-dev/tree/master/Courses/1601-webtooling-udacity"
+    }]
+}

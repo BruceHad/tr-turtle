@@ -1,28 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
 
 <head>
-    <meta charset="utf-8">
-    <meta content="IE=edge" http-equiv="X-UA-Compatible">
-    <meta content="width=device-width,initial-scale=1" name="viewport">
-    <meta content="" name="description">
+    <meta charset='utf-8'>
+    <meta content='IE=edge' http-equiv='X-UA-Compatible'>
+    <meta content='width=device-width,initial-scale=1' name='viewport'>
+    <meta content='' name='description'>
     <title>{{ title }}</title>
-    <link href="css/style.css" rel="stylesheet">
-    <link href="images/favicon.png" rel="icon">
+    <link href='css/style.css' rel='stylesheet'>
+    <link href='images/favicon.png' rel='icon'>
 </head>
 
 <body>
 
     {{> header}}
-    
+
     <div class='container'>
-        <p>If this page looks okay then html templating and CSS should be working.</p>
-        <p id='js-test'>And let's check if babel is working<span>.</span></p>
+        <div class='row'>
+            <div id='tr-main' class='col col-md-7'>
+                <h2>Projects</h2>
+                {{> projects }}
+            </div>
+            <div id='tr-side' class='col col-md-5'>
+                <h2>Recent Bookmarks</h2>
+                <div id='tr-linkblog'>
+                    <div class='loading'>
+                        <span class="glyphicon glyphicon-refresh"></span>
+                        <span class='span-loading'>Loading&hellip;</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    
+
     {{> footer}}
-    
-<script src='scripts/script.js'></script>
+
+    <script src='scripts/moment.min.js'></script>
+    <script src='scripts/promise.min.js'></script>
+    <script src='scripts/tr.js'></script>
+
 </body>
 
 </html>
