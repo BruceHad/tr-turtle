@@ -1,14 +1,11 @@
 @import 'bootstrap';
-
 $dark-background: #851919;
-
 body {
     overflow: scroll;
     border-top: 10px solid $dark-background;
 }
 
 header {
-    
     ul {
         list-style-position: inside;
         list-style-type: '> ';
@@ -16,11 +13,44 @@ header {
         margin: 10px 0 0 0;
     }
     h1 {
-        margin:5px 0; padding:0;
+        margin: 5px 0;
+        padding: 0;
     }
 }
 
 footer {
-    opacity: 0.5;
+    opacity: 0;
+    color: white;
+    background-color: $dark-background;
+    padding: 5px 0;
+    transition: opacity 0.8s;
+    &:hover {
+        opacity: 1;
+    }
+    p {
+        margin: 2px 0;
+    }
+    a {
+        color: white;
+        border-bottom: 1px dashed white;
+        &:hover {
+            color: white;
+            text-decoration: none;
+            border: 0;
+        }
+    }
+    i {
+        font-size: small;
+    }
 }
 
+.tr-main {
+    ul {
+        margin: 5px 0;
+        padding: 0;
+    }
+    li {
+        margin: 5px 0;
+        padding: 2px;
+    }
+}

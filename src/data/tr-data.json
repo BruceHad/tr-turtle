@@ -1,8 +1,14 @@
 {
     "title": "treerock",
     "subtitle": "learning how to code",
-    "lastUpdated": "2017",
     "projects": [{
+        "name": "Bookmarking App",
+        "date": "February, 2016",
+        "description": "<p>NodeJS application for storing bookmarks and provide the JSON data used to display the bookmarks here.</p><p>Uses the Express framework for NodeJS, Postgres and deployed to Heroku.</p>",
+        "image": "pr_nodejs.png",
+        "url": "//github.com/BruceHad/bookmarking-app"
+
+    }, {
         "name": "Web Tooling and Automation",
         "date": "January, 2016",
         "description": "<p>Courses selected from the Data Science Specialisation on coursera.</p><p>Includes R Programming; Getting, Cleaning and Exploring Data and Statistical Inference.</p>",
@@ -16,5 +22,25 @@
         "description": "<p>Some of the tools and techniques used by web developers.</p><p>An online course through Udacity, built by Google.</p><p>Covered <em>Productive Editing</em> and optimising your editor (Sublime Text), <em>Build Tools</em> to automate your build (Gulp), <em>Live Editing</em> for a smoother workflow, <em>Linting, Unit testing</em> and <em>Optimisation</em> for performance.</p>",
         "url": "//www.coursera.org/specializations/jhu-data-science",
         "github": "//github.com/BruceHad/notes-dev/tree/master/Courses/1601-webtooling-udacity"
+    }, {
+        "name": "Turtles and L-Systems",
+        "date": "January, 2015",
+        "description": "<p>Experiments with a Javascript 'turtle' graphics tool for drawing on the HTML Canvas. Can be programmed using Lindenmayer System grammer to weird effect.",
+        "image": "pr_turtle.gif",
+        "url": "//brucehad.github.io/myturtle/",
+        "github": "//github.com/BruceHad/myturtle"
+    }, {
+        "name": "To Do App",
+        "date": "July, 2014",
+        "description": "<p>A learning project, the boring ToDo app, using AngularJS, PHP and MySQL.",
+        "image": "pr_todo.png",
+        "url": "//sandbox.treerock.me/projects/do-something/app/",
+        "github": "//github.com/BruceHad/do-something"
+    }, {
+        "name": "Crafting Quality Code",
+        "date": "May, 2013",
+        "description": "<p>Programming course on Coursera, covering some of the fundamental skills for a (Python) programmer.</p><p>Includes design of functions &amp; organising modular code, algorithm performance, automated unit testing and debugging.</p>",
+        "url": "//www.coursera.org/course/programming2",
+        "github": "//github.com/BruceHad/notes-dev/tree/master/Courses/1402-craftingqualitycode-coursera"
     }]
 }

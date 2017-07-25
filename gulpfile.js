@@ -42,7 +42,10 @@ gulp.task('images', function() {
 });
 
 gulp.task('html', function() {
-    let templateData = {};
+    let date = new Date();
+    let templateData = {
+        lastUpdated: date.toDateString()
+    };
     let options = {
         ignorePartials: true,
         batch: ['./src/templates/partials']
