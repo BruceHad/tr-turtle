@@ -114,4 +114,13 @@ footer {
         margin: 5px 0;
         padding: 2px;
     }
+    
+    .loading {
+        min-height: 50px;
+        line-height: 50px;
+    }
+    .loading-inner {
+        margin: 0 auto;
+        width: 90px;
+    }
 }

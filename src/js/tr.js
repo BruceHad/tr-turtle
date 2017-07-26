@@ -3,6 +3,8 @@
 // moment().format();
 
 window.addEventListener('load', function() {
+  
+  // Bookmarks
 
   const dateFormat = 'Do MMMM YYYY';
 
@@ -92,4 +94,21 @@ window.addEventListener('load', function() {
   let parameters = null;
   getBookmarks(parameters)
     .then(updateHTML);
+    
+  // Spinner
+  let elem = document.querySelector('.loading .ellip');
+  let frames = ['', '.', '..', '...'];
+  let i = 3, timer = 0;
+  let intid = setInterval(function() {
+    i += 1;
+    timer += 1;
+    if (i > 3) {
+      i = 0;
+    }
+    elem.innerHTML = frames[i];
+    if (timer > 100) {
+      clearInterval(intid);
+      elem.innerHTML = '...';
+    }
+  }, 250);
 });
