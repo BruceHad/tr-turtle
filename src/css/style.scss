@@ -18,7 +18,7 @@
 // @import "bootstrap/code";
 @import "bootstrap/grid";
 // @import "bootstrap/tables";
-// @import "bootstrap/forms";
+@import "bootstrap/forms";
 // @import "bootstrap/buttons";
 
 // Components
@@ -27,7 +27,7 @@
 // @import "bootstrap/button-groups";
 // @import "bootstrap/input-groups";
 // @import "bootstrap/navs";
-// @import "bootstrap/navbar";
+@import "bootstrap/navbar";
 // @import "bootstrap/breadcrumbs";
 // @import "bootstrap/pagination";
 // @import "bootstrap/pager";
@@ -63,7 +63,7 @@ $dark-background: #851919;
 
 body {
     overflow: scroll;
-    border-top: 15px solid $dark-background;
+    border-top: 10px solid $dark-background;
 }
 
 header {
@@ -124,3 +124,9 @@ footer {
         width: 90px;
     }
 }
+
+
+li small {
+    color: #999;
+}
+

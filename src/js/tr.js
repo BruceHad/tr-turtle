@@ -78,7 +78,7 @@ window.addEventListener('load', function() {
       let date = moment(bookmarks[i].bookmark_date).format(dateFormat);
       let description = bookmarks[i].description;
 
-      let html = `<li><a href='${href}'>${name}</a> (${date})</li>`;
+      let html = `<li><a href='${href}'>${name}</a> <small>(${date})</small></li>`;
       ul.innerHTML += html;
     }
     return ul;
