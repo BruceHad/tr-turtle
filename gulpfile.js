@@ -52,6 +52,7 @@ gulp.task('html', function() {
     };
     gulp.src('src/templates/*.hbs')
         .pipe(data(function(file) {
+            //import data models for template files
             return JSON.parse(fs.readFileSync('./src/data/tr-data.json'));
         }))
         .pipe(handlebars(templateData, options))

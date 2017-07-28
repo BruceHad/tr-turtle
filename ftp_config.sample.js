@@ -1,6 +1,13 @@
+'use strict';
+
 const config = {
-    host: '' , // hostname or IP address of the FTP server. Default: 'localhost'
-    user: 'admin@hooverville.biz', // Default: 'anonymous',
-    password: ''
+    username: "",
+    // password: "password", // optional, prompted if none given 
+    host: "",
+    port: 21,
+    localRoot: __dirname + "/dist",
+    remoteRoot: "",
+    // include: ['build/version.txt'],
+    // exclude: ['.git', '.idea', 'tmp/*', 'build/*']
 };
 module.exports = config;
