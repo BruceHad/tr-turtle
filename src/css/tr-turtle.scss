@@ -1,0 +1,80 @@
+$canvas-color : white;
+$canvas-alt : #851919;
+pre {
+  padding: 5px;
+  overflow: auto;
+  overflow-wrap: break-word;
+  background-color: #f5f5f5;
+  width: auto;
+  white-space: pre;
+}
+
+code {
+  font-family: monospace;
+  font-size: normal;
+}
+
+p {
+  margin: 6px 0;
+}
+
+h2 {
+  font-size: 18px;
+}
+
+
+/* Canvas and form controls
+* ------------------------------*/
+
+.canvas-wrapper {
+  background-color: $canvas-color;
+  border: 1px dashed white;
+  -webkit-transition: border-color 2s;
+  transition: border-color 2s;
+  overflow: hidden;
+}
+
+.canvas-wrapper.show {
+  border: 1px dashed $canvas-alt;
+}
+
+canvas {
+  margin: 0 auto;
+  display: block;
+  visibility: hidden;
+}
+
+.show canvas {
+  visibility: visible;
+}
+
+.rules-ul {
+  list-style-position: inside;
+  li {
+    margin: 0;
+  }
+  label {
+    padding: 0 7px;
+  }
+}
+
+.turtle-controls {
+  text-align: center;
+}
+
+.turtle-controls textarea {
+  font-size: small;
+  overflow-wrap: break-word;
+  display: block;
+  width: 100%;
+  margin: 2px 0;
+}
+
+.radio-p label {
+  padding: 5px;
+  line-height: 2em;
+}
+
+.turtle-radio {
+  min-height: 2em;
+}

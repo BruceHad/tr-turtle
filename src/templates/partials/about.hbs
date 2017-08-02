@@ -1,0 +1,83 @@
+<!-- section one -->
+<h2>Turtles</h2>
+
+<p>A 'turtle' is a simple program that draws lines on a page based on simple instructions like 'move forward' and 'turn left'.</p>
+
+<p>These can be easily programmed to draw on the HTML canvas.</p>
+
+<pre><code>function Turtle(){
+  var location = [0,0]; // Set starting location
+  var angle = 0; // Angle is in radians
+  var canvas = new Canvas(); // Need a canvas to draw on
+  this.rotate = function(anglePercent) {
+    angle += anglePercent * Math.PI *2;
+  };
+  this.forward = function(dist) {
+    newLocation = [location[0]+ Math.cos(angle) * dist,
+            location[1]+ Math.sin(angle) * dist];
+    canvas.draw(location, newLocation, pen);
+    location = [newLocation[0], newLocation[1]];
+  };
+}
+</code></pre>
+
+<p>Add in a few basic controls and you've got the beginnings of your own turtle to play with. For example:</p>
+
+<div class="canvas-wrapper" id="one">
+    <canvas id="canvasone" width="450" height="300">
+        <p>Canvas cannot be displayed.</p>
+      </canvas>
+    <div class="form-wrapper">
+        <div class="buttons turtle-controls">
+            <button name="t-left">Left</button>
+            <button name="t-forward">Forward</button>
+            <button name="t-right">Right</button><br>
+            <button name="t-clear">Clear Drawing</button>
+        </div>
+    </div>
+</div>
+
+<p>The turtle can be programmed to draw a shape, simply by stringing together a series of commands. Try copying the following commands into the text field below and hitting 'Go Draw It'.
+</p>
+
+<pre><code>RFRRLFLRRLRFRLLFLRRLRFRRLFLRLLRFRLLFLRRLRFRRLFLRRLRFRLLFLRLLRFRRLFLRLLRFRLLFLRRLRFRRLFLRRLRFRLLFLRRLRFRRLFLRLLRFRLLFLRLLRFRRLFLRRLRFRLLFLRLLRFRRLFLRLLRFRLLFLRRLRFRRLFLRRLRFRLLFLRRLRFRRLFLRLLRFRLLFLRRLRFRRLFLRRLRFRLLFLRLLRFRRLFLRLLRFRLLFLRLLRFRRLFLRRLRFRLLFLRRLRFRRLFLRLLRFRLLFLRLLRFRRLFLRRLRFRLLFLRLLRFRRLFLRLLRFRLLFLR
+</code></pre>
+
+<div class="canvas-wrapper" id="two">
+    <canvas id="canvastwo" width="450" height="300">
+        <p>Canvas cannot be displayed.</p>
+      </canvas>
+    <div class="form-wrapper">
+        <div class="buttons turtle-controls">
+            <label for="tt-string">Command Window:</label><br>
+            <textarea id="tt-string" name="tt-string" value=""></textarea><br>
+            <button name="queue-left">Queue Left</button>
+            <button name="queue-forward">Queue Forward</button>
+            <button name="queue-right">Queue Right</button><br>
+            <button name="queue-clear">Clear Drawing</button>
+            <button name="queue-go">Go Draw It</button>
+        </div>
+    </div>
+</div>
+
+<p>That string of commands I generated was based on a pattern called a <a href="http://en.wikipedia.org/wiki/Dragon_curve">Dragon Curve</a>. It's one of many patterns that can be generated using <a href="http://en.wikipedia.org/wiki/L-system">Lindenmayer System</a>.</p>
+
+<p>L-Systems consist of alphabets of commands (like 'F' is the command for forward()). It starts with a basic string (the axiom) and a set of rules. These rules are repeatedly applied to the string to generate more and more complicated set of commands.</p>
+
+<p>For a dragon curve you start with the axiom 'FX' then apply the following rules:</p>
+<ul>
+    <li>Replace F with null</li>
+    <li>Replace X with X+YF+</li>
+    <li>Replace Y with −FX−Y</li>
+</ul>
+
+<p>So the first few iterations look something like this:</p>
+
+<p>0: FX <br>1: X+YF+ <br>2: X+YF++−FX−Y+ <br>3: X+YF++−FX−Y++−X+YF+−−FX−Y+</p>
+
+<p>Where F stands for 'move forward', + stands for 'turn right' and - 'turn left'. (X and Y are used in the L-system but don't equate to any actions).</p>
+
+<p>L-systems were actually developed by a biologist (in 1968) called Arstid Lindenmayer. It's therefore quite good at modelling plant growth. They can also be used to describe fractal-like forms.</p>
+
+<p>Play with the <a href="tr-turtle.html">L-Systems</a> tool to see it in action.</p>
+  
