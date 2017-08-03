@@ -1,5 +1,10 @@
 /* global Turtle, Controller */
 
+/*  L-System Stuff
+    -------------- */
+
+const myTurtle = new Turtle('canvasone');
+const myCont = new Controller(myTurtle);
 const lsRules = { // posx, posy, dist, angle, iterations, starting angle,rules
   'Dragon Curve': {
     x: 150,
@@ -41,34 +46,36 @@ const lsRules = { // posx, posy, dist, angle, iterations, starting angle,rules
 
 function createRadio(ruleName, checked) {
   // Creates a list element containing a radio box
-  var li = document.createElement('li');
-  li.innerHTML = `<input name='ls-system' value='${ruleName}' type='radio' ${checked ? 'checked' : ''}><label for='${ruleName}'>${ruleName}</label>`;
-  return li;
+  let container = document.createElement('p');
+  let ruleId = ruleName.split(' ').map(function(elem) {
+    return elem.toLowerCase();
+  }).join('-');
+  container.innerHTML = `<input name='ls-system' value='${ruleName}' id='${ruleId}' type='radio' ${checked ? 'checked' : ''}><label for='${ruleId}'>${ruleName}</label>`;
+  console.log(container);
+  return container;
 }
 
 function setUpRules(ruleList) {
   // Create a list of preset rules from lsRules
-  let activeRule, 
-    ruleUL = document.getElementById('rule-list');
-  for (let ruleName in ruleList) {
-    // set one of the rules as active
-    if(activeRule === undefined) activeRule = ruleName;
-    // create radio and append to ruleUL
-    var radio = createRadio(ruleName, activeRule === ruleName ? true : false);
-    ruleUL.appendChild(radio);
+  let first = true;
+  let form = document.getElementById('form-rules');
+  for (var ruleName in ruleList) {
+    if (first) updateRules(ruleList[ruleName]); // populates the rules
+    // create radio and append to ruleUL, make 'checked' if first
+    var radio = createRadio(ruleName, first);
+    form.appendChild(radio);
+    first = false;
   }
-  updateRules(ruleList[activeRule]);
 }
 
 function updateRules(ruleData) {
   // insert rule data into form
-  let rules = ruleData['rules'];
-  document.getElementById('ls-axiom').value = rules[0];
-  document.getElementById('ls-rule1').value = rules[1];
-  document.getElementById('ls-rule2').value = rules[2];
-  document.getElementById('ls-rule3').value = rules[3];
-  document.getElementById('ls-rule4').value = rules[4];
-  document.getElementById('ls-rule5').value = rules[5];
+  document.getElementById('ls-axiom').value = ruleData['rules'][0];
+  document.getElementById('ls-rule1').value = ruleData['rules'][1];
+  document.getElementById('ls-rule2').value = ruleData['rules'][2];
+  document.getElementById('ls-rule3').value = ruleData['rules'][3];
+  document.getElementById('ls-rule4').value = ruleData['rules'][4];
+  document.getElementById('ls-rule5').value = ruleData['rules'][5];
   document.getElementById('ls-distance').value = ruleData['distance'];
   document.getElementById('ls-start-angle').value = ruleData['startAngle'];
   document.getElementById('ls-turn-angle').value = ruleData['turnAngle'];
@@ -77,53 +84,50 @@ function updateRules(ruleData) {
   document.getElementById('ls-y').value = ruleData['y'];
 }
 
-function System() {
-  this.run = function() {
-    var rules = [];
-    rules[0] = document.getElementById('ls-axiom').value;
-    rules[1] = document.getElementById('ls-rule1').value;
-    rules[2] = document.getElementById('ls-rule2').value;
-    rules[3] = document.getElementById('ls-rule3').value;
-    rules[4] = document.getElementById('ls-rule4').value;
-    rules[5] = document.getElementById('ls-rule5').value;
+function run() {
+  var rules = [];
+  rules[0] = document.getElementById('ls-axiom').value;
+  rules[1] = document.getElementById('ls-rule1').value;
+  rules[2] = document.getElementById('ls-rule2').value;
+  rules[3] = document.getElementById('ls-rule3').value;
+  rules[4] = document.getElementById('ls-rule4').value;
+  rules[5] = document.getElementById('ls-rule5').value;
 
-    var dist = document.getElementById('ls-distance').value;
-    var startAngle = document.getElementById('ls-start-angle').value;
-    var turnAngle = document.getElementById('ls-turn-angle').value;
-    var iter = document.getElementById('ls-iterations').value;
-    var x = document.getElementById('ls-x').value;
-    var y = document.getElementById('ls-y').value;
-    var animate = document.getElementById('ls-animate').checked;
-    myCont.init(x, y, startAngle);
-    myCont.go(dist, turnAngle, animate, rules, iter);
-  };
-  this.clear = function() {
-    var startAngle = document.getElementById('ls-start-angle').value;
-    var x = document.getElementById('ls-x').value;
-    var y = document.getElementById('ls-y').value;
-    myCont.init(x, y, startAngle);
-  };
+  var dist = document.getElementById('ls-distance').value;
+  var startAngle = document.getElementById('ls-start-angle').value;
+  var turnAngle = document.getElementById('ls-turn-angle').value;
+  var iter = document.getElementById('ls-iterations').value;
+  var x = document.getElementById('ls-x').value;
+  var y = document.getElementById('ls-y').value;
+  var animate = document.getElementById('ls-animate').checked;
+  myCont.init(x, y, startAngle);
+  myCont.go(dist, turnAngle, animate, rules, iter);
+}
+
+function clearCanvas() {
+  var startAngle = document.getElementById('ls-start-angle').value;
+  var x = document.getElementById('ls-x').value;
+  var y = document.getElementById('ls-y').value;
+  myCont.init(x, y, startAngle);
 }
 
 setUpRules(lsRules);
-let myTurtle = new Turtle('canvasone');
-let myCont = new Controller(myTurtle);
-let lsSystem = new System();
+
+// Event handlers
+let buttons = document.querySelectorAll('button');
+for (var i = 0; i < buttons.length; i++) {
+  buttons[i].addEventListener('click', function(ev) {
+    if (ev.target.name === 'ls-go') run();
+    else if (ev.target.name === 'ls-clear') clearCanvas();
+  });
+}
 
 
-document.addEventListener('click', function(e) {
-  switch (e.target.name) {
-    case 'ls-system':
-      updateRules(lsRules[e.target.value]);
-      break;
-    case 'ls-go':
-      lsSystem.run();
-      break;
-    case 'ls-clear':
-      lsSystem.clear();
-      break;
-    default:
-      console.log(e.target.name);
-  }
-  e.stopPropagation();
-});
+let radios = document.querySelectorAll('input[type="radio"');
+for (var i = 0; i < radios.length; i++) {
+  radios[i].addEventListener('click', function(ev) {
+    updateRules(lsRules[ev.target.value]);
+  });
+}
+
+// about stuff

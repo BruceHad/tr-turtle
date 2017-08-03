@@ -48,7 +48,8 @@ gulp.task('html', function() {
     };
     let options = {
         ignorePartials: true,
-        batch: ['./src/templates/partials']
+        batch: ['./src/templates/partials'],
+        compile: {preventIndent: true}
     };
     gulp.src('src/templates/*.hbs')
         .pipe(data(function(file) {
