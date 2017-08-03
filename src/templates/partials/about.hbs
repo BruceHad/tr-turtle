@@ -6,7 +6,7 @@
 
         <p>These can be easily programmed to draw on the HTML canvas.</p>
 
-<pre><code>
+        <pre><code>
 function Turtle(){
   var location = [0,0]; // Set starting location
   var angle = 0; // Angle is in radians
@@ -24,16 +24,16 @@ function Turtle(){
 
         <p>Add in a few basic controls and you've got the beginnings of your own turtle to play with. For example:</p>
 
-        <div class="canvas-wrapper" id="one">
-            <canvas id="canvasone" width="450" height="300">
-        <p>Canvas cannot be displayed.</p>
-      </canvas>
-            <div class="form-wrapper">
-                <div class="buttons turtle-controls">
-                    <button name="t-left">Left</button>
-                    <button name="t-forward">Forward</button>
-                    <button name="t-right">Right</button><br>
-                    <button name="t-clear">Clear Drawing</button>
+        <div class='canvas-wrapper' id='one'>
+            <canvas id='canvasone' width='450' height='300'>
+                <p>Canvas cannot be displayed.</p>
+            </canvas>
+            <div class='form-wrapper'>
+                <div class='buttons turtle-controls'>
+                    <button name='t-left'>Left</button>
+                    <button name='t-forward'>Forward</button>
+                    <button name='t-right'>Right</button><br>
+                    <button name='t-clear'>Clear Drawing</button>
                 </div>
             </div>
         </div>
@@ -43,24 +43,24 @@ function Turtle(){
 
         <pre><code>RFRRLFLRRLRFRLLFLRRLRFRRLFLRLLRFRLLFLRRLRFRRLFLRRLRFRLLFLRLLRFRRLFLRLLRFRLLFLRRLRFRRLFLRRLRFRLLFLRRLRFRRLFLRLLRFRLLFLRLLRFRRLFLRRLRFRLLFLRLLRFRRLFLRLLRFRLLFLRRLRFRRLFLRRLRFRLLFLRRLRFRRLFLRLLRFRLLFLRRLRFRRLFLRRLRFRLLFLRLLRFRRLFLRLLRFRLLFLRLLRFRRLFLRRLRFRLLFLRRLRFRRLFLRLLRFRLLFLRLLRFRRLFLRRLRFRLLFLRLLRFRRLFLRLLRFRLLFLR</code></pre>
 
-        <div class="canvas-wrapper" id="two">
-            <canvas id="canvastwo" width="450" height="300">
+        <div class='canvas-wrapper' id='two'>
+            <canvas id='canvastwo' width='450' height='300'>
         <p>Canvas cannot be displayed.</p>
       </canvas>
-            <div class="form-wrapper">
-                <div class="buttons turtle-controls">
-                    <label for="tt-string">Command Window:</label><br>
-                    <textarea id="tt-string" name="tt-string" value=""></textarea><br>
-                    <button name="queue-left">Queue Left</button>
-                    <button name="queue-forward">Queue Forward</button>
-                    <button name="queue-right">Queue Right</button><br>
-                    <button name="queue-clear">Clear Drawing</button>
-                    <button name="queue-go">Go Draw It</button>
+            <div class='form-wrapper'>
+                <div class='buttons turtle-controls'>
+                    <label for='tt-string'>Command Window:</label><br>
+                    <textarea id='tt-string' name='tt-string' value=''></textarea><br>
+                    <button name='queue-left'>Queue Left</button>
+                    <button name='queue-forward'>Queue Forward</button>
+                    <button name='queue-right'>Queue Right</button><br>
+                    <button name='queue-clear'>Clear Drawing</button>
+                    <button name='queue-go'>Go Draw It</button>
                 </div>
             </div>
         </div>
 
-        <p>That string of commands I generated was based on a pattern called a <a href="http://en.wikipedia.org/wiki/Dragon_curve">Dragon Curve</a>. It's one of many patterns that can be generated using <a href="http://en.wikipedia.org/wiki/L-system">Lindenmayer System</a>.</p>
+        <p>That string of commands I generated was based on a pattern called a <a href='http://en.wikipedia.org/wiki/Dragon_curve'>Dragon Curve</a>. It's one of many patterns that can be generated using <a href='http://en.wikipedia.org/wiki/L-system'>Lindenmayer System</a>.</p>
 
         <p>L-Systems consist of alphabets of commands (like 'F' is the command for forward()). It starts with a basic string (the axiom) and a set of rules. These rules are repeatedly applied to the string to generate more and more complicated set of commands.</p>
 
@@ -79,9 +79,8 @@ function Turtle(){
 
         <p>L-systems were actually developed by a biologist (in 1968) called Arstid Lindenmayer. It's therefore quite good at modelling plant growth. They can also be used to describe fractal-like forms.</p>
 
-        <p>Play with the <a href="tr-turtle.html">L-Systems</a> tool to see it in action.</p>
+        <p>Play with the <a href='tr-turtle.html'>L-Systems</a> tool to see it in action.</p>
 
     </div>
 
 </div>
- 

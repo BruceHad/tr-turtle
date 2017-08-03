@@ -1,10 +1,10 @@
 /* global Turtle, Controller */
 
-/*  L-System Stuff
-    -------------- */
+// Main Canvas
 
-const myTurtle = new Turtle('canvasone');
+const myTurtle = new Turtle('canvas');
 const myCont = new Controller(myTurtle);
+
 const lsRules = { // posx, posy, dist, angle, iterations, starting angle,rules
   'Dragon Curve': {
     x: 150,
@@ -113,16 +113,74 @@ function clearCanvas() {
 
 setUpRules(lsRules);
 
+// Canvas 1
+
+const myTurtleOne = new Turtle('canvasone');
+const oneTurtle = {
+  'rotateLeft': function() {
+    myTurtleOne.rotate(-90);
+  },
+  'rotateRight': function() {
+    myTurtleOne.rotate(90);
+  },
+  'forward': function() {
+    myTurtleOne.forward(10, true);
+  },
+  'reset': function() {
+    myTurtleOne.reset();
+  }
+};
+
+// Canvas 2
+
+const myTurtleTwo = new Turtle('canvastwo');
+const myContTwo = new Controller(myTurtleTwo);
+const twoTurtle = {
+  'queueLeft': function() {
+    myContTwo.queue('L');
+    document.getElementById('tt-string').value += 'L';
+  },
+  'queueForward': function() {
+    myContTwo.queue('F');
+    document.getElementById('tt-string').value += 'F';
+  },
+  'queueRight': function() {
+    myContTwo.queue('R');
+    document.getElementById('tt-string').value += 'R';
+  },
+  'queueClear': function() {
+    document.getElementById('tt-string').value = '';
+    myContTwo.init(200, 100, 0);
+  },
+  'queueGo': function() {
+    myContTwo.setCommandString(document.getElementById('tt-string').value);
+    myContTwo.go(10, 90, true);
+  }
+};
+
 // Event handlers
+// Buttons
 let buttons = document.querySelectorAll('button');
 for (var i = 0; i < buttons.length; i++) {
   buttons[i].addEventListener('click', function(ev) {
-    if (ev.target.name === 'ls-go') run();
-    else if (ev.target.name === 'ls-clear') clearCanvas();
+    let actions = {
+      'ls-go': run,
+      'ls-clear': clearCanvas,
+      't-left': oneTurtle.rotateLeft,
+      't-forward': oneTurtle.forward,
+      't-right': oneTurtle.rotateRight,
+      't-clear': oneTurtle.reset,
+      'queue-left': twoTurtle.queueLeft,
+      'queue-forward': twoTurtle.queueForward,
+      'queue-right': twoTurtle.queueRight,
+      'queue-clear': twoTurtle.queueClear,
+      'queue-go': twoTurtle.queueGo
+    };
+    actions[ev.target.name]();
   });
 }
 
-
+// Radios
 let radios = document.querySelectorAll('input[type="radio"');
 for (var i = 0; i < radios.length; i++) {
   radios[i].addEventListener('click', function(ev) {
@@ -130,4 +188,4 @@ for (var i = 0; i < radios.length; i++) {
   });
 }
 
-// about stuff
+
