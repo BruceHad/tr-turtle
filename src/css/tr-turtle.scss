@@ -32,18 +32,12 @@ h2 {
   background-color: #f8f8f8;
 }
 .canvas-container {
-  width: 300px;
   margin: 5px auto;
 }
 canvas {
   background-color: $canvas-color;
   overflow: hidden;
-  width: 300px;
   margin:0 auto; padding:0;
-}
-
-@media (min-width: 768px){
-  
 }
 
 .turtle-actions {

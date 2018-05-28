@@ -1,3 +1,5 @@
+
+
 function fractionToRad(fraction) {
   return fraction * Math.PI * 2;
 }
@@ -33,7 +35,6 @@ function expandLs(rules, iter) {
       if(str.length > limit) throw new Error("Too many commands: " + str.length + "\n Limited to " + limit);
     } catch(e) {
       alert(e.message);
-      console.log(e);
       break;
     }
   }
@@ -137,7 +138,14 @@ function Controller(turtle) {
     turtle.position = data[0];
     turtle.angle = data[1];
   };
+  this.restart = function(x, y, sAngle){
+    // centre the pen without clearing canvas
+    window.clearInterval(intId);
+    // stack = [];
+    turtle.move(x, y, sAngle);
+  },
   this.init = function(x, y, sAngle) {
+    // clear canvas and centre pen
     window.clearInterval(intId);
     commandString = "";
     stack = [];
@@ -151,13 +159,24 @@ function Controller(turtle) {
     commandString = str;
   };
   this.go = function(moveLength, turnAngle, animate, rules, iterations) {
-    if(commandString === "") commandString = expandLs(rules, iterations);
+    let turnR, turnL;
+    if(commandString === "") {
+      commandString = expandLs(rules, iterations);
+    }
+    if(typeof turnAngle === "string"){
+      turnR = turnAngle;
+      turnL = turnAngle;
+    } else {
+      // assume array
+      turnR = turnAngle[0];
+      turnL = turnAngle[1];
+    }
     var commands = commandString.split('');
     if(!animate) {
       for(var i = 0; i < commands.length; i++) {
         if(commands[i] === 'F' || commands[i] === 'G') turtle.forward(moveLength);
-        else if(commands[i] === 'L' || commands[i] === '-') turtle.rotate(-1 * turnAngle);
-        else if(commands[i] === 'R' || commands[i] === '+') turtle.rotate(turnAngle);
+        else if(commands[i] === 'L' || commands[i] === '-') turtle.rotate(-1 * turnL);
+        else if(commands[i] === 'R' || commands[i] === '+') turtle.rotate(turnR);
         else if(commands[i] === '[') this.stackPush();
         else if(commands[i] === ']') this.stackPop();
         else if(commands[i] === '>') turtle.changeColour(20);
@@ -169,8 +188,8 @@ function Controller(turtle) {
           var command = commands.shift();
           self.commandString = commands.join('');
           if(command === 'F') turtle.forward(moveLength);
-          else if(command === 'L' || command === '-') turtle.rotate(-1 * turnAngle);
-          else if(command === 'R' || command === '+') turtle.rotate(turnAngle);
+          else if(command === 'L' || command === '-') turtle.rotate(-1 * turnL);
+          else if(command === 'R' || command === '+') turtle.rotate(turnR);
           else if(command === '[') self.stackPush();
           else if(command === ']') self.stackPop();
 					else if(commands[i] === '>') turtle.changeColour(20);

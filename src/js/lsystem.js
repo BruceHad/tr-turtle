@@ -51,7 +51,6 @@ function createRadio(ruleName, checked) {
     return elem.toLowerCase();
   }).join('-');
   container.innerHTML = `<input name='ls-system' value='${ruleName}' id='${ruleId}' type='radio' ${checked ? 'checked' : ''}><label for='${ruleId}'>${ruleName}</label>`;
-  console.log(container);
   return container;
 }
 
